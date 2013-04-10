@@ -7,6 +7,7 @@
  * @property integer $vesselSetupId
  * @property string $name
  * @property string $description
+ * @property string $chamber
  * @property string $upperElectrode
  * @property string $lowerElectrode
  * @property string $roughPump
@@ -19,6 +20,7 @@
  * @property SetupCameras[] $setupCamerases
  * @property SetupProbes[] $setupProbes
  * @property VesselPlates[] $vesselPlates
+ * @property Parts $chamber0
  * @property Parts $roughPump0
  * @property Parts $turboPump0
  * @property Parts $massFlowController0
@@ -53,13 +55,13 @@ class VesselSetup extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('vesselSetupId, name, description, upperElectrode, lowerElectrode, roughPump, turboPump, massFlowController, pressureGauge, dustShaker', 'required'),
+			array('vesselSetupId, name, description, chamber, upperElectrode, lowerElectrode, roughPump, turboPump, massFlowController, pressureGauge, dustShaker', 'required'),
 			array('vesselSetupId', 'numerical', 'integerOnly'=>true),
 			array('name, description', 'length', 'max'=>45),
 			array('upperElectrode, lowerElectrode, roughPump, turboPump, massFlowController, pressureGauge, dustShaker', 'length', 'max'=>10),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('vesselSetupId, name, description, upperElectrode, lowerElectrode, roughPump, turboPump, massFlowController, pressureGauge, dustShaker', 'safe', 'on'=>'search'),
+			array('vesselSetupId, name, description, chamber, upperElectrode, lowerElectrode, roughPump, turboPump, massFlowController, pressureGauge, dustShaker', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -74,6 +76,7 @@ class VesselSetup extends CActiveRecord
 			'setupCamerases' => array(self::HAS_MANY, 'SetupCameras', 'vesselSetupId'),
 			'setupProbes' => array(self::HAS_MANY, 'SetupProbes', 'vesselSetupId'),
 			'vesselPlates' => array(self::HAS_MANY, 'VesselPlates', 'vesselSetupId'),
+            'chamber0' => array(self::BELONGS_TO, 'Parts', 'chamber'),
             'upperElectrode0' => array(self::BELONGS_TO, 'Parts', 'upperElectrode'),
             'lowerElectrode0' => array(self::BELONGS_TO, 'Parts', 'lowerElectrode'),
 			'roughPump0' => array(self::BELONGS_TO, 'Parts', 'roughPump'),
@@ -93,6 +96,7 @@ class VesselSetup extends CActiveRecord
 			'vesselSetupId' => 'Vessel Setup',
 			'name' => 'Name',
 			'description' => 'Description',
+            'chamber' => 'Chamber',
 			'upperElectrode' => 'Upper Electrode',
 			'lowerElectrode' => 'Lower Electrode',
 			'roughPump' => 'Rough Pump',
@@ -117,6 +121,7 @@ class VesselSetup extends CActiveRecord
 		$criteria->compare('vesselSetupId',$this->vesselSetupId);
 		$criteria->compare('name',$this->name,true);
 		$criteria->compare('description',$this->description,true);
+        $criteria->compare('chamber',$this->chamber,true);
 		$criteria->compare('upperElectrode',$this->upperElectrode,true);
 		$criteria->compare('lowerElectrode',$this->lowerElectrode,true);
 		$criteria->compare('roughPump',$this->roughPump,true);

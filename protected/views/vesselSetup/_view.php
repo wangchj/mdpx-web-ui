@@ -17,6 +17,10 @@
 	<?php echo CHtml::encode($data->description); ?>
 	<br />
 
+    <b><?php echo CHtml::encode($data->getAttributeLabel('chamber')); ?>:</b>
+    <?php echo CHtml::encode($data->chamber); ?>
+    <br />
+
 	<b><?php echo CHtml::encode($data->getAttributeLabel('upperElectrode')); ?>:</b>
 	<?php echo CHtml::encode($data->upperElectrode); ?>
 	<br />

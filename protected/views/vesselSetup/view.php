@@ -24,6 +24,10 @@ $this->menu=array(
 		'vesselSetupId',
 		'name',
 		'description',
+        array(
+            'name'=>'upperElectrode',
+            'value'=>$model->chamber0->name . " ($model->chamber)"
+        ),
 		array(
             'name'=>'upperElectrode',
             'value'=>$model->upperElectrode0->name . " ($model->upperElectrode)"

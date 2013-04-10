@@ -132,6 +132,7 @@ class Parts extends CActiveRecord
     {
         $parts = Parts::model()->findAll();
         $result = array();
+        $result[''] = '[No value]';
         foreach($parts as $part)
         {
             $result[$part->serialNum] = "$part->name ($part->serialNum)";

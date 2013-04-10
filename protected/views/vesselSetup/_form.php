@@ -33,6 +33,13 @@
 		<?php echo $form->error($model,'description'); ?>
 	</div>
 
+    <div class="row">
+        <?php echo $form->labelEx($model,'chamber'); ?>
+        <!-- ?php echo $form->textField($model,'upperElectrode',array('size'=>10,'maxlength'=>10)); ? -->
+        <?php echo $form->dropDownList($model,'chamber',Parts::getPartsDropdownList()); ?>
+        <?php echo $form->error($model,'chamber'); ?>
+    </div>
+
 	<div class="row">
 		<?php echo $form->labelEx($model,'upperElectrode'); ?>
 		<!-- ?php echo $form->textField($model,'upperElectrode',array('size'=>10,'maxlength'=>10)); ? -->

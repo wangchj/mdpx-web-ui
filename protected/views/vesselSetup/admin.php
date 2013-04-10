@@ -48,6 +48,11 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 		'vesselSetupId',
 		'name',
 		'description',
+        //'chamber',
+        array(
+            'name'=>'chamber',
+            'value'=>'$data->chamber0->name . " (" . $data->chamber . ")"'
+        ),
 		array(
             'name'=>'upperElectrode',
             'value'=>'$data->upperElectrode0->name . " (" . $data->upperElectrode . ")"'

@@ -124,6 +124,30 @@ class Parts extends CActiveRecord
 	}
 
     /**
+     * Retrieves a list of models based on the current search/filter conditions.
+     * @return CActiveDataProvider the data provider that can return the models based on the search/filter conditions.
+     */
+    public function searchChambers()
+    {
+        // Warning: Please modify the following code to remove attributes that
+        // should not be searched.
+
+        $criteria=new CDbCriteria;
+
+        $criteria->compare('serialNum',$this->serialNum,true);
+        $criteria->compare('name',$this->name,true);
+        $criteria->compare('type',$this->type);
+        $criteria->compare('description',$this->description,true);
+        $criteria->compare('addedOn',$this->addedOn,true);
+        $criteria->compare('addedBy',$this->addedBy);
+        $criteria->addBetweenCondition('type', '1000', '1999');
+
+        return new CActiveDataProvider($this, array(
+            'criteria'=>$criteria,
+        ));
+    }
+
+    /**
      * Gets the serial number and name of parts. This is to be used to populate
      * dropdown lists in views.
      * @return array an array of parts.

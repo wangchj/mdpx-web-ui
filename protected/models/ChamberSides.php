@@ -31,6 +31,14 @@ class ChamberSides extends CActiveRecord
 		return 'ChamberSides';
 	}
 
+    /**
+     * @return array|mixed|void the composite primary key of the table.
+     */
+    public function primaryKey()
+    {
+        return array('chamberType', 'sideId');
+    }
+
 	/**
 	 * @return array validation rules for model attributes.
 	 */

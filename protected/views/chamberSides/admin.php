@@ -3,7 +3,7 @@
 /* @var $model Parts */
 
 $this->breadcrumbs=array(
-	'Parts'=>array('index'),
+	'ChamberSides'=>array('index'),
 	//'Manage',
 );
 
@@ -18,7 +18,7 @@ $('.search-button').click(function(){
 	return false;
 });
 $('.search-form form').submit(function(){
-	$('#parts-grid').yiiGridView('update', {
+	$('#chambersides-grid').yiiGridView('update', {
 		data: $(this).serialize()
 	});
 	return false;
@@ -53,6 +53,9 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 		'description',
         array(
             'class'=>'CButtonColumn',
+            'viewButtonUrl'=>'Yii::app()->createUrl("/ChamberSides/view", array("chamberType" => $data["chamberType"], "sideId"=>$data["sideId"]))',
+            'deleteButtonUrl'=>'Yii::app()->createUrl("/ChamberSides/delete", array("chamberType" => $data["chamberType"], "sideId"=>$data["sideId"]))',
+            'updateButtonUrl'=>'Yii::app()->createUrl("/ChamberSides/update", array("chamberType" => $data["chamberType"], "sideId"=>$data["sideId"]))',
         ),
 	)
 )); ?>

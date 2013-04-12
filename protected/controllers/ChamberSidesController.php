@@ -50,10 +50,10 @@ class ChamberSidesController extends Controller
 	 * Displays a particular model.
 	 * @param integer $id the ID of the model to be displayed
 	 */
-	public function actionView($id, $id2)
+	public function actionView($chamberType, $sideId)
 	{
 		$this->render('view',array(
-			'model'=>$this->loadModel($id, $id2),
+			'model'=>$this->loadModel($chamberType, $sideId),
 		));
 	}
 
@@ -61,64 +61,75 @@ class ChamberSidesController extends Controller
 	 * Creates a new model.
 	 * If creation is successful, the browser will be redirected to the 'view' page.
 	 */
-	public function actionCreate()
+	public function actionCreate($chamberType)
 	{
-		$model=new Parts;
+        //if(intvalue($chamberType) == 0) //If cannot convert to int, which returns 0
+        //    throw new CHttpException(404,'The requested page does not exist 1.');
+
+		$model=new ChamberSides;
+        $model->chamberType = $chamberType;
+
+        //Get the next side number for the chamber
+        $nextLargerSide = ChamberSides::getNextLargerSideNum($chamberType);
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if(isset($_POST['Parts']))
+        //If this is a post back, create a new model object and save to database.
+		if(isset($_POST['ChamberSides']))
 		{
-			$model->attributes=$_POST['Parts'];
-            $model->addedBy = Yii::app()->user->id;
-            $model->addedOn = date('Y-m-d H:i:s');
+			$model->attributes=$_POST['ChamberSides'];
+            $model->chamberType = $chamberType;
+            $model->sideId = $nextLargerSide;
+
 			if($model->save())
-				//$this->redirect(array('view','id'=>$model->serialNum));
-                $this->redirect(array('index'));
+                $this->redirect(array('chambers/view', 'id'=>$chamberType));
 		}
 
-        $pcat = new PartCategoriesController(0);
-        $tree = $pcat->buildCategoryTree();
+        //If this is not a post back, display the view.
+
 		$this->render('create',array(
-			'model'=>$model, 'tree'=>$tree
+			'model'=>$model, 'nextLargerSide'=>$nextLargerSide
 		));
 	}
 
 	/**
 	 * Updates a particular model.
 	 * If update is successful, the browser will be redirected to the 'view' page.
-	 * @param integer $id the ID of the model to be updated
-	 */
-	public function actionUpdate($id)
+     * @param integer $chamberType the part category id of the chamber.
+     * @param integer $sideId the side number.
+     */
+	public function actionUpdate($chamberType, $sideId)
 	{
-		$model=$this->loadModel($id);
+		$model=$this->loadModel($chamberType, $sideId);
+
+        //Get the next side number for the chamber
+        $nextLargerSide = ChamberSides::getNextLargerSideNum($chamberType);
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if(isset($_POST['Parts']))
+		if(isset($_POST['ChamberSides']))
 		{
-			$model->attributes=$_POST['Parts'];
+			$model->attributes=$_POST['ChamberSides'];
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->serialNum));
+				$this->redirect(array('chambers/view','id'=>$chamberType));
 		}
 
-        $pcat = new PartCategoriesController(0);
-        $tree = $pcat->buildCategoryTree();
 		$this->render('update',array(
-			'model'=>$model,'tree'=>$pcat->buildCategoryTree()
+			'model'=>$model,'nextLargerSide'=>$nextLargerSide
 		));
 	}
 
 	/**
 	 * Deletes a particular model.
 	 * If deletion is successful, the browser will be redirected to the 'admin' page.
-	 * @param integer $id the ID of the model to be deleted
+     * @param integer $chamberType the part category id of the chamber.
+	 * @param integer $sideId the side number.
 	 */
-	public function actionDelete($id)
+	public function actionDelete($chamberType, $sideId)
 	{
-		$this->loadModel($id)->delete();
+		$this->loadModel($chamberType, $sideId)->delete();
 
 		// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
 		if(!isset($_GET['ajax']))
@@ -163,16 +174,21 @@ class ChamberSidesController extends Controller
 	/**
 	 * Returns the data model based on the primary key given in the GET variable.
 	 * If the data model is not found, an HTTP exception will be raised.
-	 * @param integer $id the ID of the model to be loaded
+     * @param integer $chamberType the part category id of the chamber.
+     * @param integer $sideId the side number.
 	 * @return Parts the loaded model
 	 * @throws CHttpException
 	 */
 	//public function loadModel($chamberTypeId, $sideId)
 	//{
 	//	$model=Parts::model()->findByPk(array('chamberType'=>$chamberTypeId, 'sideId'=>$sideId));
-    public function loadModel($chamberTypeId)
+    public function loadModel($chamberType, $sideId)
     {
-        $model=Parts::model()->findByPk($chamberTypeId);
+        $model=ChamberSides::model()->findByPk(
+            array(
+                array('chamberType'=>$chamberType, 'sideId'=>$sideId)
+            )
+        );
 		if($model===null)
 			throw new CHttpException(404,'The requested page does not exist.');
 		return $model;

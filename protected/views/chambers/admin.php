@@ -1,15 +1,15 @@
 <?php
-/* @var $this PartsController */
-/* @var $model Parts */
+/* @var $this ChambersController */
+/* @var $model Chambers */
 
 $this->breadcrumbs=array(
-	'Parts'=>array('index'),
+	'Chambers'=>array('index'),
 	//'Manage',
 );
 
 $this->menu=array(
-	array('label'=>'List Parts', 'url'=>array('index')),
-	array('label'=>'Create Parts', 'url'=>array('create')),
+	array('label'=>'List Chambers', 'url'=>array('index')),
+	array('label'=>'Create Chambers', 'url'=>array('create')),
 );
 
 Yii::app()->clientScript->registerScript('search', "
@@ -18,7 +18,7 @@ $('.search-button').click(function(){
 	return false;
 });
 $('.search-form form').submit(function(){
-	$('#parts-grid').yiiGridView('update', {
+	$('#chambers-grid').yiiGridView('update', {
 		data: $(this).serialize()
 	});
 	return false;
@@ -41,7 +41,7 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 </div><!-- search-form -->
 
 <?php $this->widget('zii.widgets.grid.CGridView', array(
-	'id'=>'parts-grid',
+	'id'=>'chambers-grid',
 	'dataProvider'=>$model->searchChambers(),
 	'filter'=>$model,
 	'columns'=>array(

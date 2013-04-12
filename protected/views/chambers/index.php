@@ -1,9 +1,9 @@
 <?php
-/* @var $this PartsController */
+/* @var $this ChambersController */
 /* @var $dataProvider CActiveDataProvider */
 
 $this->breadcrumbs=array(
-	'Parts',
+	'Chambers',
 );
 
 $this->menu=array(

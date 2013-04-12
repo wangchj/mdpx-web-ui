@@ -52,7 +52,7 @@ class ChambersController extends Controller
 	 */
 	public function actionView($id)
 	{
-        $chamber = $this->loadMOdel($id);
+        $chamber = $this->loadModel($id);
 
         $sides = new ChamberSides('search');
         $sides->chamberType = $chamber->type;

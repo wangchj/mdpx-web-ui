@@ -99,4 +99,22 @@ class ChamberSides extends CActiveRecord
 			'criteria'=>$criteria,
 		));
 	}
+
+    /**
+     * @param $chamberType int: the part category number that signifies the chamber type.
+     * @returns int: an integer that is the next side number for this chamber.
+     * i.e. max(sideId) + 1 for this chamber.
+     */
+    public static function getNextLargerSideNum($chamberType)
+    {
+        //TODO: Make sure that chamber type is int
+        //if(!is_int($chamberType))
+        //    throw new Exception("chamber type is invalid.");
+
+        //TODO: make sure that chamber type is present
+
+        $queryCommand = Yii::app()->db->createCommand(
+            "SELECT max(sideId) FROM ChamberSides WHERE chamberType=$chamberType");
+        return $queryCommand->queryScalar() + 1;
+    }
 }

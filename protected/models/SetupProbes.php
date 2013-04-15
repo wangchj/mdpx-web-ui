@@ -12,6 +12,7 @@
  *
  * The followings are the available model relations:
  * @property VesselSetup $vesselSetup
+ * @property Parts $probe0
  */
 class SetupProbes extends CActiveRecord
 {
@@ -60,6 +61,7 @@ class SetupProbes extends CActiveRecord
 		// class name for the relations automatically generated below.
 		return array(
 			'vesselSetup' => array(self::BELONGS_TO, 'VesselSetup', 'vesselSetupId'),
+            'probe0' => array(self::BELONGS_TO, 'Parts', 'probe'),
 		);
 	}
 

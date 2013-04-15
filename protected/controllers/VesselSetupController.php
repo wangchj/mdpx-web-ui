@@ -51,8 +51,23 @@ class VesselSetupController extends Controller
 	 */
 	public function actionView($id)
 	{
+        //Model for VesselPlates for searching
+        $plates = new VesselPlates('search');
+        $plates->vesselSetupId = $id;
+
+        //Model for SetupCameras for searching
+        $cameras = new SetupCameras('search');
+        $cameras->vesselSetupId = $id;
+
+        //Model for SetupProbes for searching
+        $probes = new SetupProbes('search');
+        $probes->vesselSetupId = $id;
+
 		$this->render('view',array(
 			'model'=>$this->loadModel($id),
+            'plates'=>$plates,
+            'cameras'=>$cameras,
+            'probes'=>$probes
 		));
 	}
 

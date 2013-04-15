@@ -1,9 +1,9 @@
 <?php
-/* @var $this VesselSetupController */
-/* @var $model VesselSetup */
+/* @var $this VesselPlatesController */
+/* @var $model VesselPlates */
 
 $this->breadcrumbs=array(
-	'Vessel Setups'=>array('index'),
+	'Vessel Plates'=>array('index'),
 	$model->name,
 );
 
@@ -16,7 +16,7 @@ $this->breadcrumbs=array(
 //);
 ?>
 
-<h1>View VesselSetup #<?php echo $model->vesselSetupId; ?></h1>
+<h1>View Vessel Plate #<?php echo $model->vesselSetupId; ?></h1>
 
 <p>
     <button id="addPlateBtn" class="btn" type="button"><i class="icon-plus"></i> Add a plate</button>
@@ -82,12 +82,11 @@ $this->breadcrumbs=array(
             'class'=>'CButtonColumn',
             'buttons'=>array(
                 'view'=>array('visible'=>'false'),
-                'delete'=>array('visible'=>'false'),
                 'update'=>array('visible'=>'false'),
-            ),
-            //'viewButtonUrl'=>'Yii::app()->createUrl("/VesselSetup/view", array("vesselSetupId" => $data["vesselSetup"], "sideId"=>$data["side"]))',
-            //'deleteButtonUrl'=>'Yii::app()->createUrl("/VesselSetup/delete", array("vesselSetupId" => $data["vesselSetup"], "sideId"=>$data["side"]))',
-            'updateButtonUrl'=>'Yii::app()->createUrl("/VesselSetup/update", array("vesselSetupId" => $data["vesselSetupId"], "side"=>$data["side"]))',
+                'delete'=>array('visible'=>'false')),
+            'viewButtonUrl'=>'Yii::app()->createUrl("/ChamberSides/view", array("chamberType" => $data["chamberType"], "sideId"=>$data["sideId"]))',
+            'deleteButtonUrl'=>'Yii::app()->createUrl("/ChamberSides/delete", array("chamberType" => $data["chamberType"], "sideId"=>$data["sideId"]))',
+            'updateButtonUrl'=>'Yii::app()->createUrl("/ChamberSides/update", array("chamberType" => $data["chamberType"], "sideId"=>$data["sideId"]))',
         ),
     ),
 )); ?>
@@ -160,13 +159,13 @@ $this->breadcrumbs=array(
 <script type="text/javascript">
     $(function(){
         $('#addPlateBtn').click(function(){
-            window.location = "<?php echo $this->createAbsoluteUrl('vesselPlates/create', array('vesselSetupId'=>$model->vesselSetupId))?>";
+            window.location = "<?php echo $this->createAbsoluteUrl('chamberSides/create', array('chamberType'=>$model->type))?>";
         });
         $('#addCameraBtn').click(function(){
-            window.location = "<?php echo $this->createAbsoluteUrl('setupCameras/create', array('chamberType'=>$model->vesselSetupId))?>";
+            window.location = "<?php echo $this->createAbsoluteUrl('chamberSides/create', array('chamberType'=>$model->type))?>";
         });
         $('#addProbeBtn').click(function(){
-            window.location = "<?php echo $this->createAbsoluteUrl('setupProbes/create', array('chamberType'=>$model->vesselSetupId))?>";
+            window.location = "<?php echo $this->createAbsoluteUrl('chamberSides/create', array('chamberType'=>$model->type))?>";
         });
 
     });

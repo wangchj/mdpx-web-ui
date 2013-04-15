@@ -117,4 +117,16 @@ class ChamberSides extends CActiveRecord
             "SELECT max(sideId) FROM ChamberSides WHERE chamberType=$chamberType");
         return $queryCommand->queryScalar() + 1;
     }
+
+    public static function getSideDropdownList($chamberType)
+    {
+        $sides = ChamberSides::model()->findAll("chamberType=$chamberType");
+        $result = array();
+        foreach($sides as $side)
+        {
+            $result[$side->sideId] = "$side->sideId: $side->description";
+        }
+
+        return $result;
+    }
 }

@@ -1,6 +1,6 @@
 <?php
-/* @var $this PartsController */
-/* @var $data Parts */
+/* @var $this ChambersController */
+/* @var $data Chambers */
 ?>
 
 <div class="view">

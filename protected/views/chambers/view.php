@@ -1,19 +1,19 @@
 <?php
-/* @var $this PartsController */
-/* @var $model Parts */
+/* @var $this ChambersController */
+/* @var $model Chambers */
 
 $this->breadcrumbs=array(
 	'Chambers'=>array('index'),
 	$model->name,
 );
 
-$this->menu=array(
-	array('label'=>'List Parts', 'url'=>array('index')),
-	array('label'=>'Create Parts', 'url'=>array('create')),
-	array('label'=>'Update Parts', 'url'=>array('update', 'id'=>$model->serialNum)),
-	array('label'=>'Delete Parts', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->serialNum),'confirm'=>'Are you sure you want to delete this item?')),
-	array('label'=>'Manage Parts', 'url'=>array('admin')),
-);
+//$this->menu=array(
+//	array('label'=>'List Parts', 'url'=>array('index')),
+//	array('label'=>'Create Parts', 'url'=>array('create')),
+//	array('label'=>'Update Parts', 'url'=>array('update', 'id'=>$model->serialNum)),
+//	array('label'=>'Delete Parts', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->serialNum),'confirm'=>'Are you sure you want to delete this item?')),
+//	array('label'=>'Manage Parts', 'url'=>array('admin')),
+//);
 ?>
 
 <h1>View Chamber #<?php echo $model->serialNum; ?></h1>

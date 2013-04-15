@@ -1,6 +1,6 @@
 <?php
-/* @var $this PartsController */
-/* @var $model Parts */
+/* @var $this ChambersController */
+/* @var $model Chambers */
 /* @var $form CActiveForm */
 ?>
 

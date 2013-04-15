@@ -1,6 +1,6 @@
 <?php
-/* @var $this PartsController */
-/* @var $model Parts */
+/* @var $thisChambersController */
+/* @var $model Chambers */
 /* @var $form CActiveForm */
 
 Yii::app()->getClientScript()->registerScriptFile(Yii::app()->baseUrl.'/js/dynatree-1.2.4/jquery/jquery-ui.custom.js');

@@ -20,7 +20,7 @@ $this->breadcrumbs=array(
 
 <p>
     <button id="addPlateBtn" class="btn" type="button"><i class="icon-plus"></i> Add a plate</button>
-    <button id="addCameratn" class="btn" type="button"><i class="icon-plus"></i> Add a camera</button>
+    <button id="addCameraBtn" class="btn" type="button"><i class="icon-plus"></i> Add a camera</button>
     <button id="addProbeBtn" class="btn" type="button"><i class="icon-plus"></i> Add a probe</button>
 </p>
 
@@ -160,13 +160,13 @@ $this->breadcrumbs=array(
 <script type="text/javascript">
     $(function(){
         $('#addPlateBtn').click(function(){
-            window.location = "<?php echo $this->createAbsoluteUrl('vesselPlates/create', array('vesselSetupId'=>$model->vesselSetupId))?>";
+            window.location = "<?php echo $this->createAbsoluteUrl('VesselPlates/create', array('vesselSetupId'=>$model->vesselSetupId))?>";
         });
         $('#addCameraBtn').click(function(){
-            window.location = "<?php echo $this->createAbsoluteUrl('setupCameras/create', array('chamberType'=>$model->vesselSetupId))?>";
+            window.location = "<?php echo $this->createAbsoluteUrl('SetupCameras/create', array('vesselSetupId'=>$model->vesselSetupId))?>";
         });
         $('#addProbeBtn').click(function(){
-            window.location = "<?php echo $this->createAbsoluteUrl('setupProbes/create', array('chamberType'=>$model->vesselSetupId))?>";
+            window.location = "<?php echo $this->createAbsoluteUrl('SetupProbes/create', array('vesselSetupId'=>$model->vesselSetupId))?>";
         });
 
     });

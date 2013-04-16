@@ -75,14 +75,14 @@ class Experiments extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'experimentId' => 'Experiment',
+			'experimentId' => 'Experiment ID',
 			'name' => 'Name',
 			'description' => 'Description',
 			'dateTime' => 'Date Time',
 			'researcherId' => 'Researcher',
 			'operatorId' => 'Operator',
 			'setupId' => 'Setup',
-			'ExpDataPath' => 'Exp Data Path',
+			'ExpDataPath' => 'Experiment Data File Path',
 		);
 	}
 

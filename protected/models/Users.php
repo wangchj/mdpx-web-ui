@@ -119,4 +119,16 @@ class Users extends CActiveRecord
 	{
 		return md5($password);
 	}
+
+    public static function getDropdownList()
+    {
+        $users = Users::model()->findAll();
+        $result = array();
+        foreach($users as $user)
+        {
+            $result[$user->userId] = "$user->userId: $user->firstName $user->lastName";
+        }
+
+        return $result;
+    }
 }

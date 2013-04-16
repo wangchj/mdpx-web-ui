@@ -16,7 +16,11 @@ $this->menu=array(
 );
 ?>
 
-<h1>View ExperimentSetup #<?php echo $model->setupId; ?></h1>
+<h1>View Experiment Setup #<?php echo $model->setupId; ?></h1>
+
+<p>
+<button id="addExperimentBtn" class="btn" type="button"><i class="icon-plus"></i> Create Experiment Setup</button>
+</p>
 
 <?php $this->widget('zii.widgets.CDetailView', array(
 	'data'=>$model,
@@ -41,3 +45,11 @@ $this->menu=array(
 		'dustType2',
 	),
 )); ?>
+
+<script type="text/javascript">
+    $(function(){
+        $('#addExperimentBtn').click(function(){
+            window.location = "<?php echo $this->createAbsoluteUrl('Experiments/create', array('experimentSetupId'=>$model->setupId))?>";
+        });
+    });
+</script>

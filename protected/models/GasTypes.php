@@ -90,4 +90,21 @@ class GasTypes extends CActiveRecord
 			'criteria'=>$criteria,
 		));
 	}
+
+    /**
+     * Gets a list of gas types to be used in dropdown selection menu.
+     * @return array in the format array(int=>string, int=>string, ...).
+     * @example array(1=>'1:argon', 2=>'2:krypton', ...)
+     */
+    public static function getGasTypeDropdownList()
+    {
+        $gasTypes = GasTypes::model()->findAll();
+        $result = array();
+        foreach($gasTypes as $gasType)
+        {
+            $result[$gasType->gasTypeId] = "$gasType->gasTypeId: $gasType->name";
+        }
+
+        return $result;
+    }
 }

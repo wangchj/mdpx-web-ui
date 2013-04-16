@@ -107,7 +107,7 @@ Yii::app()->getClientScript()->registerCssFile(Yii::app()->baseUrl.'/bootstrap/c
                         <li role="presentation"><a role="menuitem" tabindex="-1" href="<?php echo getAppUrl()?>/index.php/VesselSetup/create">Add</a></li>
                     </ul>
                 </li>
-                <li><a href="#">Experiment Setup</a></li>
+                <li><a href="<?php echo $this->createAbsoluteUrl('ExperimentSetup/')?>">Experiment Setup</a></li>
             </ul>
         </div>
     </div>

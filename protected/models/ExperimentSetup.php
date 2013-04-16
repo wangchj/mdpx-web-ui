@@ -58,9 +58,10 @@ class ExperimentSetup extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('setupId, name, description, vesselSetupId, dcVoltageSetpoint, dcCurrentSetpoint, gasType1, gasType2, dustType1, dustType2', 'required'),
+			array('name, description, vesselSetupId, dcVoltageSetpoint, dcCurrentSetpoint, gasType1, gasType2, dustType1, dustType2', 'required'),
 			array('setupId, vesselSetupId, gasType1, gasType2, dustType1, dustType2', 'numerical', 'integerOnly'=>true),
 			array('name, description, rfPowerSetpoint', 'length', 'max'=>45),
+            array('dcVoltageSetpoint, dcCurrentSetpoint, pressureSetpoint, magnet1Setpoint, magnet2Setpoint, magnet3Setpoint, magnet4Setpoint, magneticFieldSetpoint, magneticFieldGradientSetpoint', 'numerical'),
 			array('dcVoltageSetpoint, dcCurrentSetpoint, pressureSetpoint, magnet1Setpoint, magnet2Setpoint, magnet3Setpoint, magnet4Setpoint, magneticFieldSetpoint, magneticFieldGradientSetpoint', 'length', 'max'=>18),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.

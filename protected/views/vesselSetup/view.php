@@ -22,6 +22,8 @@ $this->breadcrumbs=array(
     <button id="addPlateBtn" class="btn" type="button"><i class="icon-plus"></i> Add a plate</button>
     <button id="addCameraBtn" class="btn" type="button"><i class="icon-plus"></i> Add a camera</button>
     <button id="addProbeBtn" class="btn" type="button"><i class="icon-plus"></i> Add a probe</button>
+    &nbsp;
+    <button id="addExperimentSetupBtn" class="btn" type="button"><i class="icon-plus"></i> Create Experiment Setup</button>
 </p>
 
 <?php $this->widget('zii.widgets.CDetailView', array(
@@ -167,6 +169,9 @@ $this->breadcrumbs=array(
         });
         $('#addProbeBtn').click(function(){
             window.location = "<?php echo $this->createAbsoluteUrl('SetupProbes/create', array('vesselSetupId'=>$model->vesselSetupId))?>";
+        });
+        $('#addExperimentSetupBtn').click(function(){
+            window.location = "<?php echo $this->createAbsoluteUrl('ExperimentSetup/create', array('vesselSetupId'=>$model->vesselSetupId))?>";
         });
 
     });

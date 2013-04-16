@@ -55,7 +55,7 @@ class VesselSetup extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('vesselSetupId, name, description, chamber, upperElectrode, lowerElectrode, roughPump, turboPump, massFlowController, pressureGauge, dustShaker', 'required'),
+			array('name, description, chamber, upperElectrode, lowerElectrode, roughPump, turboPump, massFlowController, pressureGauge, dustShaker', 'required'),
 			array('vesselSetupId', 'numerical', 'integerOnly'=>true),
 			array('name, description', 'length', 'max'=>45),
 			array('upperElectrode, lowerElectrode, roughPump, turboPump, massFlowController, pressureGauge, dustShaker', 'length', 'max'=>10),

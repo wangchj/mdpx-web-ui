@@ -15,11 +15,19 @@
 
 	<?php echo $form->errorSummary($model); ?>
 
-	<div class="row">
+    <?php
+    if($this->action->id != 'create'){
+    ?>
+
+        <div class="row">
 		<?php echo $form->labelEx($model,'vesselSetupId'); ?>
 		<?php echo $form->textField($model,'vesselSetupId'); ?>
 		<?php echo $form->error($model,'vesselSetupId'); ?>
-	</div>
+	    </div>
+
+    <?php
+    }
+    ?>
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'name'); ?>
@@ -99,7 +107,10 @@
 </div><!-- form -->
 
 <?php
-var_dump(Parts::getPartsDropdownList());
+//var_dump(Parts::getPartsDropdownList());
+echo $this->getUniqueId();
+echo '<br />';
+echo $this->action->id;
 ?>
 
 <script type="text/javascript">

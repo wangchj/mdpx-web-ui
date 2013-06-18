@@ -27,12 +27,6 @@ Yii::app()->getClientScript()->registerCssFile(Yii::app()->baseUrl.'/js/dynatree
 	</div>
 
 	<div class="row">
-		<?php echo $form->labelEx($model,'name'); ?>
-		<?php echo $form->textField($model,'name',array('size'=>20,'maxlength'=>20)); ?>
-		<?php echo $form->error($model,'name'); ?>
-	</div>
-
-	<div class="row">
 		<?php echo $form->labelEx($model,'type'); ?>
         <?php echo $form->hiddenField($model,'type'); ?>
 		<input type="text" id="text_type" readonly="readonly" data-toggle="modal" role="button"
@@ -41,12 +35,6 @@ Yii::app()->getClientScript()->registerCssFile(Yii::app()->baseUrl.'/js/dynatree
                        <?php } ?>
                 style="background-color:#ffffff"/>
 		<?php echo $form->error($model,'type'); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->labelEx($model,'description'); ?>
-		<?php echo $form->textArea($model,'description',array('size'=>60,'maxlength'=>200)); ?>
-		<?php echo $form->error($model,'description'); ?>
 	</div>
 
 <!--	<div class="row">

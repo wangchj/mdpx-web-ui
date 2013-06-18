@@ -1,6 +1,6 @@
 <?php
-/* @var $this VesselSetupController */
-/* @var $model VesselSetup */
+/* @var $this VesselSetupsController */
+/* @var $model VesselSetups */
 
 $this->breadcrumbs=array(
 	'Vessel Setups'=>array('index'),
@@ -31,78 +31,21 @@ $this->breadcrumbs=array(
 	'attributes'=>array(
 		'vesselSetupId',
 		'name',
-		'description',
-        array(
-            'name'=>'upperElectrode',
-            'value'=>$model->chamber0->name . " ($model->chamber)"
-        ),
-		array(
-            'name'=>'upperElectrode',
-            'value'=>$model->upperElectrode0->name . " ($model->upperElectrode)"
-        ),
-        array(
-            'name'=>'lowerElectrode',
-            'value'=>$model->upperElectrode0->name . " ($model->upperElectrode)"
-        ),
-        array(
-            'name'=>'roughPump',
-            'value'=>$model->roughPump0->name . " ($model->roughPump)"
-        ),
-        array(
-            'name'=>'turboPump',
-            'value'=>$model->turboPump0->name . " ($model->turboPump)"
-        ),
-        array(
-            'name'=>'massFlowController',
-            'value'=>$model->massFlowController0->name . " ($model->massFlowController)"
-        ),
-        array(
-            'name'=>'pressureGauge',
-            'value'=>$model->pressureGauge0->name . " ($model->pressureGauge)"
-        ),
-        array(
-            'name'=>'dustShaker',
-            'value'=>$model->dustShaker0->name . " ($model->dustShaker)"
-        ),
+        'dateTime'
 	),
 )); ?>
 
-<h2>Plates</h2>
 
-<?php $this->widget('zii.widgets.grid.CGridView', array(
-    'id'=>'vessel-plates-grid',
-    'dataProvider'=>$plates->search(),
-    'filter'=>$plates,
-    'columns'=>array(
-        'vesselSetupId',
-        'side',
-        array(
-            'name'=>'plate',
-            'value'=>'$data->plate0->name . " (" . $data->plate . ")"'
-        ),
-        array(
-            'class'=>'CButtonColumn',
-            'buttons'=>array(
-                'view'=>array('visible'=>'false'),
-                'delete'=>array('visible'=>'false'),
-                'update'=>array('visible'=>'false'),
-            ),
-            //'viewButtonUrl'=>'Yii::app()->createUrl("/VesselSetup/view", array("vesselSetupId" => $data["vesselSetup"], "sideId"=>$data["side"]))',
-            //'deleteButtonUrl'=>'Yii::app()->createUrl("/VesselSetup/delete", array("vesselSetupId" => $data["vesselSetup"], "sideId"=>$data["side"]))',
-            'updateButtonUrl'=>'Yii::app()->createUrl("/VesselSetup/update", array("vesselSetupId" => $data["vesselSetupId"], "side"=>$data["side"]))',
-        ),
-    ),
-)); ?>
+<!-- h2>Cameras</h2 -->
 
-<h2>Cameras</h2>
-
-<?php $this->widget('zii.widgets.grid.CGridView', array(
+<?php /* $this->widget('zii.widgets.grid.CGridView', array(
     'id'=>'setup-cameras-grid',
     'dataProvider'=>$cameras->search(),
     'filter'=>$cameras,
     'columns'=>array(
-        'vesselSetupId',
-        'side',
+        'setupPartId',
+        //'vesselSetupId',
+        //'side',
         array(
             'name'=>'camera',
             'value'=>'$data->camera0->name . " (" . $data->camera . ")"',
@@ -129,11 +72,11 @@ $this->breadcrumbs=array(
             'updateButtonUrl'=>'Yii::app()->createUrl("/ChamberSides/update", array("chamberType" => $data["chamberType"], "sideId"=>$data["sideId"]))',
         ),
     ),
-)); ?>
+));*/ ?>
 
-<h2>Probes</h2>
+<!-- h2>Probes</h2 -->
 
-<?php $this->widget('zii.widgets.grid.CGridView', array(
+<?php /* $this->widget('zii.widgets.grid.CGridView', array(
     'id'=>'setup-probes-grid',
     'dataProvider'=>$probes->search(),
     'filter'=>$probes,
@@ -157,13 +100,10 @@ $this->breadcrumbs=array(
             'updateButtonUrl'=>'Yii::app()->createUrl("/ChamberSides/update", array("chamberType" => $data["chamberType"], "sideId"=>$data["sideId"]))',
         ),
     ),
-)); ?>
+)); */ ?>
 
 <script type="text/javascript">
     $(function(){
-        $('#addPlateBtn').click(function(){
-            window.location = "<?php echo $this->createAbsoluteUrl('VesselPlates/create', array('vesselSetupId'=>$model->vesselSetupId))?>";
-        });
         $('#addCameraBtn').click(function(){
             window.location = "<?php echo $this->createAbsoluteUrl('SetupCameras/create', array('vesselSetupId'=>$model->vesselSetupId))?>";
         });
@@ -171,7 +111,7 @@ $this->breadcrumbs=array(
             window.location = "<?php echo $this->createAbsoluteUrl('SetupProbes/create', array('vesselSetupId'=>$model->vesselSetupId))?>";
         });
         $('#addExperimentSetupBtn').click(function(){
-            window.location = "<?php echo $this->createAbsoluteUrl('ExperimentSetup/create', array('vesselSetupId'=>$model->vesselSetupId))?>";
+            window.location = "<?php echo $this->createAbsoluteUrl('ExperimentSetups/create', array('vesselSetupId'=>$model->vesselSetupId))?>";
         });
 
     });

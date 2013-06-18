@@ -4,7 +4,7 @@
 
 $this->breadcrumbs=array(
 	'Parts'=>array('index'),
-	$model->name=>array('view','id'=>$model->serialNum),
+	$model->serialNum=>array('view','id'=>$model->serialNum),
 	'Update',
 );
 

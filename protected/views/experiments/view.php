@@ -27,7 +27,5 @@ $this->menu=array(
 		'dateTime',
 		'researcherId',
 		'operatorId',
-		'setupId',
-		'ExpDataPath',
 	),
 )); ?>

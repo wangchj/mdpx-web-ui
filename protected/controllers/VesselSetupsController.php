@@ -1,6 +1,6 @@
 <?php
 
-class ExperimentsController extends Controller
+class VesselSetupsController extends Controller
 {
 	/**
 	 * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
@@ -32,7 +32,7 @@ class ExperimentsController extends Controller
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update', 'admin', 'delete'),
+				'actions'=>array('create','update'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -51,8 +51,18 @@ class ExperimentsController extends Controller
 	 */
 	public function actionView($id)
 	{
+        //Model for SetupCameras for searching
+        //$cameras = new SetupCameras('search');
+        //$cameras->vesselSetupId = $id;
+
+        //Model for SetupProbes for searching
+        //$probes = new SetupProbes('search');
+        //$probes->vesselSetupId = $id;
+
 		$this->render('view',array(
 			'model'=>$this->loadModel($id),
+            //'cameras'=>$cameras,
+            //'probes'=>$probes
 		));
 	}
 
@@ -62,18 +72,16 @@ class ExperimentsController extends Controller
 	 */
 	public function actionCreate()
 	{
-		$model=new Experiments;
+		$model=new VesselSetups;
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if(isset($_POST['Experiments']))
+		if(isset($_POST['VesselSetups']))
 		{
-			$model->attributes=$_POST['Experiments'];
-            $model->dateTime = date('Y-m-d H:i:s');
-
+			$model->attributes=$_POST['VesselSetups'];
 			if($model->save())
-				$this->redirect(array('admin'));
+				$this->redirect(array('view','id'=>$model->vesselSetupId));
 		}
 
 		$this->render('create',array(
@@ -93,11 +101,11 @@ class ExperimentsController extends Controller
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if(isset($_POST['Experiments']))
+		if(isset($_POST['VesselSetups']))
 		{
-			$model->attributes=$_POST['Experiments'];
+			$model->attributes=$_POST['VesselSetups'];
 			if($model->save())
-				$this->redirect(array('admin'));
+				$this->redirect(array('view','id'=>$model->vesselSetupId));
 		}
 
 		$this->render('update',array(
@@ -124,10 +132,15 @@ class ExperimentsController extends Controller
 	 */
 	public function actionIndex()
 	{
-        $model=new Experiments('search');
+/*		$dataProvider=new CActiveDataProvider('VesselSetups');
+		$this->render('index',array(
+			'dataProvider'=>$dataProvider,
+		));*/
+
+        $model=new VesselSetups('search');
         $model->unsetAttributes();  // clear any default values
-        if(isset($_GET['Experiments']))
-            $model->attributes=$_GET['Experiments'];
+        if(isset($_GET['VesselSetups']))
+            $model->attributes=$_GET['VesselSetups'];
 
         $this->render('admin',array(
             'model'=>$model,
@@ -139,10 +152,10 @@ class ExperimentsController extends Controller
 	 */
 	public function actionAdmin()
 	{
-		$model=new Experiments('search');
+		$model=new VesselSetups('search');
 		$model->unsetAttributes();  // clear any default values
-		if(isset($_GET['Experiments']))
-			$model->attributes=$_GET['Experiments'];
+		if(isset($_GET['VesselSetups']))
+			$model->attributes=$_GET['VesselSetups'];
 
 		$this->render('admin',array(
 			'model'=>$model,
@@ -153,12 +166,12 @@ class ExperimentsController extends Controller
 	 * Returns the data model based on the primary key given in the GET variable.
 	 * If the data model is not found, an HTTP exception will be raised.
 	 * @param integer $id the ID of the model to be loaded
-	 * @return Experiments the loaded model
+	 * @return VesselSetups the loaded model
 	 * @throws CHttpException
 	 */
 	public function loadModel($id)
 	{
-		$model=Experiments::model()->findByPk($id);
+		$model=VesselSetups::model()->findByPk($id);
 		if($model===null)
 			throw new CHttpException(404,'The requested page does not exist.');
 		return $model;
@@ -166,11 +179,11 @@ class ExperimentsController extends Controller
 
 	/**
 	 * Performs the AJAX validation.
-	 * @param Experiments $model the model to be validated
+	 * @param VesselSetups $model the model to be validated
 	 */
 	protected function performAjaxValidation($model)
 	{
-		if(isset($_POST['ajax']) && $_POST['ajax']==='experiments-form')
+		if(isset($_POST['ajax']) && $_POST['ajax']==='vessel-setup-form')
 		{
 			echo CActiveForm::validate($model);
 			Yii::app()->end();

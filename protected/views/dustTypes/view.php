@@ -23,6 +23,6 @@ $this->menu=array(
 	'attributes'=>array(
 		'dustTypeId',
 		'name',
-		'description',
+		//'description',
 	),
 )); ?>

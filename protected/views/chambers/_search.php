@@ -16,20 +16,20 @@
 		<?php echo $form->textField($model,'serialNum',array('size'=>10,'maxlength'=>10)); ?>
 	</div>
 
-	<div class="row">
-		<?php echo $form->label($model,'name'); ?>
-		<?php echo $form->textField($model,'name',array('size'=>20,'maxlength'=>20)); ?>
-	</div>
+	<!-- div class="row">
+		<?php //echo $form->label($model,'name'); ?>
+		<?php //echo $form->textField($model,'name',array('size'=>20,'maxlength'=>20)); ?>
+	</div -->
 
 	<div class="row">
 		<?php echo $form->label($model,'type'); ?>
 		<?php echo $form->textField($model,'type'); ?>
 	</div>
 
-	<div class="row">
-		<?php echo $form->label($model,'description'); ?>
-		<?php echo $form->textField($model,'description',array('size'=>60,'maxlength'=>200)); ?>
-	</div>
+	<!-- div class="row">
+		<?php //echo $form->label($model,'description'); ?>
+		<?php //echo $form->textField($model,'description',array('size'=>60,'maxlength'=>200)); ?>
+	</div -->
 
 	<div class="row">
 		<?php echo $form->label($model,'addedOn'); ?>

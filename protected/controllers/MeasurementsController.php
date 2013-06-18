@@ -1,6 +1,6 @@
 <?php
 
-class VesselSetupController extends Controller
+class MeasurementsController extends Controller
 {
 	/**
 	 * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
@@ -51,23 +51,8 @@ class VesselSetupController extends Controller
 	 */
 	public function actionView($id)
 	{
-        //Model for VesselPlates for searching
-        $plates = new VesselPlates('search');
-        $plates->vesselSetupId = $id;
-
-        //Model for SetupCameras for searching
-        $cameras = new SetupCameras('search');
-        $cameras->vesselSetupId = $id;
-
-        //Model for SetupProbes for searching
-        $probes = new SetupProbes('search');
-        $probes->vesselSetupId = $id;
-
 		$this->render('view',array(
 			'model'=>$this->loadModel($id),
-            'plates'=>$plates,
-            'cameras'=>$cameras,
-            'probes'=>$probes
 		));
 	}
 
@@ -77,16 +62,16 @@ class VesselSetupController extends Controller
 	 */
 	public function actionCreate()
 	{
-		$model=new VesselSetup;
+		$model=new Measurements;
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if(isset($_POST['VesselSetup']))
+		if(isset($_POST['Measurements']))
 		{
-			$model->attributes=$_POST['VesselSetup'];
+			$model->attributes=$_POST['Measurements'];
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->vesselSetupId));
+				$this->redirect(array('view','id'=>$model->measurementId));
 		}
 
 		$this->render('create',array(
@@ -106,11 +91,11 @@ class VesselSetupController extends Controller
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if(isset($_POST['VesselSetup']))
+		if(isset($_POST['Measurements']))
 		{
-			$model->attributes=$_POST['VesselSetup'];
+			$model->attributes=$_POST['Measurements'];
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->vesselSetupId));
+				$this->redirect(array('view','id'=>$model->measurementId));
 		}
 
 		$this->render('update',array(
@@ -137,19 +122,10 @@ class VesselSetupController extends Controller
 	 */
 	public function actionIndex()
 	{
-/*		$dataProvider=new CActiveDataProvider('VesselSetup');
+		$dataProvider=new CActiveDataProvider('Measurements');
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider,
-		));*/
-
-        $model=new VesselSetup('search');
-        $model->unsetAttributes();  // clear any default values
-        if(isset($_GET['VesselSetup']))
-            $model->attributes=$_GET['VesselSetup'];
-
-        $this->render('admin',array(
-            'model'=>$model,
-        ));
+		));
 	}
 
 	/**
@@ -157,10 +133,10 @@ class VesselSetupController extends Controller
 	 */
 	public function actionAdmin()
 	{
-		$model=new VesselSetup('search');
+		$model=new Measurements('search');
 		$model->unsetAttributes();  // clear any default values
-		if(isset($_GET['VesselSetup']))
-			$model->attributes=$_GET['VesselSetup'];
+		if(isset($_GET['Measurements']))
+			$model->attributes=$_GET['Measurements'];
 
 		$this->render('admin',array(
 			'model'=>$model,
@@ -171,12 +147,12 @@ class VesselSetupController extends Controller
 	 * Returns the data model based on the primary key given in the GET variable.
 	 * If the data model is not found, an HTTP exception will be raised.
 	 * @param integer $id the ID of the model to be loaded
-	 * @return VesselSetup the loaded model
+	 * @return Measurements the loaded model
 	 * @throws CHttpException
 	 */
 	public function loadModel($id)
 	{
-		$model=VesselSetup::model()->findByPk($id);
+		$model=Measurements::model()->findByPk($id);
 		if($model===null)
 			throw new CHttpException(404,'The requested page does not exist.');
 		return $model;
@@ -184,11 +160,11 @@ class VesselSetupController extends Controller
 
 	/**
 	 * Performs the AJAX validation.
-	 * @param VesselSetup $model the model to be validated
+	 * @param Measurements $model the model to be validated
 	 */
 	protected function performAjaxValidation($model)
 	{
-		if(isset($_POST['ajax']) && $_POST['ajax']==='vessel-setup-form')
+		if(isset($_POST['ajax']) && $_POST['ajax']==='measurements-form')
 		{
 			echo CActiveForm::validate($model);
 			Yii::app()->end();

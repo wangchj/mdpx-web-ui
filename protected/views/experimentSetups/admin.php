@@ -8,7 +8,7 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'List ExperimentSetup', 'url'=>array('index')),
+	array('label'=>'List ExperimentSetups', 'url'=>array('index')),
 	array('label'=>'Create ExperimentSetup', 'url'=>array('create')),
 );
 
@@ -41,11 +41,13 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 </div><!-- search-form -->
 
 <?php $this->widget('zii.widgets.grid.CGridView', array(
-	'id'=>'experiment-setup-grid',
+	'id'=>'experiment-setups-grid',
 	'dataProvider'=>$model->search(),
 	'filter'=>$model,
 	'columns'=>array(
-		'setupId',
+        'experimentSetupId',
+        'experimentId',
+        'dateTime',
 		'name',
 		'description',
 		'vesselSetupId',

@@ -5,9 +5,7 @@
  *
  * The followings are the available columns in table 'Parts':
  * @property string $serialNum
- * @property string $name
  * @property integer $type
- * @property string $description
  * @property string $addedOn
  * @property integer $addedBy
  *
@@ -52,11 +50,9 @@ class Parts extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('serialNum, name, type, description, addedOn, addedBy', 'required'),
+			array('serialNum, type, addedOn, addedBy', 'required'),
 			array('type, addedBy', 'numerical', 'integerOnly'=>true),
 			array('serialNum', 'length', 'max'=>10),
-			array('name', 'length', 'max'=>20),
-			array('description', 'length', 'max'=>200),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('serialNum, name, type, description, addedOn, addedBy', 'safe', 'on'=>'search'),
@@ -92,9 +88,7 @@ class Parts extends CActiveRecord
 	{
 		return array(
 			'serialNum' => 'Serial Number',
-			'name' => 'Name',
 			'type' => 'Type',
-			'description' => 'Description',
 			'addedOn' => 'Added On',
 			'addedBy' => 'Added By',
 		);
@@ -112,9 +106,7 @@ class Parts extends CActiveRecord
 		$criteria=new CDbCriteria;
 
 		$criteria->compare('serialNum',$this->serialNum,true);
-		$criteria->compare('name',$this->name,true);
 		$criteria->compare('type',$this->type);
-		$criteria->compare('description',$this->description,true);
 		$criteria->compare('addedOn',$this->addedOn,true);
 		$criteria->compare('addedBy',$this->addedBy);
 
@@ -135,9 +127,7 @@ class Parts extends CActiveRecord
         $criteria=new CDbCriteria;
 
         $criteria->compare('serialNum',$this->serialNum,true);
-        $criteria->compare('name',$this->name,true);
         $criteria->compare('type',$this->type);
-        $criteria->compare('description',$this->description,true);
         $criteria->compare('addedOn',$this->addedOn,true);
         $criteria->compare('addedBy',$this->addedBy);
         $criteria->addBetweenCondition('type', '1000', '1999');

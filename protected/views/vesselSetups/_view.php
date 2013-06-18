@@ -1,6 +1,6 @@
 <?php
-/* @var $this VesselSetupController */
-/* @var $data VesselSetup */
+/* @var $this VesselSetupsController */
+/* @var $data VesselSetups */
 ?>
 
 <div class="view">
@@ -13,6 +13,11 @@
 	<?php echo CHtml::encode($data->name); ?>
 	<br />
 
+    <b><?php echo CHtml::encode($data->getAttributeLabel('dateTime')); ?>:</b>
+    <?php echo CHtml::encode($data->dateTime); ?>
+    <br />
+
+    <?php /*
 	<b><?php echo CHtml::encode($data->getAttributeLabel('description')); ?>:</b>
 	<?php echo CHtml::encode($data->description); ?>
 	<br />
@@ -37,7 +42,6 @@
 	<?php echo CHtml::encode($data->turboPump); ?>
 	<br />
 
-	<?php /*
 	<b><?php echo CHtml::encode($data->getAttributeLabel('massFlowController')); ?>:</b>
 	<?php echo CHtml::encode($data->massFlowController); ?>
 	<br />

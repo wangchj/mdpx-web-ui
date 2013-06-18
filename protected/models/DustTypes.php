@@ -6,7 +6,6 @@
  * The followings are the available columns in table 'DustTypes':
  * @property integer $dustTypeId
  * @property string $name
- * @property string $description
  *
  * The followings are the available model relations:
  * @property ExperimentSetup[] $experimentSetups
@@ -40,12 +39,12 @@ class DustTypes extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('dustTypeId, name, description', 'required'),
-			array('dustTypeId', 'numerical', 'integerOnly'=>true),
-			array('name, description', 'length', 'max'=>45),
+            array('dustTypeId, name', 'required'),
+            array('dustTypeId', 'numerical', 'integerOnly'=>true),
+            array('name', 'length', 'max'=>45),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('dustTypeId, name, description', 'safe', 'on'=>'search'),
+            array('dustTypeId, name', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -70,7 +69,6 @@ class DustTypes extends CActiveRecord
 		return array(
 			'dustTypeId' => 'Dust Type',
 			'name' => 'Name',
-			'description' => 'Description',
 		);
 	}
 
@@ -87,7 +85,6 @@ class DustTypes extends CActiveRecord
 
 		$criteria->compare('dustTypeId',$this->dustTypeId);
 		$criteria->compare('name',$this->name,true);
-		$criteria->compare('description',$this->description,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

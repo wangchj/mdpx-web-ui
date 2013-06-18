@@ -1,6 +1,6 @@
 <?php
-/* @var $this ExperimentSetupController */
-/* @var $model ExperimentSetup */
+/* @var $this ExperimentSetupsController */
+/* @var $model ExperimentSetups */
 
 $this->breadcrumbs=array(
 	'Experiment Setups'=>array('index'),
@@ -8,7 +8,7 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'List ExperimentSetup', 'url'=>array('index')),
+	array('label'=>'List ExperimentSetups', 'url'=>array('index')),
 	array('label'=>'Manage ExperimentSetup', 'url'=>array('admin')),
 );
 ?>

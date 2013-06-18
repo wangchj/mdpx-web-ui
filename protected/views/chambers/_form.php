@@ -26,11 +26,11 @@ Yii::app()->getClientScript()->registerCssFile(Yii::app()->baseUrl.'/js/dynatree
 		<?php echo $form->error($model,'serialNum'); ?>
 	</div>
 
-	<div class="row">
-		<?php echo $form->labelEx($model,'name'); ?>
-		<?php echo $form->textField($model,'name',array('size'=>20,'maxlength'=>20)); ?>
-		<?php echo $form->error($model,'name'); ?>
-	</div>
+	<!-- div class="row">
+		<?php //echo $form->labelEx($model,'name'); ?>
+		<?php //echo $form->textField($model,'name',array('size'=>20,'maxlength'=>20)); ?>
+		<?php //echo $form->error($model,'name'); ?>
+	</div -->
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'type'); ?>
@@ -43,11 +43,11 @@ Yii::app()->getClientScript()->registerCssFile(Yii::app()->baseUrl.'/js/dynatree
 		<?php echo $form->error($model,'type'); ?>
 	</div>
 
-	<div class="row">
-		<?php echo $form->labelEx($model,'description'); ?>
-		<?php echo $form->textArea($model,'description',array('size'=>60,'maxlength'=>200)); ?>
-		<?php echo $form->error($model,'description'); ?>
-	</div>
+	<!-- div class="row">
+		<?php //echo $form->labelEx($model,'description'); ?>
+		<?php //echo $form->textArea($model,'description',array('size'=>60,'maxlength'=>200)); ?>
+		<?php //echo $form->error($model,'description'); ?>
+	</div -->
 
 <!--	<div class="row">
 		<?php /*echo $form->labelEx($model,'addedOn'); */?>

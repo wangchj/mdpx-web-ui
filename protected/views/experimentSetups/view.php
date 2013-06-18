@@ -1,6 +1,6 @@
 <?php
-/* @var $this ExperimentSetupController */
-/* @var $model ExperimentSetup */
+/* @var $this ExperimentSetupsController */
+/* @var $model ExperimentSetups */
 
 $this->breadcrumbs=array(
 	'Experiment Setups'=>array('index'),
@@ -10,13 +10,13 @@ $this->breadcrumbs=array(
 $this->menu=array(
 	array('label'=>'List ExperimentSetup', 'url'=>array('index')),
 	array('label'=>'Create ExperimentSetup', 'url'=>array('create')),
-	array('label'=>'Update ExperimentSetup', 'url'=>array('update', 'id'=>$model->setupId)),
-	array('label'=>'Delete ExperimentSetup', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->setupId),'confirm'=>'Are you sure you want to delete this item?')),
+	array('label'=>'Update ExperimentSetup', 'url'=>array('update', 'id'=>$model->experimentSetupId)),
+	array('label'=>'Delete ExperimentSetup', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->experimentSetupId),'confirm'=>'Are you sure you want to delete this item?')),
 	array('label'=>'Manage ExperimentSetup', 'url'=>array('admin')),
 );
 ?>
 
-<h1>View Experiment Setup #<?php echo $model->setupId; ?></h1>
+<h1>View Experiment Setup #<?php echo $model->experimentSetupId; ?></h1>
 
 <p>
 <button id="addExperimentBtn" class="btn" type="button"><i class="icon-plus"></i> Create Experiment Setup</button>
@@ -25,7 +25,9 @@ $this->menu=array(
 <?php $this->widget('zii.widgets.CDetailView', array(
 	'data'=>$model,
 	'attributes'=>array(
-		'setupId',
+        'experimentSetupId',
+        'experimentId',
+        'dateTime',
 		'name',
 		'description',
 		'vesselSetupId',
@@ -49,7 +51,7 @@ $this->menu=array(
 <script type="text/javascript">
     $(function(){
         $('#addExperimentBtn').click(function(){
-            window.location = "<?php echo $this->createAbsoluteUrl('Experiments/create', array('experimentSetupId'=>$model->setupId))?>";
+            window.location = "<?php echo $this->createAbsoluteUrl('Experiments/create', array('experimentSetupId'=>$model->experimentSetupId))?>";
         });
     });
 </script>

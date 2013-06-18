@@ -101,14 +101,15 @@ Yii::app()->getClientScript()->registerCssFile(Yii::app()->baseUrl.'/bootstrap/c
                     </ul>
                 </li>
                 <li class="dropdown">
-                    <a id="vs_dd" class="dropdown-toggle" data-toggle="dropdown" href="<?php echo getAppUrl()?>/index.php/VesselSetup">Vessel Setups</a>
+                    <a id="vs_dd" class="dropdown-toggle" data-toggle="dropdown" href="<?php echo getAppUrl()?>/index.php/VesselSetups">Vessel Setups</a>
                     <ul class="dropdown-menu" role="menu" aria-labelledby="drop1">
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="<?php echo getAppUrl()?>/index.php/VesselSetup">View</a></li>
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="<?php echo getAppUrl()?>/index.php/VesselSetup/create">Add</a></li>
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="<?php echo getAppUrl()?>/index.php/VesselSetups">View</a></li>
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="<?php echo getAppUrl()?>/index.php/VesselSetups/create">Add</a></li>
                     </ul>
                 </li>
-                <li><a href="<?php echo $this->createAbsoluteUrl('ExperimentSetup/')?>">Experiment Setups</a></li>
+                <li><a href="<?php echo $this->createAbsoluteUrl('ExperimentSetups/')?>">Experiment Setups</a></li>
                 <li><a href="<?php echo $this->createAbsoluteUrl('Experiments/')?>">Experiments</a></li>
+                <li><a href="<?php echo $this->createAbsoluteUrl('Measurements/')?>">Measurements</a></li>
                 <li class="dropdown">
                     <a id="user_dd" class="dropdown-toggle" data-toggle="dropdown" href="<?php echo getAppUrl()?>/index.php/Users">Users</a>
                     <ul class="dropdown-menu" role="menu" aria-labelledby="drop1">

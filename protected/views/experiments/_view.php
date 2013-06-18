@@ -33,11 +33,4 @@
 	<?php echo CHtml::encode($data->setupId); ?>
 	<br />
 
-	<?php /*
-	<b><?php echo CHtml::encode($data->getAttributeLabel('ExpDataPath')); ?>:</b>
-	<?php echo CHtml::encode($data->ExpDataPath); ?>
-	<br />
-
-	*/ ?>
-
 </div>

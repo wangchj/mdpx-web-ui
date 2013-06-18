@@ -1,6 +1,6 @@
 <?php
-/* @var $this ExperimentSetupController */
-/* @var $model ExperimentSetup */
+/* @var $this ExperimentSetupsController */
+/* @var $model ExperimentSetups */
 /* @var $form CActiveForm */
 ?>
 
@@ -11,10 +11,20 @@
 	'method'=>'get',
 )); ?>
 
-	<div class="row">
-		<?php echo $form->label($model,'setupId'); ?>
-		<?php echo $form->textField($model,'setupId'); ?>
-	</div>
+    <div class="row">
+        <?php echo $form->label($model,'experimentSetupId'); ?>
+        <?php echo $form->textField($model,'experimentSetupId'); ?>
+    </div>
+
+    <div class="row">
+        <?php echo $form->label($model,'experimentId'); ?>
+        <?php echo $form->textField($model,'experimentId'); ?>
+    </div>
+
+    <div class="row">
+        <?php echo $form->label($model,'dateTime'); ?>
+        <?php echo $form->textField($model,'dateTime'); ?>
+    </div>
 
 	<div class="row">
 		<?php echo $form->label($model,'name'); ?>

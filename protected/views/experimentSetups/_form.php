@@ -1,13 +1,13 @@
 <?php
-/* @var $this ExperimentSetupController */
-/* @var $model ExperimentSetup */
+/* @var $this ExperimentSetupsController */
+/* @var $model ExperimentSetups */
 /* @var $form CActiveForm */
 ?>
 
 <div class="form">
 
 <?php $form=$this->beginWidget('CActiveForm', array(
-	'id'=>'experiment-setup-form',
+	'id'=>'experiment-setups-form',
 	'enableAjaxValidation'=>false,
 )); ?>
 
@@ -15,11 +15,17 @@
 
 	<?php echo $form->errorSummary($model); ?>
 
-	<!-- div class="row">
-		<?php echo $form->labelEx($model,'setupId'); ?>
-		<?php echo $form->textField($model,'setupId'); ?>
-		<?php echo $form->error($model,'setupId'); ?>
-	</div -->
+    <div class="row">
+        <?php echo $form->labelEx($model,'experimentId'); ?>
+        <?php echo $form->textField($model,'experimentId'); ?>
+        <?php echo $form->error($model,'experimentId'); ?>
+    </div>
+
+    <div class="row">
+        <?php echo $form->labelEx($model,'dateTime'); ?>
+        <?php echo $form->textField($model,'dateTime'); ?>
+        <?php echo $form->error($model,'dateTime'); ?>
+    </div>
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'name'); ?>
@@ -135,7 +141,7 @@
 <script type="text/javascript">
     $(function(){
         $('#cancelBtn').click(function(){
-            window.location = "<?php echo $this->createAbsoluteUrl('ExperimentSetup/index') ?>";
+            window.location = "<?php echo $this->createAbsoluteUrl('ExperimentSetups/index') ?>";
         });
     });
 </script>

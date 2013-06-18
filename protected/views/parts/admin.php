@@ -46,12 +46,12 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 	'filter'=>$model,
 	'columns'=>array(
 		'serialNum',
-		'name',
+		//'name',
 		array(
             'name'=>'type',
             'value'=>'$data->type0->name  . \' (\' . $data->type . \')\''
             ),
-		'description',
+		//'description',
 		'addedOn',
         array(
             'name'=>'addedBy',

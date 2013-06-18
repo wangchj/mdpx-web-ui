@@ -1,5 +1,5 @@
 <?php
-/* @var $this VesselSetupController */
+/* @var $this VesselSetupsController */
 /* @var $dataProvider CActiveDataProvider */
 
 $this->breadcrumbs=array(
@@ -8,7 +8,7 @@ $this->breadcrumbs=array(
 
 $this->menu=array(
 	array('label'=>'Create VesselSetup', 'url'=>array('create')),
-	array('label'=>'Manage VesselSetup', 'url'=>array('admin')),
+	array('label'=>'Manage VesselSetups', 'url'=>array('admin')),
 );
 ?>
 

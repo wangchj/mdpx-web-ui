@@ -1,13 +1,13 @@
 <?php
-/* @var $this VesselSetupController */
-/* @var $model VesselSetup */
+/* @var $this VesselSetupsController */
+/* @var $model VesselSetups */
 /* @var $form CActiveForm */
 ?>
 
 <div class="form">
 
 <?php $form=$this->beginWidget('CActiveForm', array(
-	'id'=>'vessel-setup-form',
+	'id'=>'vessel-setups-form',
 	'enableAjaxValidation'=>false,
 )); ?>
 
@@ -35,6 +35,13 @@
 		<?php echo $form->error($model,'name'); ?>
 	</div>
 
+    <div class="row">
+        <?php echo $form->labelEx($model,'dateTime'); ?>
+        <?php echo $form->textField($model,'dateTime'); ?>
+        <?php echo $form->error($model,'dateTime'); ?>
+    </div>
+
+    <?php /*
 	<div class="row">
 		<?php echo $form->labelEx($model,'description'); ?>
 		<?php echo $form->textField($model,'description',array('size'=>45,'maxlength'=>45)); ?>
@@ -96,6 +103,7 @@
         <?php echo $form->dropDownList($model,'dustShaker',Parts::getPartsDropdownList()); ?>
 		<?php echo $form->error($model,'dustShaker'); ?>
 	</div>
+    */ ?>
 
 	<div class="row buttons">
 		<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); ?>
@@ -116,7 +124,7 @@ echo $this->action->id;
 <script type="text/javascript">
     $(function(){
         $('#cancelBtn').click(function(){
-            window.location = "<?php putAppUlr()?>/index.php/VesselSetup";
+            window.location = "<?php putAppUlr()?>/index.php/VesselSetups";
         });
 
     });

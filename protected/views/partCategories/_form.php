@@ -42,6 +42,12 @@
 	</div>
 
     <div class="row">
+        <?php echo $form->labelEx($model,'description'); ?>
+        <?php echo $form->textArea($model,'description',array('size'=>200,'maxlength'=>200)); ?>
+        <?php echo $form->error($model,'description'); ?>
+    </div>
+
+    <div class="row">
         <?php echo $form->labelEx($model,'isGroup'); ?>
         <?php echo $form->checkbox($model,'isGroup'); ?>
         <?php echo $form->error($model,'isGroup'); ?>

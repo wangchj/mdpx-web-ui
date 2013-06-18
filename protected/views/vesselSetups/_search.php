@@ -1,6 +1,6 @@
 <?php
-/* @var $this VesselSetupController */
-/* @var $model VesselSetup */
+/* @var $this VesselSetupsController */
+/* @var $model VesselSetups */
 /* @var $form CActiveForm */
 ?>
 
@@ -21,6 +21,7 @@
 		<?php echo $form->textField($model,'name',array('size'=>45,'maxlength'=>45)); ?>
 	</div>
 
+    <?php /*
 	<div class="row">
 		<?php echo $form->label($model,'description'); ?>
 		<?php echo $form->textField($model,'description',array('size'=>45,'maxlength'=>45)); ?>
@@ -60,6 +61,7 @@
 		<?php echo $form->label($model,'dustShaker'); ?>
 		<?php echo $form->textField($model,'dustShaker',array('size'=>10,'maxlength'=>10)); ?>
 	</div>
+    */ ?>
 
 	<div class="row buttons">
 		<?php echo CHtml::submitButton('Search'); ?>

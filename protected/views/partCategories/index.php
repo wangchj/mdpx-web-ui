@@ -62,6 +62,7 @@ $('.search-form form').submit(function(){
     'columns'=>array(
         'partCatId',
         'name',
+        'description',
         'parent',
         array(
             'class'=>'CButtonColumn',

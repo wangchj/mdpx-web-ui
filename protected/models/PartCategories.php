@@ -6,6 +6,7 @@
  * The followings are the available columns in table 'PartCategories':
  * @property integer $partCatId
  * @property string $name
+ * @property string description
  * @property integer $parent
  * @property boolean $isGroup
  *
@@ -47,9 +48,10 @@ class PartCategories extends CActiveRecord
 			array('parent,partCatId', 'numerical', 'integerOnly'=>true),
 			array('isGroup', 'boolean'),
 			array('name', 'length', 'max'=>40),
+            array('description', 'length', 'max'=>200),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('partCatId, name, parent, isGroup', 'safe', 'on'=>'search'),
+			array('partCatId, name, description, parent, isGroup', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -76,6 +78,7 @@ class PartCategories extends CActiveRecord
 		return array(
 			'partCatId' => 'Part Category ID',
 			'name' => 'Name',
+            'description' => 'Description',
 			'parent' => 'Parent',
 			'isGroup' => 'Is Group Category',
 		);
@@ -94,6 +97,7 @@ class PartCategories extends CActiveRecord
 
 		$criteria->compare('partCatId',$this->partCatId);
 		$criteria->compare('name',$this->name,true);
+        $criteria->compare('description',$this->description,true);
 		$criteria->compare('parent',$this->parent);
 		$criteria->compare('isGroup',$this->isGroup);
 

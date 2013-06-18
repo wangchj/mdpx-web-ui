@@ -1,15 +1,15 @@
 <?php
-/* @var $this ChambersController */
-/* @var $model Chambers */
+/* @var $this MeasurementsController */
+/* @var $model Measurements */
 
 $this->breadcrumbs=array(
-	'Chambers'=>array('index'),
-	//'Manage',
+	'Measurements'=>array('index'),
+	'Manage',
 );
 
 $this->menu=array(
-	array('label'=>'List Chambers', 'url'=>array('index')),
-	array('label'=>'Create Chambers', 'url'=>array('create')),
+	array('label'=>'List Measurements', 'url'=>array('index')),
+	array('label'=>'Create Measurements', 'url'=>array('create')),
 );
 
 Yii::app()->clientScript->registerScript('search', "
@@ -18,7 +18,7 @@ $('.search-button').click(function(){
 	return false;
 });
 $('.search-form form').submit(function(){
-	$('#chambers-grid').yiiGridView('update', {
+	$('#measurements-grid').yiiGridView('update', {
 		data: $(this).serialize()
 	});
 	return false;
@@ -26,7 +26,7 @@ $('.search-form form').submit(function(){
 ");
 ?>
 
-<h1>Chambers</h1>
+<h1>Manage Measurements</h1>
 
 <p>
 You may optionally enter a comparison operator (<b>&lt;</b>, <b>&lt;=</b>, <b>&gt;</b>, <b>&gt;=</b>, <b>&lt;&gt;</b>
@@ -41,23 +41,27 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 </div><!-- search-form -->
 
 <?php $this->widget('zii.widgets.grid.CGridView', array(
-	'id'=>'chambers-grid',
-	'dataProvider'=>$model->searchChambers(),
+	'id'=>'measurements-grid',
+	'dataProvider'=>$model->search(),
 	'filter'=>$model,
 	'columns'=>array(
-		'serialNum',
-		//'name',
-		array(
-            'name'=>'type',
-            'value'=>'$data->type0->name  . \' (\' . $data->type . \')\''
-            ),
-		//'description',
-		'addedOn',
-        array(
-            'name'=>'addedBy',
-            'value'=>'$data->addedBy0->firstName . \' \' . $data->addedBy0->lastName . \' (\' . $data->addedBy . \')\''
-        ),
-		//'addedBy',
+		'measurementId',
+		'experimentSetupId',
+		'dateTime',
+		'dcVoltage',
+		'dcCurrent',
+		'rfPower',
+		/*
+		'massFlow',
+		'pressure',
+		'magnet1',
+		'magnet2',
+		'magnet3',
+		'magnet4',
+		'magneticField',
+		'magneticFieldGradient',
+		'dataPath',
+		*/
 		array(
 			'class'=>'CButtonColumn',
 		),

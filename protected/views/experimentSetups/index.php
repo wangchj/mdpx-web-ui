@@ -1,5 +1,5 @@
 <?php
-/* @var $this ExperimentSetupController */
+/* @var $this ExperimentSetupsController */
 /* @var $dataProvider CActiveDataProvider */
 
 $this->breadcrumbs=array(
@@ -7,7 +7,7 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'Create ExperimentSetup', 'url'=>array('create')),
+	array('label'=>'Create ExperimentSetups', 'url'=>array('create')),
 	array('label'=>'Manage ExperimentSetup', 'url'=>array('admin')),
 );
 ?>

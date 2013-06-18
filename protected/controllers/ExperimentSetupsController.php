@@ -1,6 +1,6 @@
 <?php
 
-class ExperimentSetupController extends Controller
+class ExperimentSetupsController extends Controller
 {
 	/**
 	 * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
@@ -62,7 +62,7 @@ class ExperimentSetupController extends Controller
 	 */
 	public function actionCreate()
 	{
-		$model=new ExperimentSetup;
+		$model=new ExperimentSetups;
 
         if(isset($_GET['vesselSetupId']))
             $model->vesselSetupId = $_GET['vesselSetupId'];
@@ -70,9 +70,9 @@ class ExperimentSetupController extends Controller
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if(isset($_POST['ExperimentSetup']))
+		if(isset($_POST['ExperimentSetups']))
 		{
-			$model->attributes=$_POST['ExperimentSetup'];
+			$model->attributes=$_POST['ExperimentSetups'];
 			if($model->save())
 				$this->redirect(array('admin'));
 		}
@@ -94,9 +94,9 @@ class ExperimentSetupController extends Controller
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if(isset($_POST['ExperimentSetup']))
+		if(isset($_POST['ExperimentSetups']))
 		{
-			$model->attributes=$_POST['ExperimentSetup'];
+			$model->attributes=$_POST['ExperimentSetups'];
 			if($model->save())
 				//$this->redirect(array('view','id'=>$model->setupId));
                 $this->redirect(array('admin'));
@@ -126,10 +126,10 @@ class ExperimentSetupController extends Controller
 	 */
 	public function actionIndex()
 	{
-        $model=new ExperimentSetup('search');
+        $model=new ExperimentSetups('search');
         $model->unsetAttributes();  // clear any default values
-        if(isset($_GET['ExperimentSetup']))
-            $model->attributes=$_GET['ExperimentSetup'];
+        if(isset($_GET['ExperimentSetups']))
+            $model->attributes=$_GET['ExperimentSetups'];
 
         $this->render('admin',array(
             'model'=>$model,
@@ -141,10 +141,10 @@ class ExperimentSetupController extends Controller
 	 */
 	public function actionAdmin()
 	{
-		$model=new ExperimentSetup('search');
+		$model=new ExperimentSetups('search');
 		$model->unsetAttributes();  // clear any default values
-		if(isset($_GET['ExperimentSetup']))
-			$model->attributes=$_GET['ExperimentSetup'];
+		if(isset($_GET['ExperimentSetups']))
+			$model->attributes=$_GET['ExperimentSetups'];
 
 		$this->render('admin',array(
 			'model'=>$model,
@@ -155,12 +155,12 @@ class ExperimentSetupController extends Controller
 	 * Returns the data model based on the primary key given in the GET variable.
 	 * If the data model is not found, an HTTP exception will be raised.
 	 * @param integer $id the ID of the model to be loaded
-	 * @return ExperimentSetup the loaded model
+	 * @return ExperimentSetups the loaded model
 	 * @throws CHttpException
 	 */
 	public function loadModel($id)
 	{
-		$model=ExperimentSetup::model()->findByPk($id);
+		$model=ExperimentSetups::model()->findByPk($id);
 		if($model===null)
 			throw new CHttpException(404,'The requested page does not exist.');
 		return $model;
@@ -168,7 +168,7 @@ class ExperimentSetupController extends Controller
 
 	/**
 	 * Performs the AJAX validation.
-	 * @param ExperimentSetup $model the model to be validated
+	 * @param ExperimentSetups $model the model to be validated
 	 */
 	protected function performAjaxValidation($model)
 	{

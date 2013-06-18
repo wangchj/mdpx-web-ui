@@ -21,6 +21,11 @@
 		<?php echo $form->textField($model,'name',array('size'=>20,'maxlength'=>20)); ?>
 	</div>
 
+    <div class="row">
+        <?php echo $form->label($model,'description'); ?>
+        <?php echo $form->textField($model,'description',array('size'=>20,'maxlength'=>200)); ?>
+    </div>
+
 	<div class="row">
 		<?php echo $form->label($model,'parent'); ?>
 		<?php echo $form->textField($model,'parent'); ?>

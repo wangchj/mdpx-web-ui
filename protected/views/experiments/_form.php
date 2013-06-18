@@ -51,18 +51,6 @@
 		<?php echo $form->error($model,'operatorId'); ?>
 	</div>
 
-	<div class="row">
-		<?php echo $form->labelEx($model,'setupId'); ?>
-		<?php echo $form->textField($model,'setupId'); ?>
-		<?php echo $form->error($model,'setupId'); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->labelEx($model,'ExpDataPath'); ?>
-		<?php echo $form->textField($model,'ExpDataPath',array('size'=>45,'maxlength'=>45)); ?>
-		<?php echo $form->error($model,'ExpDataPath'); ?>
-	</div>
-
 	<div class="row buttons">
 		<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); ?>
         <?php echo CHtml::button('Cancel', array('id'=>'cancelBtn')); ?>

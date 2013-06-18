@@ -1,27 +1,22 @@
 <?php
 
 /**
- * This is the model class for table "Experiments".
+ * This is the model class for table "VesselSetups".
  *
- * The followings are the available columns in table 'Experiments':
- * @property integer $experimentId
+ * The followings are the available columns in table 'VesselSetups':
+ * @property integer $vesselSetupId
  * @property string $name
- * @property string $description
  * @property string $dateTime
- * @property integer $researcherId
- * @property integer $operatorId
  *
  * The followings are the available model relations:
- * @property ExperimentSetups[] $experimentSetups
- * @property Users $researcher
- * @property Users $operator
+ * @property SetupParts[] $setupParts
  */
-class Experiments extends CActiveRecord
+class VesselSetups extends CActiveRecord
 {
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @param string $className active record class name.
-	 * @return Experiments the static model class
+	 * @return VesselSetups the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{
@@ -33,7 +28,7 @@ class Experiments extends CActiveRecord
 	 */
 	public function tableName()
 	{
-		return 'Experiments';
+		return 'VesselSetups';
 	}
 
 	/**
@@ -44,12 +39,12 @@ class Experiments extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('experimentId, name, description, dateTime, researcherId, operatorId', 'required'),
-			array('experimentId, researcherId, operatorId', 'numerical', 'integerOnly'=>true),
-			array('name, description', 'length', 'max'=>45),
+			array('name, dateTime', 'required'),
+			array('vesselSetupId', 'numerical', 'integerOnly'=>true),
+			array('name', 'length', 'max'=>45),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('experimentId, name, description, dateTime, researcherId, operatorId', 'safe', 'on'=>'search'),
+			array('vesselSetupId, name, dateTime', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -61,9 +56,7 @@ class Experiments extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-            'experimentSetups' => array(self::HAS_MANY, 'ExperimentSetups', 'experimentId'),
-			'researcher' => array(self::BELONGS_TO, 'Users', 'researcherId'),
-			'operator' => array(self::BELONGS_TO, 'Users', 'operatorId'),
+            'setupParts' => array(self::HAS_MANY, 'SetupParts', 'vesselSetupId'),
 		);
 	}
 
@@ -73,12 +66,9 @@ class Experiments extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'experimentId' => 'Experiment ID',
+			'vesselSetupId' => 'Vessel Setup',
 			'name' => 'Name',
-			'description' => 'Description',
 			'dateTime' => 'Date Time',
-			'researcherId' => 'Researcher',
-			'operatorId' => 'Operator',
 		);
 	}
 
@@ -93,12 +83,9 @@ class Experiments extends CActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('experimentId',$this->experimentId);
+		$criteria->compare('vesselSetupId',$this->vesselSetupId);
 		$criteria->compare('name',$this->name,true);
-		$criteria->compare('description',$this->description,true);
-		$criteria->compare('dateTime',$this->dateTime,true);
-		$criteria->compare('researcherId',$this->researcherId);
-		$criteria->compare('operatorId',$this->operatorId);
+        $criteria->compare('dateTime',$this->dateTime,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

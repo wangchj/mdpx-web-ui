@@ -1,13 +1,21 @@
 <?php
-/* @var $this ExperimentSetupController */
-/* @var $data ExperimentSetup */
+/* @var $this ExperimentSetupsController */
+/* @var $data ExperimentSetups */
 ?>
 
 <div class="view">
 
-	<b><?php echo CHtml::encode($data->getAttributeLabel('setupId')); ?>:</b>
-	<?php echo CHtml::link(CHtml::encode($data->setupId), array('view', 'id'=>$data->setupId)); ?>
-	<br />
+    <b><?php echo CHtml::encode($data->getAttributeLabel('experimentSetupId')); ?>:</b>
+    <?php echo CHtml::link(CHtml::encode($data->experimentSetupId), array('view', 'id'=>$data->experimentSetupId)); ?>
+    <br />
+
+    <b><?php echo CHtml::encode($data->getAttributeLabel('experimentId')); ?>:</b>
+    <?php echo CHtml::encode($data->experimentId); ?>
+    <br />
+
+    <b><?php echo CHtml::encode($data->getAttributeLabel('dateTime')); ?>:</b>
+    <?php echo CHtml::encode($data->dateTime); ?>
+    <br />
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('name')); ?>:</b>
 	<?php echo CHtml::encode($data->name); ?>

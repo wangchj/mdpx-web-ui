@@ -4,7 +4,7 @@
 
 $this->breadcrumbs=array(
 	'Parts'=>array('index'),
-	$model->name,
+    $model->serialNum,//$model->name,
 );
 
 $this->menu=array(
@@ -22,12 +22,12 @@ $this->menu=array(
 	'data'=>$model,
 	'attributes'=>array(
 		'serialNum',
-		'name',
+		//'name',
 		array(
             'name'=>'type',
             'value'=>$model->type0->name . " ($model->type)"
         ),
-		'description',
+		//'description',
 		'addedOn',
         array(
             'name'=>'addedBy',

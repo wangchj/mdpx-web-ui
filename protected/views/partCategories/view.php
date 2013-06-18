@@ -23,6 +23,7 @@ $this->menu=array(
 	'attributes'=>array(
 		'partCatId',
 		'name',
+        'description',
 		'parent',
 	),
 )); ?>

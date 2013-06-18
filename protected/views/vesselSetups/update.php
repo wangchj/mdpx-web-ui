@@ -1,6 +1,6 @@
 <?php
-/* @var $this VesselSetupController */
-/* @var $model VesselSetup */
+/* @var $this VesselSetupsController */
+/* @var $model VesselSetups */
 
 $this->breadcrumbs=array(
 	'Vessel Setups'=>array('index'),
@@ -9,7 +9,7 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'List VesselSetup', 'url'=>array('index')),
+	array('label'=>'List VesselSetups', 'url'=>array('index')),
 	array('label'=>'Create VesselSetup', 'url'=>array('create')),
 	array('label'=>'View VesselSetup', 'url'=>array('view', 'id'=>$model->vesselSetupId)),
 	array('label'=>'Manage VesselSetup', 'url'=>array('admin')),

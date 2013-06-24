@@ -41,11 +41,13 @@ class UserIdentity extends CUserIdentity
 	}
 	
 	/**
-	 * TODO: this is a temporary hack that returns the ID as name.
+	 * Returns the full name (first name and last name) of the user.
+     * @return string
 	 */
 	public function getName()
 	{
-	    return $this->id;
+        $user = Users::model()->findByAttributes(array('userId'=>$this->id));
+        return $user->firstName . ' ' . $user->lastName;
 	}
 	
 	/**

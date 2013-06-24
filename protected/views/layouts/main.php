@@ -5,7 +5,14 @@ Yii::app()->clientScript->registerCoreScript('jquery');
 
 Yii::app()->getClientScript()->registerScriptFile(getAppUrl().'/bootstrap/js/bootstrap.js');
 Yii::app()->getClientScript()->registerCssFile(Yii::app()->baseUrl.'/bootstrap/css/bootstrap.css');
-Yii::app()->getClientScript()->registerCssFile(Yii::app()->baseUrl.'/bootstrap/css/bootstrap-responsive.css');
+Yii::app()->getClientScript()->registerCssFile(Yii::app()->baseUrl.'/bootstrap/css/sidenav.css');
+//Yii::app()->getClientScript()->registerCssFile(Yii::app()->baseUrl.'/bootstrap/css/bootstrap-responsive.css');
+Yii::app()->getClientScript()->registerCssFile(Yii::app()->baseUrl.'/css/btn-grp.css');
+?>
+
+<?php
+if(!isset($menu))
+    $menu = 'Welcome';
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -18,20 +25,18 @@ Yii::app()->getClientScript()->registerCssFile(Yii::app()->baseUrl.'/bootstrap/c
 <!--	<link rel="stylesheet" type="text/css" href="<?php /*echo Yii::app()->request->baseUrl; */?>/css/screen.css" media="screen, projection" />
 	<link rel="stylesheet" type="text/css" href="<?php /*echo Yii::app()->request->baseUrl; */?>/css/print.css" media="print" />
 -->
-    <!-- Twitter Bootstrap -->
-    <!--
-    <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/bootstrap/css/bootstrap.css" />
-    <script type="text/javascript" src="<?php putAppUlr()?>/bootstrap/js/bootstrap.js"></script>
-    -->
 
-	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/main.css" />
-	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/form.css" />
+	<!-- link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/main.css" / -->
+	<!-- link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/form.css" / -->
     
     <!-- jQuery>
-    <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/jquery-1.9.1.js"></script>
+    <script type="text/javascript" src="<?php //echo Yii::app()->request->baseUrl; ?>/js/jquery-1.9.1.js"></script>
     <script type="text/javascript" src="http://code.jquery.com/jquery-migrate-1.1.1.min.js"></script>
     -->
-    
+    <style>
+        body{padding: 50px;}
+    </style>
+
 	<title><?php echo CHtml::encode($this->pageTitle); ?></title>
 
     <script type="text/javascript">
@@ -47,7 +52,7 @@ Yii::app()->getClientScript()->registerCssFile(Yii::app()->baseUrl.'/bootstrap/c
 
 <body>
 
-<div class="container" id="page">
+<!-- div class="container" id="page" -->
 
     <!--
 	<div id="header">
@@ -55,72 +60,61 @@ Yii::app()->getClientScript()->registerCssFile(Yii::app()->baseUrl.'/bootstrap/c
 	</div><!-- header -->
 
 
-    <div class="navbar">
-        <div class="navbar-inner">
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="navbar-inner" style="padding-left:35px;padding-right:35px">
             <ul class="nav">
-                <li class="dropdown">
-                    <a id="pc_dd" class="dropdown-toggle" data-toggle="dropdown" href="<?php echo getAppUrl()?>/index.php/PartCategories" data_target="#">Part Categories</a>
+                <!-- li <?php if($menu=='PartCatalog') echo 'class="active"'; ?>><a href="">Part Catalog</a></li -->
+                <!-- li <?php if($menu=='Setups') echo 'class="active"'; ?>><a href="">Setups</a></li -->
+                <!-- li <?php if($menu=='Other') echo 'class="active"'; ?>><a href="">Other</a></li -->
+                <!-- li class="pull-right"><a class="pull-right" href="">Logout</a></li -->
+
+                <li <?php if($menu=='Welcome') echo 'class="active"'; ?>><a href="<?php putAppUrl()?>/index.php">Welcome</a></li>
+
+                <li class="dropdown <?php if($menu=='PartCatalog') echo 'active'; ?>">
+                    <a id="PartCatalog-menu" class="dropdown-toggle" data-toggle="dropdown" href="" data_target="#">Part Catalog <b class="caret"></b></a>
                     <ul class="dropdown-menu" role="menu" aria-labelledby="drop1">
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="<?php echo getAppUrl()?>/index.php/PartCategories">View</a></li>
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="<?php echo getAppUrl()?>/index.php/PartCategories/treeview">Tree View</a></li>
-                        <li role="presentation" class="divider"></li>
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="<?php echo getAppUrl()?>/index.php/PartCategories/create">Add</a></li>
-                 <!--       <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Something else here</a></li>
-                        <li role="presentation" class="divider"></li>
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Separated link</a></li>--><!--       <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Something else here</a></li>
-                        <li role="presentation" class="divider"></li>
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Separated link</a></li>-->
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="<?php putAppUrl()?>/index.php/PartCategories">Part Categories</a></li>
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="<?php putAppUrl()?>/index.php/Parts">Parts</a></li>
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="<?php putAppUrl()?>/index.php/GasTypes">Gas Types</a></li>
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="<?php putAppUrl()?>/index.php/DustTypes">Dust Types</a></li>
                     </ul>
                 </li>
-                <li class="dropdown">
-                    <a id="prt_dd" class="dropdown-toggle" data-toggle="dropdown" href="<?php echo getAppUrl()?>/index.php/Parts">Parts</a>
+                <li class="dropdown <?php if($menu=='Setups') echo 'active'; ?>">
+                    <a id="Setups-menu" class="dropdown-toggle" data-toggle="dropdown" href="" data_target="#">Setups <b class="caret"></b></a>
                     <ul class="dropdown-menu" role="menu" aria-labelledby="drop1">
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="<?php echo getAppUrl()?>/index.php/Parts">View</a></li>
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="<?php echo getAppUrl()?>/index.php/Parts/create">Add</a></li>
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="<?php putAppUrl()?>/index.php/VesselSetups">Vessel Setups</a></li>
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="<?php putAppUrl()?>/index.php/ExperimentSetups">Experiment Setups</a></li>
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="<?php putAppUrl()?>/index.php/Experiments">Experiments</a></li>
                     </ul>
                 </li>
-                <li class="dropdown">
-                    <a id="chbr_dd" class="dropdown-toggle" data-toggle="dropdown" href="<?php echo getAppUrl()?>/index.php/Chambers">Chambers</a>
+                <li class="dropdown <?php if($menu=='Other') echo 'active'; ?>">
+                    <a id="Other-menu" class="dropdown-toggle" data-toggle="dropdown" href="<?php putAppUrl()?>/index.php/Users">Other <b class="caret"></b></a>
                     <ul class="dropdown-menu" role="menu" aria-labelledby="drop1">
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="<?php echo getAppUrl()?>/index.php/Chambers">View</a></li>
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="<?php echo getAppUrl()?>/index.php/Chambers/create">Add</a></li>
-                    </ul>
-                </li>
-                <li class="dropdown">
-                    <a id="gt_dd" class="dropdown-toggle" data-toggle="dropdown" href="<?php echo getAppUrl()?>/index.php/GasTypes">Gas Types</a>
-                    <ul class="dropdown-menu" role="menu" aria-labelledby="drop1">
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="<?php echo getAppUrl()?>/index.php/GasTypes">View</a></li>
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="<?php echo getAppUrl()?>/index.php/GasTypes/create">Add</a></li>
-                    </ul>
-                </li>
-                <li class="dropdown">
-                    <a id="dt_dd" class="dropdown-toggle" data-toggle="dropdown" href="<?php echo getAppUrl()?>/index.php/DustTypes">Dust Types</a>
-                    <ul class="dropdown-menu" role="menu" aria-labelledby="drop1">
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="<?php echo getAppUrl()?>/index.php/DustTypes">View</a></li>
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="<?php echo getAppUrl()?>/index.php/DustTypes/create">Add</a></li>
-                    </ul>
-                </li>
-                <li class="dropdown">
-                    <a id="vs_dd" class="dropdown-toggle" data-toggle="dropdown" href="<?php echo getAppUrl()?>/index.php/VesselSetups">Vessel Setups</a>
-                    <ul class="dropdown-menu" role="menu" aria-labelledby="drop1">
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="<?php echo getAppUrl()?>/index.php/VesselSetups">View</a></li>
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="<?php echo getAppUrl()?>/index.php/VesselSetups/create">Add</a></li>
-                    </ul>
-                </li>
-                <li><a href="<?php echo $this->createAbsoluteUrl('ExperimentSetups/')?>">Experiment Setups</a></li>
-                <li><a href="<?php echo $this->createAbsoluteUrl('Experiments/')?>">Experiments</a></li>
-                <li><a href="<?php echo $this->createAbsoluteUrl('Measurements/')?>">Measurements</a></li>
-                <li class="dropdown">
-                    <a id="user_dd" class="dropdown-toggle" data-toggle="dropdown" href="<?php echo getAppUrl()?>/index.php/Users">Users</a>
-                    <ul class="dropdown-menu" role="menu" aria-labelledby="drop1">
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="<?php echo getAppUrl()?>/index.php/Users">View</a></li>
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="<?php echo getAppUrl()?>/index.php/Users/create">Add</a></li>
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="<?php putAppUrl()?>/index.php/Users">Users</a></li>
                     </ul>
                 </li>
             </ul>
-        </div>
-    </div>
+            <ul class="nav" style="float:right">
+                <?php if(Yii::app()->user->isGuest){?>
+                    <li><a href="<?=$this->createUrl('site/login')?>">Login</a></li>
+                <?php } else {?>
+                    <li class="dropdown">
+                        <a id="Setups-menu" class="dropdown-toggle" data-toggle="dropdown" href="" data_target="#"><?=Yii::app()->user->name?> <b class="caret"></b></a>
+                        <ul class="dropdown-menu" role="menu" aria-labelledby="drop1">
+                            <li role="presentation"><a role="menuitem" tabindex="-1" href="<?php putAppUrl()?>/index.php/VesselSetups">Account Info</a></li>
+                            <li role="presentation"><a role="menuitem" tabindex="-1" href="<?php putAppUrl()?>/index.php/ExperimentSetups">Change Password</a></li>
+                            <li role="presentation"><a role="menuitem" tabindex="-1" href="<?=$this->createUrl('site/logout')?>">Logout</a></li>
+                        </ul>
+                    </li>
+                <?php }?>
 
+
+            </ul>
+        </div> <!-- navbar-inner -->
+    </div> <!-- navbar -->
+
+<!-- div style="background-color: #f5f5f5; position:absolute;left:0px;width:100%; min-height: 30px">abc
+</div -->
 <!--    <div class="dropdown">
     <a class="dropdown-toggle" data-toggle="dropdown" href="#">Part Categories</a>
     <ul class="dropdown-menu" role="menu" aria-labelledby="drop3">
@@ -132,39 +126,18 @@ Yii::app()->getClientScript()->registerCssFile(Yii::app()->baseUrl.'/bootstrap/c
     </ul>
     </div>-->
 
-	<!-- div id="mainmenu" -->
-		<?php /*
-            $this->widget('zii.widgets.CMenu',array(
-			'items'=>array(
-				array('label'=>'Home', 'url'=>array('/site/index')),
-				array('label'=>'About', 'url'=>array('/site/page', 'view'=>'about')),
-				array('label'=>'Contact', 'url'=>array('/site/contact')),
-				array('label'=>'Login', 'url'=>array('/site/login'), 'visible'=>Yii::app()->user->isGuest),
-				array('label'=>'Logout ('.Yii::app()->user->name.')', 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest)
-			),
-		    )); */
-        ?>
-	<!-- /div --><!-- mainmenu -->
-
-	<?php if(isset($this->breadcrumbs)):?>
-		<?php $this->widget('zii.widgets.CBreadcrumbs', array(
-			'links'=>$this->breadcrumbs,
-		)); ?><!-- breadcrumbs -->
-	<?php endif?>
-
+	<?php //if(isset($this->breadcrumbs)):?>
+		<?php //$this->widget('zii.widgets.CBreadcrumbs', array(
+			//'links'=>$this->breadcrumbs,
+		//)); ?><!-- breadcrumbs -->
+	<?php //endif?>
 
 	<?php echo $content; ?>
 
 
 	<div class="clear"></div>
 
-	<div class="row" id="footer">
-		Copyright &copy; <?php echo date('Y'); ?> by My Company.<br/>
-		All Rights Reserved.<br/>
-		<?php echo Yii::powered(); ?>
-	</div><!-- footer -->
-
-</div><!-- page -->
+<!-- /div --><!-- page -->
 
 </body>
 </html>

@@ -11,27 +11,27 @@
 	'method'=>'get',
 )); ?>
 
-	<div class="row">
+	<div>
 		<?php echo $form->label($model,'partCatId'); ?>
 		<?php echo $form->textField($model,'partCatId'); ?>
 	</div>
 
-	<div class="row">
+	<div>
 		<?php echo $form->label($model,'name'); ?>
 		<?php echo $form->textField($model,'name',array('size'=>20,'maxlength'=>20)); ?>
 	</div>
 
-    <div class="row">
+    <div>
         <?php echo $form->label($model,'description'); ?>
         <?php echo $form->textField($model,'description',array('size'=>20,'maxlength'=>200)); ?>
     </div>
 
-	<div class="row">
+	<div>
 		<?php echo $form->label($model,'parent'); ?>
 		<?php echo $form->textField($model,'parent'); ?>
 	</div>
 
-	<div class="row buttons">
+	<div class="buttons">
 		<?php echo CHtml::submitButton('Search'); ?>
 	</div>
 

@@ -3,31 +3,25 @@
 /* @var $data Parts */
 ?>
 
-<div class="view">
+<?php
+Yii::app()->getClientScript()->registerCssFile(Yii::app()->baseUrl.'/css/styles.css');
+?>
 
-	<b><?php echo CHtml::encode($data->getAttributeLabel('serialNum')); ?>:</b>
-	<?php echo CHtml::link(CHtml::encode($data->serialNum), array('view', 'id'=>$data->serialNum)); ?>
-	<br />
-
-	<!-- b><?php echo CHtml::encode($data->getAttributeLabel('name')); ?>:</b>
-	<?php echo CHtml::encode($data->name); ?>
-	<br / -->
-
-	<b><?php echo CHtml::encode($data->getAttributeLabel('type')); ?>:</b>
-	<?php echo CHtml::encode($data->type); ?>
-	<br />
-
-	<!-- b><?php echo CHtml::encode($data->getAttributeLabel('description')); ?>:</b>
-	<?php echo CHtml::encode($data->description); ?>
-	<br / -->
-
-	<b><?php echo CHtml::encode($data->getAttributeLabel('addedOn')); ?>:</b>
-	<?php echo CHtml::encode($data->addedOn); ?>
-	<br />
-
-	<b><?php echo CHtml::encode($data->getAttributeLabel('addedBy')); ?>:</b>
-	<?php echo CHtml::encode($data->addedBy); ?>
-	<br />
-
-
-</div>
+<table class="detail-view" id="yw0" style="margin-bottom: 20px">
+    <tr class="odd">
+        <th><?php echo CHtml::encode($data->getAttributeLabel('serialNum')); ?></th>
+        <td><?php echo CHtml::link(CHtml::encode($data->serialNum), array('view', 'id'=>$data->serialNum)); ?></td>
+    </tr>
+    <tr class="even">
+        <th><?php echo CHtml::encode($data->getAttributeLabel('type')); ?></th>
+        <td><?php echo CHtml::encode($data->type); ?></td>
+    </tr>
+    <tr class="odd">
+        <th><?php echo CHtml::encode($data->getAttributeLabel('addedOn')); ?></th>
+        <td><?php echo CHtml::encode($data->addedOn); ?></td>
+    </tr>
+    <tr class="even">
+        <th><?php echo CHtml::encode($data->getAttributeLabel('addedBy')); ?></th>
+        <td><?php echo CHtml::encode($data->addedBy); ?></td>
+    </tr>
+</table>

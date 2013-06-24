@@ -24,19 +24,19 @@
     function createClicked(action, node)
     {
         var key = node.data.key;
-        window.location = "<?php putAppUlr()?>/index.php/PartCategories/create?parent=" + key;
+        window.location = "<?php echo $this->createUrl('create')?>?parent=" + key;
     }
 
     function editClicked(action, node)
     {
         var key = node.data.key;
-        window.location = "<?php putAppUlr()?>/index.php/PartCategories/update?id=" + key;
+        window.location = "<?php echo $this->createUrl('update')?>?id=" + key;
     }
 
     function deleteClicked(action, node)
     {
         var key = node.data.key;
-        window.location = "<?php putAppUlr()?>/index.php/PartCategories/delete?id=" + key;
+        window.location = "<?php echo $this->createUrl('delete')?>?id=" + key;
     }
 
     $(function(){
@@ -139,7 +139,7 @@ function renderTree(array $tree)
 }
 ?>
 
-<div id="demo2">
+<div id="demo2" style="width:100%;">
 
 	<ul>
         <li data="isFolder:true,expand:true">All Categories

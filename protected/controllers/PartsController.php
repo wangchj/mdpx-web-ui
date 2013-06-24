@@ -7,7 +7,7 @@ class PartsController extends Controller
 	 * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
 	 * using two-column layout. See 'protected/views/layouts/column2.php'.
 	 */
-	public $layout='//layouts/column1';
+	public $layout='//layouts/column2';
 
 	/**
 	 * @return array action filters
@@ -33,7 +33,7 @@ class PartsController extends Controller
 			//	'users'=>array('*'),
 			//),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('index','view','create','update','admin','delete'),
+				'actions'=>array('index','view','list','create','update','admin','delete'),
 				'users'=>array('@'),
 			),
 			//array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -144,6 +144,14 @@ class PartsController extends Controller
             'model'=>$model,
         ));
 	}
+
+    public function actionList()
+    {
+        $dataProvider=new CActiveDataProvider('Parts');
+        $this->render('list',array(
+            'dataProvider'=>$dataProvider,
+        ));
+    }
 
 	/**
 	 * Manages all models.

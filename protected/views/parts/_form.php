@@ -20,13 +20,13 @@ Yii::app()->getClientScript()->registerCssFile(Yii::app()->baseUrl.'/js/dynatree
 
 	<?php echo $form->errorSummary($model); ?>
 
-	<div class="row">
+	<div>
 		<?php echo $form->labelEx($model,'serialNum'); ?>
 		<?php echo $form->textField($model,'serialNum',array('size'=>10,'maxlength'=>10)); ?>
 		<?php echo $form->error($model,'serialNum'); ?>
 	</div>
 
-	<div class="row">
+	<div>
 		<?php echo $form->labelEx($model,'type'); ?>
         <?php echo $form->hiddenField($model,'type'); ?>
 		<input type="text" id="text_type" readonly="readonly" data-toggle="modal" role="button"
@@ -37,19 +37,19 @@ Yii::app()->getClientScript()->registerCssFile(Yii::app()->baseUrl.'/js/dynatree
 		<?php echo $form->error($model,'type'); ?>
 	</div>
 
-<!--	<div class="row">
+<!--	<div>
 		<?php /*echo $form->labelEx($model,'addedOn'); */?>
 		<?php /*echo $form->textField($model,'addedOn'); */?>
 		<?php /*echo $form->error($model,'addedOn'); */?>
 	</div>
 
-	<div class="row">
+	<div>
 		<?php /*echo $form->labelEx($model,'addedBy'); */?>
 		<?php /*echo $form->textField($model,'addedBy'); */?>
 		<?php /*echo $form->error($model,'addedBy'); */?>
 	</div>-->
 
-	<div class="row buttons">
+	<div class="buttons">
 		<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); ?>
         <?php echo CHtml::button('Cancel', array('id'=>'cancelBtn')); ?>
 	</div>
@@ -153,7 +153,7 @@ function renderTree(array $tree)
         });
 
         $('#cancelBtn').click(function(){
-            window.location = "<?php putAppUlr()?>/index.php/Parts";
+            window.location = "<?php echo $this->createUrl('Parts/')?>";
         });
 
     });

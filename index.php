@@ -17,7 +17,7 @@ function getAppUrl()
     return Yii::app()->request->baseUrl;
 }
 
-function putAppUlr()
+function putAppUrl()
 {
     echo getAppUrl();
 }

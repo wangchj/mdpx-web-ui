@@ -13,6 +13,6 @@ $this->menu=array(
 );
 ?>
 
-<h1>Create Users</h1>
+<h1>Register User</h1>
 
-<?php echo $this->renderPartial('_form', array('model'=>$model)); ?>
+<?php echo $this->renderPartial('//users/_form', array('model'=>$model)); ?>

@@ -41,11 +41,11 @@ class SiteController extends Controller
 	{
 		return array(
 			array('allow',
-				'actions'=>array('index'),
+				'actions'=>array(),
 				'users'=>array('@'),
 			),
 			array('allow',
-			    'actions'=>array('login', 'logout', 'error'),
+			    'actions'=>array('index','register','login', 'logout', 'error'),
 			    'users'=>array('*'),
 			),
 			array('deny',  // deny all users
@@ -104,6 +104,34 @@ class SiteController extends Controller
 		}
 		$this->render('contact',array('model'=>$model));
 	}
+
+    public function actionRegister()
+    {
+        $model = new Users;
+
+        if(isset($_POST['Users']))
+        {
+            $model->attributes=$_POST['Users'];
+
+            //Clean phone number
+            $model->phone = str_replace(' ', '', str_replace('-', '', str_replace(')', '', str_replace('(', '', $model->phone))));
+
+            if($model->validate())
+            {
+                //Add registration date
+                //$model->signupTime = date('Y-m-d H:i:s');
+
+                //Hash password
+                $model->password = $model->encryptPassword($model->password);
+
+                //Insert new registration to database.
+                if($model->save(false))
+                	$this->redirect(array('login'));
+            }
+        }
+        // display the form
+        $this->render('//users/create',array('model'=>$model));
+    }
 
 	/**
 	 * Displays the login page

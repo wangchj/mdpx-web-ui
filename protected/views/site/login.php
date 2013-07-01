@@ -13,6 +13,8 @@ $this->breadcrumbs=array(
 
 <p>Please fill out the following form with your login credentials:</p>
 
+<p>If you do not have a login credential, please <a href="<?=$this->createUrl('register')?>">register</a> to request access.</p>
+
 <div class="form">
 <?php $form=$this->beginWidget('CActiveForm', array(
 	'id'=>'login-form',

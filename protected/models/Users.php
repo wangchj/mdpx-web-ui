@@ -16,9 +16,15 @@
  * @property Experiments[] $experiments
  * @property Experiments[] $experiments1
  * @property Parts[] $parts
+ * @property Roles[] $roles
  */
 class Users extends CActiveRecord
 {
+    /**
+     * @var string only used in user registration.
+     */
+    public $password_repeat;
+
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @param string $className active record class name.
@@ -45,11 +51,13 @@ class Users extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('userId, firstName, lastName, email, affiliation, password', 'required'),
+			array('firstName, lastName, email, affiliation, password, password_repeat', 'required'),
 			array('userId', 'numerical', 'integerOnly'=>true),
 			array('firstName, lastName, email, affiliation', 'length', 'max'=>45),
 			array('phone', 'length', 'max'=>10),
-			array('password', 'length', 'max'=>32),
+			array('password,password_repeat', 'length', 'max'=>32),
+            array('password', 'compare', 'on'=>'insert'),
+            array('password_repeat', 'safe', 'on'=>'insert'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('userId, firstName, lastName, phone, email, affiliation, password', 'safe', 'on'=>'search'),
@@ -67,6 +75,7 @@ class Users extends CActiveRecord
 			'experiments' => array(self::HAS_MANY, 'Experiments', 'researcherId'),
 			'experiments1' => array(self::HAS_MANY, 'Experiments', 'operatorId'),
 			'parts' => array(self::HAS_MANY, 'Parts', 'addedBy'),
+            'roles' => array(self::MANY_MANY, 'Roles', 'UserRoles(userId, roleId)'),
 		);
 	}
 
@@ -83,6 +92,7 @@ class Users extends CActiveRecord
 			'email' => 'Email',
 			'affiliation' => 'Affiliation',
 			'password' => 'Password',
+            'password_repeat' => 'Re-enter Password',
 		);
 	}
 

@@ -41,7 +41,7 @@ class SiteController extends Controller
 	{
 		return array(
 			array('allow',
-				'actions'=>array(),
+				'actions'=>array('changePassword'),
 				'users'=>array('@'),
 			),
 			array('allow',
@@ -166,5 +166,36 @@ class SiteController extends Controller
 	{
 		Yii::app()->user->logout();
 		$this->redirect(Yii::app()->homeUrl);
-	}
+    }
+
+    public function actionChangePassword()
+    {
+        $model = new ChangePasswordForm;
+        if(isset($_POST['ChangePasswordForm']))
+        {
+            $model->attributes = $_POST['ChangePasswordForm'];
+            if($model->validate())
+            {
+                $userModel = Users::model()->findByAttributes(
+                    array(
+                        'userId'=>Yii::app()->user->id,
+                        'password'=>Users::encryptPassword($model->oldPwd)
+                    )
+                );
+                if($userModel != null)
+                {
+                    $userModel->password = Users::encryptPassword($model->newPwd);
+                    $userModel->save(false);
+                    Yii::app()->user->logout();
+                    $this->redirect(array('login'));
+                }
+                else
+                {
+                    $model->addError('oldPwd', 'Password is incorrect');
+                }
+
+            }
+        }
+        $this->render('changePassword', array('model'=>$model));
+    }
 }

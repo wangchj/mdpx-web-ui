@@ -30,7 +30,12 @@ return array(
 
 	// application components
 	'components'=>array(
+        'accessManager'=>array(
+            //application/components/RoleAccessControl class
+            'class'=>'RoleAccessControl'
+        ),
 		'user'=>array(
+            //'class'=>'WebUser',
 			// enable cookie-based authentication
 			'allowAutoLogin'=>true,
 		),

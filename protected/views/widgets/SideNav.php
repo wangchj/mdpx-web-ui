@@ -8,6 +8,8 @@
 class SideNav extends CWidget
 {
 
+    public $accessManager;
+
     public $menus = array(
         array(
             //Label, action ID
@@ -37,6 +39,11 @@ class SideNav extends CWidget
 
     private function renderItem($item)
     {
+        //If user does not have permission to access this item, stop rendering.
+        if(!$this->accessManager->hasAccess(Yii::app()->user->id, $this->controller->id,
+            $item[1]))
+            return;
+
         //Print <li> start tag
         echo '<li';
         if($this->controller->action->id == $item[1])
@@ -58,6 +65,8 @@ class SideNav extends CWidget
 
     public function init()
     {
+        $this->accessManager = Yii::app()->accessManager;
+
         if($this->controller->id == 'partCategories')
             $this->menus = array(
                 array(

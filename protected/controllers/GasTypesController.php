@@ -32,7 +32,7 @@ class GasTypesController extends Controller
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update'),
+				'actions'=>array('list','create','update'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -136,6 +136,14 @@ class GasTypesController extends Controller
             'model'=>$model,
         ));
 	}
+
+    public function actionList()
+    {
+        $dataProvider=new CActiveDataProvider('GasTypes');
+        $this->render('list',array(
+            'dataProvider'=>$dataProvider,
+        ));
+    }
 
 	/**
 	 * Manages all models.

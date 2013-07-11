@@ -3,28 +3,24 @@
 /* @var $data PartCategories */
 ?>
 
-<?php
-Yii::app()->getClientScript()->registerCssFile(Yii::app()->baseUrl.'/css/styles.css');
-?>
-
-<table class="detail-view" id="yw0" style="margin-bottom: 20px">
-    <tr class="odd">
-        <th><?php echo CHtml::encode($data->getAttributeLabel('partCatId')); ?></th>
+<table class="table table-bordered table-striped" style="margin-bottom: 20px">
+    <tr>
+        <th style="width:160px"><?php echo CHtml::encode($data->getAttributeLabel('partCatId')); ?></th>
         <td><?php echo CHtml::link(CHtml::encode($data->partCatId), array('view', 'id'=>$data->partCatId)); ?></td>
     </tr>
-    <tr class="even">
+    <tr>
         <th><?php echo CHtml::encode($data->getAttributeLabel('name')); ?></th>
         <td><?php echo CHtml::encode($data->name); ?></td>
     </tr>
-    <tr class="odd">
+    <tr>
         <th><?php echo CHtml::encode($data->getAttributeLabel('description')); ?></th>
         <td><?php echo CHtml::encode($data->description); ?></td>
     </tr>
-    <tr class="even">
+    <tr>
         <th><?php echo CHtml::encode($data->getAttributeLabel('parent')); ?></th>
         <td><?php echo CHtml::encode($data->parent); ?></td>
     </tr>
-    <tr class="odd">
+    <tr>
         <th><?php echo CHtml::encode($data->getAttributeLabel('isGroup')); ?></th>
         <td><?php echo CHtml::encode($data->isGroup); ?></td>
     </tr>

@@ -1,16 +1,17 @@
-<script type="text/javascript">
-    $(function(){
-        $('#cancelBtn').click(function(){
-            window.location = "<?php echo $this->createUrl('PartCategories/')?>";
-        });
-    });
-</script>
-
 <?php
 /* @var $this PartCategoriesController */
 /* @var $model PartCategories */
 /* @var $form CActiveForm */
 ?>
+
+<script type="text/javascript">
+    $(function(){
+        //Handler for Cancel button
+        $('#cancelBtn').click(function(){
+            window.location = "<?php echo $this->createUrl('PartCategories/')?>";
+        });
+    });
+</script>
 
 <div class="form">
 

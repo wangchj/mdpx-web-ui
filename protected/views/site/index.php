@@ -4,7 +4,45 @@
 $this->pageTitle=Yii::app()->name;
 ?>
 
+<?php
+Yii::app()->getClientScript()->registerCssFile(Yii::app()->baseUrl.'/bootstrap/css/jumbotron.css');
+?>
+
+<div class="jumbotron masthead">
+    <div class="container">
+        <h1>MDPX Database</h1>
+        <p>Database for MDPX</p>
+        <?php
+        if(Yii::app()->user->isGuest){
+        ?>
+        <p>
+            <a href="<?=$this->createUrl('site/login')?>" class="btn btn-primary">Login</a>
+        </p>
+        <?php
+        }
+        else{
+        ?>
+        <ul class="masthead-links">
+            <li>
+                <a href="<?=$this->createUrl('partCategories/index')?>">Part Catalog</a>
+            </li>
+            <li>
+                <a href="<?=$this->createUrl('vesselSetups/index')?>">Vessel Setups</a>
+            </li>
+            <li>
+                <a href="<?=$this->createUrl('experiments/index')?>">Experiments</a>
+            </li>
+
+        </ul>
+        <?php
+        }
+        ?>
+    </div>
+</div>
+
+<?php /*
 <h1>Welcome to <i><?php echo CHtml::encode(Yii::app()->name); ?></i></h1>
+
 
 <p>Congratulations! You have successfully created your Yii application.</p>
 
@@ -18,3 +56,4 @@ $this->pageTitle=Yii::app()->name;
 the <a href="http://www.yiiframework.com/doc/">documentation</a>.
 Feel free to ask in the <a href="http://www.yiiframework.com/forum/">forum</a>,
 should you have any questions.</p>
+ */?>

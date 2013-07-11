@@ -66,6 +66,14 @@ $('.search-form form').submit(function(){
         'parent',
         array(
             'class'=>'CButtonColumn',
+            'buttons'=>array(
+                'update'=>array(
+                    'visible'=>'Yii::app()->accessManager->hasAccess(Yii::app()->user->id,$this->id, "update")',
+                ),
+                'delete'=>array(
+                    'visible'=>'Yii::app()->accessManager->hasAccess(Yii::app()->user->id, $this->id, "delete")',
+                ),
+            ),
         ),
     ),
 )); ?>

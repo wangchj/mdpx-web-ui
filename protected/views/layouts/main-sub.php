@@ -3,6 +3,12 @@
 <?php
 switch($this->id)
 {
+    /**
+     * $menuItems - an array of horizontal sub-main menu.
+     *
+     * Item syntax: array('label of item', 'controllerId')
+     */
+
     case 'partCategories':
     case 'parts':
     case 'gasTypes':
@@ -16,20 +22,27 @@ switch($this->id)
         $menuCategory = 'PartCatalog';
         break;
     case 'vesselSetups':
+        $menuItems = array(
+            array('Vessel Setups', 'vesselSetups'),
+            );
+        $menuCategory = 'Setup';
+        break;
     case 'experimentSetups':
     case 'experiments':
         $menuItems = array(
-            array('Vessel Setups', 'vesselSetups'),
+            array('Experiment Groups', 'experiments'),
             array('Experiment Setups', 'experimentSetups'),
-            array('Experiments', 'experiments'),
+            array('Measurements', 'measurements'),
         );
-        $menuCategory = 'Setups';
+        $menuCategory = 'Experiment';
         break;
     case 'users':
         $menuItems = array(
             array('Users', 'users'),
+            array('Roles', 'roles'),
+            array('Role Permissions', 'rolePermissions')
         );
-        $menuCategory = 'Other';
+        $menuCategory = 'Admin';
         break;
 }
 ?>

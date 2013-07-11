@@ -79,18 +79,30 @@ if(!isset($menu))
                         <li role="presentation"><a role="menuitem" tabindex="-1" href="<?php putAppUrl()?>/index.php/DustTypes">Dust Types</a></li>
                     </ul>
                 </li>
-                <li class="dropdown <?php if($menu=='Setups') echo 'active'; ?>">
-                    <a id="Setups-menu" class="dropdown-toggle" data-toggle="dropdown" href="" data_target="#">Setups <b class="caret"></b></a>
+                <li class="dropdown <?php if($menu=='Setup') echo 'active'; ?>">
+                    <a id="Setup-menu" class="dropdown-toggle" data-toggle="dropdown" href="" data_target="#">Setup <b class="caret"></b></a>
                     <ul class="dropdown-menu" role="menu" aria-labelledby="drop1">
                         <li role="presentation"><a role="menuitem" tabindex="-1" href="<?php putAppUrl()?>/index.php/VesselSetups">Vessel Setups</a></li>
+                        <?php /*
                         <li role="presentation"><a role="menuitem" tabindex="-1" href="<?php putAppUrl()?>/index.php/ExperimentSetups">Experiment Setups</a></li>
                         <li role="presentation"><a role="menuitem" tabindex="-1" href="<?php putAppUrl()?>/index.php/Experiments">Experiments</a></li>
+                        */?>
                     </ul>
                 </li>
-                <li class="dropdown <?php if($menu=='Other') echo 'active'; ?>">
-                    <a id="Other-menu" class="dropdown-toggle" data-toggle="dropdown" href="<?php putAppUrl()?>/index.php/Users">Other <b class="caret"></b></a>
+                <li class="dropdown <?php if($menu=='Experiment') echo 'active'; ?>">
+                    <a id="Experiment-menu" class="dropdown-toggle" data-toggle="dropdown" href="" data_target="#">Experiment <b class="caret"></b></a>
+                    <ul class="dropdown-menu" role="menu" aria-labelledby="drop1">
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="<?php putAppUrl()?>/index.php/Experiments">Experiment Groups</a></li>
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="<?php putAppUrl()?>/index.php/ExperimentSetups">Experiment Setups</a></li>
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="<?php putAppUrl()?>/index.php/Measurements">Measurements</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown <?php if($menu=='Admin') echo 'active'; ?>">
+                    <a id="Admin-menu" class="dropdown-toggle" data-toggle="dropdown" href="<?php putAppUrl()?>/index.php/Users">Admin <b class="caret"></b></a>
                     <ul class="dropdown-menu" role="menu" aria-labelledby="drop1">
                         <li role="presentation"><a role="menuitem" tabindex="-1" href="<?php putAppUrl()?>/index.php/Users">Users</a></li>
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="<?php putAppUrl()?>/index.php/Roles">Roles</a></li>
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="<?php putAppUrl()?>/index.php/RolePermissions">Role Permissions</a></li>
                     </ul>
                 </li>
             </ul>

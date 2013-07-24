@@ -101,6 +101,25 @@ class RoleAccessControl extends CApplicationComponent {
     );
 
     /**
+     * @param $userId int database ID of the user.
+     * @param $roleName string Name of the role. For example: 'Admin'
+     * @return bool true if the role is assigned to the user; false otherwise.
+     */
+    public static function hasRole($userId, $roleName)
+    {
+        //Get Role ID
+        $role = Roles::model()->findByAttributes(array('roleName'=>$roleName));
+        if($role == null)
+            return false;
+
+        $userRole = UserRoles::model()->findByAttributes(array('userId'=>$userId, 'roleId'=>$role->roleId));
+        if($userRole == null)
+            return false;
+
+        return true;
+    }
+
+    /**
      * Translates controller ID to database object id to be used in database access
      * authorization.
      *

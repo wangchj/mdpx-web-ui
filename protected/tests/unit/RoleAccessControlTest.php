@@ -86,4 +86,22 @@ class RoleAccessControlTest extends CDbTestCase
         $this->assertTrue(RoleAccessControl::actionMatch('treeview','read'));
         $this->assertFalse(RoleAccessControl::actionMatch('delete','read'));
     }
+
+    public function  testHasRole()
+    {
+        $access = new RoleAccessControl();
+
+        $user = Users::model()->findByAttributes(array('firstName'=>'admin', 'lastName'=>'admin'));
+        $this->assertTrue($access->hasRole($user->userId, 'Admin'));
+        $this->assertFalse($access->hasRole($user->userId, 'Operator'));
+        $this->assertFalse($access->hasRole($user->userId, 'RandomRoleName'));
+
+        $user = Users::model()->findByAttributes(array('firstName'=>'operator', 'lastName'=>'operator'));
+        $this->assertTrue($access->hasRole($user->userId, 'Operator'));
+        $this->assertFalse($access->hasRole($user->userId, 'Admin'));
+        $this->assertFalse($access->hasRole($user->userId, 'RandomRoleName'));
+
+        //None existing user
+        $this->assertFalse($access->hasRole(-1, 'Operator'));
+    }
 }

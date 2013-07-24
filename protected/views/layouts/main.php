@@ -97,6 +97,7 @@ if(!isset($menu))
                         <li role="presentation"><a role="menuitem" tabindex="-1" href="<?php putAppUrl()?>/index.php/Measurements">Measurements</a></li>
                     </ul>
                 </li>
+                <?php if(Yii::app()->accessManager->hasRole(Yii::app()->user->id, 'Admin')){?>
                 <li class="dropdown <?php if($menu=='Admin') echo 'active'; ?>">
                     <a id="Admin-menu" class="dropdown-toggle" data-toggle="dropdown" href="<?php putAppUrl()?>/index.php/Users">Admin <b class="caret"></b></a>
                     <ul class="dropdown-menu" role="menu" aria-labelledby="drop1">
@@ -105,6 +106,7 @@ if(!isset($menu))
                         <li role="presentation"><a role="menuitem" tabindex="-1" href="<?php putAppUrl()?>/index.php/RolePermissions">Role Permissions</a></li>
                     </ul>
                 </li>
+                <?php }?>
             </ul>
             <ul class="nav" style="float:right">
                 <?php if(Yii::app()->user->isGuest){?>

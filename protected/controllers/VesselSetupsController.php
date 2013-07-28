@@ -28,7 +28,7 @@ class VesselSetupsController extends Controller
 	{
 		return array(
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('index','view','create','update'),
+				'actions'=>array('index','view','partsList','create','update'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -62,6 +62,21 @@ class VesselSetupsController extends Controller
 		));
 	}
 
+    /**
+     * Displays all parts of a Vessel Setup.
+     * @param integer $id the ID of Vessel Setup.
+     */
+    public function actionPartsList($id)
+    {
+        $model = new SetupParts('search');
+        $model->vesselSetupId = $id;
+
+        $this->render('partsList',array(
+            'model'=>$model,
+            //'cameras'=>$cameras,
+            //'probes'=>$probes
+        ));
+    }
 	/**
 	 * Creates a new model.
 	 * If creation is successful, the browser will be redirected to the 'view' page.
@@ -133,15 +148,65 @@ class VesselSetupsController extends Controller
 			'dataProvider'=>$dataProvider,
 		));*/
 
-        $model=new VesselSetups('search');
-        $model->unsetAttributes();  // clear any default values
-        if(isset($_GET['VesselSetups']))
-            $model->attributes=$_GET['VesselSetups'];
+        $sql =
+            'SELECT
+              VesselSetups.*,
+              ChSp.name AS chamber,
+                TESp.name AS topElectrode,
+                BESp.name AS botElectrode
+            FROM VesselSetups
+            LEFT JOIN
+            (SELECT * FROM SetupParts sp1
+            INNER JOIN Parts_Chambers ON sp1.part=Parts_Chambers.serialNum) AS ChSp
+            ON VesselSetups.vesselSetupId = ChSp.vesselSetupId
+            LEFT JOIN
+            (SELECT * FROM SetupParts sp2
+            INNER JOIN Parts_TopElectrodes ON sp2.part=Parts_TopElectrodes.serialNum) AS TESp
+            ON VesselSetups.vesselSetupId = TESp.vesselSetupId
+            LEFT JOIN
+            (SELECT * FROM SetupParts sp3
+            INNER JOIN Parts_BottomElectrodes ON sp3.part=Parts_BottomElectrodes.serialNum) AS BESp
+            ON VesselSetups.vesselSetupId = BESp.vesselSetupId';
+        $count = Yii::app()->db->createCommand(
+            'SELECT COUNT(*)
+            FROM VesselSetups
+            LEFT JOIN
+            (SELECT * FROM SetupParts sp1
+            INNER JOIN Parts_Chambers ON sp1.part=Parts_Chambers.serialNum) AS ChSp
+            ON VesselSetups.vesselSetupId = ChSp.vesselSetupId
+            LEFT JOIN
+            (SELECT * FROM SetupParts sp2
+            INNER JOIN Parts_TopElectrodes ON sp2.part=Parts_TopElectrodes.serialNum) AS TESp
+            ON VesselSetups.vesselSetupId = TESp.vesselSetupId
+            LEFT JOIN
+            (SELECT * FROM SetupParts sp3
+            INNER JOIN Parts_BottomElectrodes ON sp3.part=Parts_BottomElectrodes.serialNum) AS BESp
+            ON VesselSetups.vesselSetupId = BESp.vesselSetupId')->queryScalar();
 
-        $this->render('admin',array(
-            'model'=>$model,
+        //$model=new VesselSetups('search');
+        //$model->unsetAttributes();  // clear any default values
+        //if(isset($_GET['VesselSetups']))
+            //$model->attributes=$_GET['VesselSetups'];
+
+        //$this->render('admin',array(
+        //    'model'=>$model,
+        //));
+
+        $dataProvider=new CSqlDataProvider($sql, array(
+            'keyField'=>'vesselSetupId',
+            'totalItemCount'=>$count,
+            //'sort'=>array(
+            //    'attributes'=>array(
+            //        'id', 'username', 'email',
+            //    ),
+            //),
+            //'pagination'=>array(
+            //    'pageSize'=>10,
+            //),
         ));
-	}
+
+        $this->render('admin', array('dataProvider'=>$dataProvider));
+    }
 
 	/**
 	 * Manages all models.

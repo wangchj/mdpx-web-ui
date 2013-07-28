@@ -19,7 +19,7 @@
     if($this->action->id != 'create'){
     ?>
 
-        <div class="row">
+        <div>
 		<?php echo $form->labelEx($model,'vesselSetupId'); ?>
 		<?php echo $form->textField($model,'vesselSetupId'); ?>
 		<?php echo $form->error($model,'vesselSetupId'); ?>
@@ -29,13 +29,13 @@
     }
     ?>
 
-	<div class="row">
+	<div>
 		<?php echo $form->labelEx($model,'name'); ?>
 		<?php echo $form->textField($model,'name',array('size'=>45,'maxlength'=>45)); ?>
 		<?php echo $form->error($model,'name'); ?>
 	</div>
 
-    <div class="row">
+    <div>
         <?php echo $form->labelEx($model,'dateTime'); ?>
         <?php echo $form->textField($model,'dateTime'); ?>
         <?php echo $form->error($model,'dateTime'); ?>
@@ -105,7 +105,7 @@
 	</div>
     */ ?>
 
-	<div class="row buttons">
+	<div class="buttons">
 		<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); ?>
         <?php echo CHtml::button('Cancel', array('id'=>'cancelBtn')); ?>
 	</div>
@@ -114,17 +114,10 @@
 
 </div><!-- form -->
 
-<?php
-//var_dump(Parts::getPartsDropdownList());
-echo $this->getUniqueId();
-echo '<br />';
-echo $this->action->id;
-?>
-
 <script type="text/javascript">
     $(function(){
         $('#cancelBtn').click(function(){
-            window.location = "<?php putAppUlr()?>/index.php/VesselSetups";
+            window.location = "<?=$this->createUrl('VesselSetups/')?>";
         });
 
     });

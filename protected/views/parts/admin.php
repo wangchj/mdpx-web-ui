@@ -2,16 +2,6 @@
 /* @var $this PartsController */
 /* @var $model Parts */
 
-$this->breadcrumbs=array(
-	'Parts'=>array('index'),
-	//'Manage',
-);
-
-$this->menu=array(
-	array('label'=>'List Parts', 'url'=>array('index')),
-	array('label'=>'Create Parts', 'url'=>array('create')),
-);
-
 Yii::app()->clientScript->registerScript('search', "
 $('.search-button').click(function(){
 	$('.search-form').toggle();

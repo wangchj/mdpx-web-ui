@@ -2,16 +2,6 @@
 /* @var $this GasTypesController */
 /* @var $model GasTypes */
 
-$this->breadcrumbs=array(
-	'Gas Types'=>array('index'),
-	'Manage',
-);
-
-$this->menu=array(
-	array('label'=>'List GasTypes', 'url'=>array('index')),
-	array('label'=>'Create GasTypes', 'url'=>array('create')),
-);
-
 Yii::app()->clientScript->registerScript('search', "
 $('.search-button').click(function(){
 	$('.search-form').toggle();

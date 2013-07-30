@@ -2,16 +2,6 @@
 /* @var $this MeasurementsController */
 /* @var $model Measurements */
 
-$this->breadcrumbs=array(
-	'Measurements'=>array('index'),
-	'Manage',
-);
-
-$this->menu=array(
-	array('label'=>'List Measurements', 'url'=>array('index')),
-	array('label'=>'Create Measurements', 'url'=>array('create')),
-);
-
 Yii::app()->clientScript->registerScript('search', "
 $('.search-button').click(function(){
 	$('.search-form').toggle();

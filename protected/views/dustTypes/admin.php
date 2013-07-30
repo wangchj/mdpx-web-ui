@@ -2,16 +2,6 @@
 /* @var $this DustTypesController */
 /* @var $model DustTypes */
 
-$this->breadcrumbs=array(
-	'Dust Types'=>array('index'),
-	'Manage',
-);
-
-$this->menu=array(
-	array('label'=>'List DustTypes', 'url'=>array('index')),
-	array('label'=>'Create DustTypes', 'url'=>array('create')),
-);
-
 Yii::app()->clientScript->registerScript('search', "
 $('.search-button').click(function(){
 	$('.search-form').toggle();

@@ -2,16 +2,6 @@
 /* @var $this PartCategoriesController */
 /* @var $model PartCategories */
 
-$this->breadcrumbs=array(
-	'Part Categories'=>array('index'),
-	'Manage',
-);
-
-$this->menu=array(
-	array('label'=>'List PartCategories', 'url'=>array('index')),
-	array('label'=>'Create PartCategories', 'url'=>array('create')),
-);
-
 Yii::app()->clientScript->registerScript('search', "
 $('.search-button').click(function(){
 	$('.search-form').toggle();

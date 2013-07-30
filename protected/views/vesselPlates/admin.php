@@ -2,16 +2,6 @@
 /* @var $this VesselPlatesController */
 /* @var $model VesselPlates */
 
-$this->breadcrumbs=array(
-	'Vessel Plates'=>array('index'),
-	'Manage',
-);
-
-//$this->menu=array(
-//	array('label'=>'List VesselSetup', 'url'=>array('index')),
-//	array('label'=>'Create VesselSetup', 'url'=>array('create')),
-//);
-
 Yii::app()->clientScript->registerScript('search', "
 $('.search-button').click(function(){
 	$('.search-form').toggle();

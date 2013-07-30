@@ -18,15 +18,6 @@
 //Yii::app()->getClientScript()->registerScriptFile(Yii::app()->baseUrl.'/js/menu/jquery.contextMenu-custom.js');
 //Yii::app()->getClientScript()->registerCssFile(Yii::app()->baseUrl.'/js/menu/jquery.contextMenu.css');
 
-$this->breadcrumbs=array(
-	'Part Categories',
-);
-
-$this->menu=array(
-	array('label'=>'Create PartCategories', 'url'=>array('create')),
-	array('label'=>'Manage PartCategories', 'url'=>array('admin')),
-);
-
 Yii::app()->clientScript->registerScript('search', "
 $('.search-button').click(function(){
 	$('.search-form').toggle();

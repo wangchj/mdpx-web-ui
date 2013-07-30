@@ -2,16 +2,6 @@
 /* @var $this SetupProbesController */
 /* @var $model SetupProbes */
 
-$this->breadcrumbs=array(
-	'Setup Probes'=>array('index'),
-	'Manage',
-);
-
-//$this->menu=array(
-//	array('label'=>'List VesselSetup', 'url'=>array('index')),
-//	array('label'=>'Create VesselSetup', 'url'=>array('create')),
-//);
-
 Yii::app()->clientScript->registerScript('search', "
 $('.search-button').click(function(){
 	$('.search-form').toggle();

@@ -90,15 +90,6 @@ Yii::app()->getClientScript()->registerCssFile(Yii::app()->baseUrl.'/js/dynatree
 
 Yii::app()->getClientScript()->registerScriptFile(Yii::app()->baseUrl.'/js/menu/jquery.contextMenu-custom.js');
 Yii::app()->getClientScript()->registerCssFile(Yii::app()->baseUrl.'/js/menu/jquery.contextMenu.css');
-
-$this->breadcrumbs=array(
-	'Part Categories',
-);
-
-$this->menu=array(
-	array('label'=>'Create PartCategories', 'url'=>array('create')),
-	array('label'=>'Manage PartCategories', 'url'=>array('admin')),
-);
 ?>
 
 <ul id="myMenu" class="contextMenu">

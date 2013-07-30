@@ -2,16 +2,6 @@
 /* @var $this ExperimentSetupController */
 /* @var $model ExperimentSetup */
 
-$this->breadcrumbs=array(
-	'Experiment Setups'=>array('index'),
-	'Manage',
-);
-
-$this->menu=array(
-	array('label'=>'List ExperimentSetups', 'url'=>array('index')),
-	array('label'=>'Create ExperimentSetup', 'url'=>array('create')),
-);
-
 Yii::app()->clientScript->registerScript('search', "
 $('.search-button').click(function(){
 	$('.search-form').toggle();

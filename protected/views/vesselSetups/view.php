@@ -1,19 +1,6 @@
 <?php
 /* @var $this VesselSetupsController */
 /* @var $model VesselSetups */
-
-$this->breadcrumbs=array(
-	'Vessel Setups'=>array('index'),
-	$model->name,
-);
-
-//$this->menu=array(
-//	array('label'=>'List VesselSetup', 'url'=>array('index')),
-//	array('label'=>'Create VesselSetup', 'url'=>array('create')),
-//	array('label'=>'Update VesselSetup', 'url'=>array('update', 'id'=>$model->vesselSetupId)),
-//	array('label'=>'Delete VesselSetup', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->vesselSetupId),'confirm'=>'Are you sure you want to delete this item?')),
-//	array('label'=>'Manage VesselSetup', 'url'=>array('admin')),
-//);
 ?>
 
 <h1>View VesselSetup #<?php echo $model->vesselSetupId; ?></h1>

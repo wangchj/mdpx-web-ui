@@ -2,16 +2,6 @@
 /* @var $this ChambersController */
 /* @var $model Chambers */
 
-$this->breadcrumbs=array(
-	'Chambers'=>array('index'),
-	//'Manage',
-);
-
-$this->menu=array(
-	array('label'=>'List Chambers', 'url'=>array('index')),
-	array('label'=>'Create Chambers', 'url'=>array('create')),
-);
-
 Yii::app()->clientScript->registerScript('search', "
 $('.search-button').click(function(){
 	$('.search-form').toggle();

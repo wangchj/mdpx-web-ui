@@ -56,7 +56,7 @@ class Roles extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'roleId' => 'Role',
+			'roleId' => 'Role ID',
 			'roleName' => 'Role Name',
 		);
 	}

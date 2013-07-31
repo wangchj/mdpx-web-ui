@@ -37,6 +37,8 @@ switch($this->id)
         $menuCategory = 'Experiment';
         break;
     case 'users':
+    case 'roles':
+    case 'rolePermissions':
         $menuItems = array(
             array('Users', 'users'),
             array('Roles', 'roles'),

@@ -32,7 +32,12 @@ $actionId = $this->action->id;
             </ul>
             */?>
 
-            <?php $this->widget('application.views.widgets.SideNav')?>
+            <?php
+            if($this->menu != null)
+                $this->widget('application.views.widgets.SideNav', array('menus'=>$this->menu));
+            else
+                $this->widget('application.views.widgets.SideNav');
+            ?>
 
         </td>
         <td style="width:25px"></td>

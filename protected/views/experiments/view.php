@@ -12,6 +12,7 @@
 		'name',
 		'description',
 		'dateTime',
+        'isProgrammed',
 		'researcherId',
 		'operatorId',
 	),

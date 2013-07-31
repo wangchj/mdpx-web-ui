@@ -39,6 +39,12 @@
 		<?php echo $form->error($model,'dateTime'); ?>
 	</div> */?>
 
+    <div>
+        <?php echo $form->labelEx($model,'isProgrammed'); ?>
+        <?php echo $form->dropDownList($model,'isProgrammed',array('1'=>'Yes','0'=>'No')); ?>
+        <?php echo $form->error($model,'isProgrammed'); ?>
+    </div>
+
 	<div>
 		<?php echo $form->labelEx($model,'researcherId'); ?>
 		<?php echo $form->dropDownList($model, 'researcherId', Users::getDropdownList()) ?>

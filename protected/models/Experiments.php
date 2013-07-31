@@ -8,6 +8,7 @@
  * @property string $name
  * @property string $description
  * @property string $dateTime
+ * @property integer $isProgrammed
  * @property integer $researcherId
  * @property integer $operatorId
  *
@@ -44,12 +45,12 @@ class Experiments extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('experimentId, name, description, dateTime, researcherId, operatorId', 'required'),
-			array('experimentId, researcherId, operatorId', 'numerical', 'integerOnly'=>true),
+			array('experimentId, name, description, dateTime, isProgrammed, researcherId, operatorId', 'required'),
+			array('experimentId, isProgrammed, researcherId, operatorId', 'numerical', 'integerOnly'=>true),
 			array('name, description', 'length', 'max'=>45),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('experimentId, name, description, dateTime, researcherId, operatorId', 'safe', 'on'=>'search'),
+			array('experimentId, name, description, dateTime, isProgrammed, researcherId, operatorId', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -77,6 +78,7 @@ class Experiments extends CActiveRecord
 			'name' => 'Name',
 			'description' => 'Description',
 			'dateTime' => 'Date Time',
+            'isProgrammed' => 'Is Programmed',
 			'researcherId' => 'Researcher',
 			'operatorId' => 'Operator',
 		);
@@ -97,6 +99,7 @@ class Experiments extends CActiveRecord
 		$criteria->compare('name',$this->name,true);
 		$criteria->compare('description',$this->description,true);
 		$criteria->compare('dateTime',$this->dateTime,true);
+        $criteria->compare('isProgrammed',$this->isProgrammed);
 		$criteria->compare('researcherId',$this->researcherId);
 		$criteria->compare('operatorId',$this->operatorId);
 

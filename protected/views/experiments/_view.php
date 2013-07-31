@@ -21,6 +21,10 @@
 	<?php echo CHtml::encode($data->dateTime); ?>
 	<br />
 
+    <b><?php echo CHtml::encode($data->getAttributeLabel('isProgrammed')); ?>:</b>
+    <?php echo ($data->isProgrammed == 1) ? 'Yes' : 'No'; ?>
+    <br />
+
 	<b><?php echo CHtml::encode($data->getAttributeLabel('researcherId')); ?>:</b>
 	<?php echo CHtml::encode($data->researcherId); ?>
 	<br />

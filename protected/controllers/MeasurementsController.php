@@ -6,7 +6,7 @@ class MeasurementsController extends Controller
 	 * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
 	 * using two-column layout. See 'protected/views/layouts/column2.php'.
 	 */
-	public $layout='//layouts/column1';
+	public $layout='//layouts/column2';
 
 	/**
 	 * @return array action filters
@@ -122,26 +122,32 @@ class MeasurementsController extends Controller
 	 */
 	public function actionIndex()
 	{
-		$dataProvider=new CActiveDataProvider('Measurements');
-		$this->render('index',array(
-			'dataProvider'=>$dataProvider,
-		));
+        $model=new Measurements('search');
+        $model->unsetAttributes();  // clear any default values
+        if(isset($_GET['Measurements']))
+            $model->attributes=$_GET['Measurements'];
+        if(isset($_GET['experimentSetupId']))
+            $model->experimentSetupId=$_GET['experimentSetupId'];
+
+        $this->render('admin',array(
+            'model'=>$model,
+        ));
 	}
 
 	/**
 	 * Manages all models.
 	 */
-	public function actionAdmin()
-	{
-		$model=new Measurements('search');
-		$model->unsetAttributes();  // clear any default values
-		if(isset($_GET['Measurements']))
-			$model->attributes=$_GET['Measurements'];
-
-		$this->render('admin',array(
-			'model'=>$model,
-		));
-	}
+//	public function actionAdmin()
+//	{
+//		$model=new Measurements('search');
+//		$model->unsetAttributes();  // clear any default values
+//		if(isset($_GET['Measurements']))
+//			$model->attributes=$_GET['Measurements'];
+//
+//		$this->render('admin',array(
+//			'model'=>$model,
+//		));
+//	}
 
 	/**
 	 * Returns the data model based on the primary key given in the GET variable.

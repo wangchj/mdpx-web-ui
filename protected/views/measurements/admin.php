@@ -14,6 +14,13 @@ $('.search-form form').submit(function(){
 	return false;
 });
 ");
+
+$this->menu = array(
+    array(
+        array('label'=>'Grid View', 'route'=>'measurements/index'),
+        array('label'=>'Add New', 'route'=>'measurements/create')
+    ),
+);
 ?>
 
 <h1>Manage Measurements</h1>
@@ -38,20 +45,51 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 		'measurementId',
 		'experimentSetupId',
 		'dateTime',
-		'dcVoltage',
-		'dcCurrent',
-		'rfPower',
-		/*
-		'massFlow',
-		'pressure',
-		'magnet1',
-		'magnet2',
-		'magnet3',
-		'magnet4',
-		'magneticField',
-		'magneticFieldGradient',
+        array(
+            'name'=>'dcVoltage',
+            'value'=>'round($data->dcVoltage,2)'
+        ),
+        array(
+            'name'=>'dcCurrent',
+            'value'=>'round($data->dcCurrent,2)'
+        ),
+        array(
+            'name'=>'rfPower',
+            'value'=>'round($data->rfPower,2)'
+        ),
+        array(
+            'name'=>'massFlow',
+            'value'=>'round($data->massFlow,2)'
+        ),
+        array(
+            'name'=>'pressure',
+            'value'=>'round($data->pressure,2)'
+        ),
+        array(
+            'name'=>'magnet1',
+            'value'=>'round($data->magnet1,2)'
+        ),
+        array(
+            'name'=>'magnet2',
+            'value'=>'round($data->magnet2,2)'
+        ),
+        array(
+            'name'=>'magnet3',
+            'value'=>'round($data->magnet3,2)'
+        ),
+        array(
+            'name'=>'magnet4',
+            'value'=>'round($data->magnet4,2)'
+        ),
+        array(
+            'name'=>'magneticField',
+            'value'=>'round($data->magneticField,2)'
+        ),
+        array(
+            'name'=>'magneticFieldGradient',
+            'value'=>'round($data->magneticFieldGradient,2)'
+        ),
 		'dataPath',
-		*/
 		array(
 			'class'=>'CButtonColumn',
 		),

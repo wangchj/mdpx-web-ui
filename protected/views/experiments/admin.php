@@ -40,8 +40,12 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 		'description',
 		'dateTime',
         'isProgrammed:boolean',
-		'researcherId',
-		'operatorId',
+        array(
+            'name'=>'researcherId',
+            'value'=>'$data->researcher->firstName . \' \' . $data->researcher->lastName . \' (\' . $data->researcherId . \')\''),
+        array(
+            'name'=>'operatorId',
+            'value'=>'$data->operator->firstName . \' \' . $data->operator->lastName . \' (\' . $data->operatorId . \')\''),
 		array(
 			'class'=>'CButtonColumn',
 		),

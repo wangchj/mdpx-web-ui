@@ -130,6 +130,8 @@ class ExperimentSetupsController extends Controller
         $model->unsetAttributes();  // clear any default values
         if(isset($_GET['ExperimentSetups']))
             $model->attributes=$_GET['ExperimentSetups'];
+        if(isset($_GET['experimentId']))
+            $model->experimentId=$_GET['experimentId'];
 
         $this->render('admin',array(
             'model'=>$model,

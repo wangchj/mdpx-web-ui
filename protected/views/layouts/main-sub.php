@@ -29,6 +29,7 @@ switch($this->id)
         break;
     case 'experimentSetups':
     case 'experiments':
+    case 'measurements':
         $menuItems = array(
             array('Experiment Groups', 'experiments'),
             array('Experiment Setups', 'experimentSetups'),

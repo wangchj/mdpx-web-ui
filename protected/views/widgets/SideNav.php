@@ -59,9 +59,20 @@ class SideNav extends CWidget
 
     private function renderItem($item)
     {
+        if(!strpos($item['route'], '/'))
+        {
+            $routeController = $this->controller->id;
+            $routeAction = $item['route'];
+        }
+        else
+        {
+            $route = explode('/', $item['route']);
+            $routeController = $route[0];
+            $routeAction = $route[1];
+        }
+
         //If user does not have permission to access this item, stop rendering.
-        if(!$this->accessManager->hasAccess(Yii::app()->user->id, $this->controller->id,
-            $item['route']))
+        if(!$this->accessManager->hasAccess(Yii::app()->user->id, $routeController, $routeAction))
             return;
 
         //Print <li> start tag

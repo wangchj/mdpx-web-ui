@@ -44,6 +44,11 @@
      -moz-border-radius: 0 0 6px 6px;
           border-radius: 0 0 6px 6px;
 }
+.bs-docs-sidenav > li:only-child > a {
+  -webkit-border-radius: 6px 6px 6px 6px;
+     -moz-border-radius: 6px 6px 6px 6px;
+          border-radius: 6px 6px 6px 6px;
+}
 .bs-docs-sidenav > .active > a {
   position: relative;
   z-index: 2;

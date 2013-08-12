@@ -44,7 +44,7 @@ return array(
 			'urlFormat'=>'path',
 			'rules'=>array(
                 //'ChamberSides/view?chamberType=<chamberType:\d+>&sideId=<sideId:\d+>'=>'chamberSides/view',
-				'<controller:\w+>/<id:\d+>'=>'<controller>/view',
+				'<controller:\w+>/<id:[-\d]+>'=>'<controller>/view',
 				'<controller:\w+>/<action:\w+>/<id:\d+>'=>'<controller>/<action>',
 				'<controller:\w+>/<action:\w+>'=>'<controller>/<action>',
 			),

@@ -52,7 +52,7 @@ class Parts extends CActiveRecord
 		return array(
 			array('serialNum, type, addedOn, addedBy', 'required'),
 			array('type, addedBy', 'numerical', 'integerOnly'=>true),
-			array('serialNum', 'length', 'max'=>10),
+			array('serialNum', 'length', 'max'=>50),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('serialNum, name, type, description, addedOn, addedBy', 'safe', 'on'=>'search'),

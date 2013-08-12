@@ -22,7 +22,7 @@ Yii::app()->getClientScript()->registerCssFile(Yii::app()->baseUrl.'/js/dynatree
 
 	<div>
 		<?php echo $form->labelEx($model,'serialNum'); ?>
-		<?php echo $form->textField($model,'serialNum',array('size'=>10,'maxlength'=>10)); ?>
+		<?php echo $form->textField($model,'serialNum',array('size'=>50,'maxlength'=>50)); ?>
 		<?php echo $form->error($model,'serialNum'); ?>
 	</div>
 

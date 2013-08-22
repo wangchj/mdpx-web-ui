@@ -32,7 +32,7 @@ class PartCategoriesController extends Controller
 			//	'users'=>array('*'),
 			//),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('index','view','treeview','list','create','update','delete','admin'),
+				'actions'=>array('index','view','treeview','treeJson','list','create','update','delete','admin'),
 				'users'=>array('@'),
 			),
 			//array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -135,15 +135,14 @@ class PartCategoriesController extends Controller
             $model->attributes=$_GET['PartCategories'];
 
 		$this->render('index',array(
-			'dataProvider'=>$dataProvider, 'tree'=>$this->buildCategoryTree(), 'model'=>$model
+			'dataProvider'=>$dataProvider, 'model'=>$model
 		));
 	}
 
     public function actionTreeView()
     {
-        $this->render('treeview',array(
-            'tree'=>$this->buildCategoryTree()
-        ));
+        $rootCats = PartCategories::model()->findAll("parent is NULL");
+        $this->render('treeview', array('rootCats'=>$rootCats));
     }
 
     public function actionList()
@@ -254,8 +253,11 @@ class PartCategoriesController extends Controller
 		$result = array(
 				'id'=>$cat->partCatId,
 				'name'=>$cat->name,
-				'isGroup'=>$cat->isGroup,
-                'children'=>array()
+                'description'=>$cat->description,
+				'partCount'=>$cat->isGroup? '' : count($cat->parts),
+                'isGroup'=>$cat->isGroup,
+                'children'=>array(),
+            //'iconCls'=>'icon-ok'
 				);
 		
 		//if($cat->isGroup == 1)

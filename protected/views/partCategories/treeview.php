@@ -1,10 +1,73 @@
+<?php
+/* @var $this PartCategoriesController */
+/* @var $dataProvider CActiveDataProvider */
+
+Yii::app()->clientScript->registerCoreScript('jquery');
+Yii::app()->getClientScript()->registerScriptFile(Yii::app()->baseUrl.'/js/treetable/javascripts/src/jquery.treetable.js');
+Yii::app()->getClientScript()->registerCssFile(Yii::app()->baseUrl.'/js/treetable/stylesheets/jquery.treetable.css');
+Yii::app()->getClientScript()->registerCssFile(Yii::app()->baseUrl.'/js/treetable/stylesheets/jquery.treetable.theme.default.css');
+?>
+
+<h1>Part Categories</h1>
+
+<table id="tree-table" class="treetable">
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Identifier</th>
+        <th>Description</th>
+        <th>Part Count</th>
+    </tr>
+    </thead>
+    <tbody>
+    <?php
+    foreach ($rootCats as $rootCat)
+    {
+        renderNode($rootCat);
+    }
+
+    ?>
+    </tbody>
+</table>
+
+<?php
+function renderNode($partCat)
+{
+    $icon = $partCat->isGroup? 'folder' : 'file';
+    //$parent = $partCat->parent == null ? '0', $partCat->parent;
+    $partCount = $partCat->isGroup ? '' : count($partCat->parts);
+
+    //Output <tr data-tt-id= ... >
+    echo "<tr data-tt-id=\"$partCat->partCatId\" data-tt-parent-id=\"$partCat->parent\">";
+    echo "<td><span class=\"$icon\">$partCat->name</span></td>";
+    echo "<td>$partCat->partCatId</td>";
+    echo "<td>$partCat->description</td>";
+    echo "<td>$partCount</td>";
+    echo '</tr>';
+
+    if(count($partCat->partCategories) > 0)
+        foreach($partCat->partCategories as $partCat0)
+            renderNode($partCat0);
+}
+?>
+
+<ul id="menu-group" class="dropdown-menu context-menu" role="menu" aria-labelledby="dropdownMenu">
+    <li><a href="#" onclick="createClicked()">Add New Category</a></li>
+    <li><a href="#" onclick="editClicked()">Edit Category</a></li>
+</ul>
+
+<ul id="menu-part" class="dropdown-menu context-menu" role="menu">
+    <li><a href="#" onclick="editClicked()">Edit Category</a></li>
+</ul>
+
+
 <script type="text/javascript">
     function bindContextMenu(span) {
         // Add context menu to this node:
-        $(span).contextMenu({menu: "myMenu"}, function(action, el, pos) {
+        $(span).contextMenu({menu: "menu"}, function(action, el, pos) {
             // The event was bound to the <span> tag, but the node object
             // is stored in the parent <li> tag
-            var node = $.ui.dynatree.getNode(el);
+            var node = $.ui.fancytree.getNode(el);
             switch( action ) {
                 case "add":
                     createClicked(action, node);
@@ -21,139 +84,65 @@
         });
     };
 
-    function createClicked(action, node)
+    function createClicked()
     {
-        var key = node.data.key;
-        window.location = "<?php echo $this->createUrl('create')?>?parent=" + key;
+        //Selected node
+        var selNode = $('#tree-table tr.selected');
+        var nodeId = selNode.attr('data-tt-id');
+        window.location = "<?php echo $this->createUrl('create')?>?parent=" + node.id;
     }
 
-    function editClicked(action, node)
+    function editClicked()
     {
-        var key = node.data.key;
-        window.location = "<?php echo $this->createUrl('update')?>?id=" + key;
+        //Selected node
+        var selNode = $('#tree-table tr.selected');
+        var nodeId = selNode.attr('data-tt-id');
+        window.location = "<?php echo $this->createUrl('update')?>?id=" + nodeId;
     }
 
     function deleteClicked(action, node)
     {
-        var key = node.data.key;
+        //Selected node
+        var selNode = $('#tree-table tr.selected');
+        var nodeId = selNode.attr('data-tt-id');
         window.location = "<?php echo $this->createUrl('delete')?>?id=" + key;
     }
 
-    $(function(){
-        // Attach the dynatree widget to an existing <div id="tree"> element
-        // and pass the tree options as an argument to the dynatree() function:
-        $("#demo2").dynatree({
-            onActivate: function(node) {
-                // A DynaTreeNode object is passed to the activation handler
-                // Note: we also get this event, if persistence is on, and the page is reloaded.
-                //alert("You activated " + node.data.title);
-            },
-            persist: false,
-            onClick: function(node, event) {
-                // Close menu on click
-                if( $(".contextMenu:visible").length > 0 ){
-                    $(".contextMenu").hide();
-//          return false;
-                }
-            },
-            onCreate: function(node, span){
-                bindContextMenu(span);
-            }
+    $(function()
+    {
+        //Make treetable
+        $("#tree-table").treetable({expandable:true});
+
+        // Highlight selected row
+        $("#tree-table").on("mousedown", "tr", function() {
+            $(".selected").not(this).removeClass("selected");
+            $(this).addClass("selected");
+            //$(this).toggleClass("selected");
         });
 
-        /*    $('.dynatree-folder').mousedown(function(event){
-                if(event.which==3)
+        $("#tree-table tbody tr").bind('contextmenu',
+            function(event){
+                var node = $(this);
+                var nodeId = node.attr('data-tt-id');
+
+                //Hide any menu currently on the page
+                $('.context-menu').hide();
+
+                if(node.find('span').is('.folder'))
                 {
-                    alert(this.children[2].innerText);
+                    //Show menu for folder
+                    $('#menu-group').css({left: event.pageX + 2 , top: event.pageY + 2}).show();
                 }
-            })*/
+                else
+                    $('#menu-part').css({left: event.pageX + 2 , top: event.pageY + 2}).show();
+
+                //Return false to not show browser context menu
+                return false;
+            }
+        );
+
+        $(document).bind('click', function(event){
+            $('.context-menu').hide();
+        });
     });
 </script>
-
-<?php
-/* @var $this PartCategoriesController */
-/* @var $dataProvider CActiveDataProvider */
-
-Yii::app()->clientScript->registerCoreScript('jquery');
-Yii::app()->getClientScript()->registerScriptFile(Yii::app()->baseUrl.'/js/dynatree-1.2.4/jquery/jquery-ui.custom.js');
-Yii::app()->getClientScript()->registerScriptFile(Yii::app()->baseUrl.'/js/dynatree-1.2.4/dist/jquery.dynatree-1.2.4.js');
-
-Yii::app()->getClientScript()->registerCssFile(Yii::app()->baseUrl.'/js/dynatree-1.2.4/src/skin-vista/ui.dynatree.css');
-
-//Yii::app()->getClientScript()->registerScriptFile(Yii::app()->baseUrl.'/js/contextmenu/src/jquery.contextMenu.js');
-//Yii::app()->getClientScript()->registerScriptFile(Yii::app()->baseUrl.'/js/contextmenu/src/jquery.ui.position.js');
-//Yii::app()->getClientScript()->registerScriptFile(Yii::app()->baseUrl.'/js/contextmenu/screen.js');
-//Yii::app()->getClientScript()->registerScriptFile(Yii::app()->baseUrl.'/js/contextmenu/prettify/prettify.js');
-//Yii::app()->getClientScript()->registerCssFile(Yii::app()->baseUrl.'/js/contextmenu/src/jquery.contextMenu.css');
-//Yii::app()->getClientScript()->registerCssFile(Yii::app()->baseUrl.'/js/contextmenu/screen.css');
-//Yii::app()->getClientScript()->registerCssFile(Yii::app()->baseUrl.'/js/contextmenu/prettify/prettify.sunburst.css');
-
-Yii::app()->getClientScript()->registerScriptFile(Yii::app()->baseUrl.'/js/menu/jquery.contextMenu-custom.js');
-Yii::app()->getClientScript()->registerCssFile(Yii::app()->baseUrl.'/js/menu/jquery.contextMenu.css');
-?>
-
-<ul id="myMenu" class="contextMenu">
-    <li class="add"><a href="#add">New</a></li>
-    <li class="edit"><a href="#edit">Edit</a></li>
-    <!-- li class="delete"><a href="#delete">Delete</a></li -->
-</ul>
-
-<h1>Part Categories</h1>
-
-<?php
-function renderTree(array $tree)
-{
-    if(count($tree) > 0){
-        echo '<ul>';
-
-        foreach($tree as $node)
-        {
-            $id = $node['id'];
-            $name = $node['name'];
-            $isGroup = $node['isGroup'] == 1 ? 'true' : 'false';
-
-            //Render the open tag of current node.
-            if($node['isGroup'] == 1)
-                echo "<li class=\"folder\" data=\"key:$id,isFolder:true,expand:true\">$id: $name";
-            else
-                echo "<li data=\"key:$id,isFolder:false\">$id: $name";
-            //Render children of current node.
-            if($node['isGroup'] == 1)
-                renderTree($node['children']);
-
-            //Render the close tag of current node.
-            echo "</li>";
-        }
-
-        echo '</ul>';
-    }
-}
-?>
-
-<div id="demo2" style="width:100%;">
-
-	<ul>
-        <li data="isFolder:true,expand:true">All Categories
-            <?php
-                renderTree($tree)
-            ?>
-        </li>
-    </ul>
-<!--
-        <li id="rhtml_1" class="folder">
-			<a href="#">Root node 1</a>
-			<ul>
-				<li id="rhtml_2">
-					<a href="#">Child node 1</a>
-				</li>
-				<li id="rhtml_3">
-					<a href="#">Child node 2</a>
-				</li>
-			</ul>
-		</li>
-		<li id="rhtml_4">
-			<a href="#">Root node 2</a>
-		</li>
-	</ul>
-	-->
-</div>

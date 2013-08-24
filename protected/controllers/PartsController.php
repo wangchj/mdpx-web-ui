@@ -1,5 +1,4 @@
 <?php
-Yii::import('application.controllers.PartCategoriesController');
 
 class PartsController extends Controller
 {

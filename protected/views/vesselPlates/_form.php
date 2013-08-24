@@ -31,7 +31,7 @@
 
     <div class="row">
         <?php echo $form->labelEx($model,'plate'); ?>
-        <!-- ?php echo $form->textField($model,'upperElectrode',array('size'=>10,'maxlength'=>10)); ? -->
+        <!-- ?php echo $form->textField($model,'upperElectrode',array('size'=>30,'maxlength'=>30)); ? -->
         <?php echo $form->dropDownList($model,'plate',Parts::getPartsDropdownList()); ?>
         <?php echo $form->error($model,'plate'); ?>
     </div>

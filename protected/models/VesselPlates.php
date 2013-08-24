@@ -42,7 +42,7 @@ class VesselPlates extends CActiveRecord
 		return array(
 			array('vesselSetupId, side, plate', 'required'),
 			array('vesselSetupId, side', 'numerical', 'integerOnly'=>true),
-			array('plate', 'length', 'max'=>10),
+			array('plate', 'length', 'max'=>50),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('vesselSetupId, side, plate', 'safe', 'on'=>'search'),

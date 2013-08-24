@@ -13,7 +13,7 @@
 
 	<div>
 		<?php echo $form->label($model,'serialNum'); ?>
-		<?php echo $form->textField($model,'serialNum',array('size'=>10,'maxlength'=>10)); ?>
+		<?php echo $form->textField($model,'serialNum',array('size'=>30,'maxlength'=>30)); ?>
 	</div>
 
 	<!-- div>

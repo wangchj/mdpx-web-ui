@@ -36,7 +36,7 @@ class SetupParts extends CActiveRecord
 		return array(
 			array('setupPartId, vesselSetupId, part', 'required'),
 			array('setupPartId, vesselSetupId, parent, port', 'numerical', 'integerOnly'=>true),
-			array('part', 'length', 'max'=>10),
+			array('part', 'length', 'max'=>30),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('setupPartId, vesselSetupId, part, parent, port', 'safe', 'on'=>'search'),

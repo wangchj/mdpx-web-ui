@@ -31,7 +31,7 @@
 
     <div class="row">
         <?php echo $form->labelEx($model,'camera'); ?>
-        <!-- ?php echo $form->textField($model,'upperElectrode',array('size'=>10,'maxlength'=>10)); ? -->
+        <!-- ?php echo $form->textField($model,'upperElectrode',array('size'=>30,'maxlength'=>30)); ? -->
         <?php echo $form->dropDownList($model,'camera',Parts::getPartsDropdownList()); ?>
         <?php echo $form->error($model,'camera'); ?>
     </div>
@@ -56,14 +56,14 @@
 
     <div class="row">
         <?php echo $form->labelEx($model,'lens'); ?>
-        <!-- ?php echo $form->textField($model,'upperElectrode',array('size'=>10,'maxlength'=>10)); ? -->
+        <!-- ?php echo $form->textField($model,'upperElectrode',array('size'=>30,'maxlength'=>30)); ? -->
         <?php echo $form->dropDownList($model,'lens',Parts::getPartsDropdownList()); ?>
         <?php echo $form->error($model,'lens'); ?>
     </div>
 
     <div class="row">
         <?php echo $form->labelEx($model,'filter'); ?>
-        <!-- ?php echo $form->textField($model,'upperElectrode',array('size'=>10,'maxlength'=>10)); ? -->
+        <!-- ?php echo $form->textField($model,'upperElectrode',array('size'=>30,'maxlength'=>30)); ? -->
         <?php echo $form->dropDownList($model,'filter',Parts::getPartsDropdownList()); ?>
         <?php echo $form->error($model,'filter'); ?>
     </div>

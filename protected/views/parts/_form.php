@@ -42,7 +42,7 @@ function renderNode($partCat)
 
 	<div>
 		<?php echo $form->labelEx($model,'serialNum'); ?>
-		<?php echo $form->textField($model,'serialNum',array('size'=>50,'maxlength'=>50)); ?>
+		<?php echo $form->textField($model,'serialNum',array('size'=>30,'maxlength'=>30)); ?>
 		<?php echo $form->error($model,'serialNum'); ?>
 	</div>
 

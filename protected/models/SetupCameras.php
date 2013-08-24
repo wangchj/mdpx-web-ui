@@ -37,7 +37,7 @@ class SetupCameras extends CActiveRecord
             array('setupPartId', 'numerical', 'integerOnly'=>true),
             array('description', 'length', 'max'=>45),
             array('positionR, positionZ', 'length', 'max'=>18),
-            array('lens, filter', 'length', 'max'=>10),
+            array('lens, filter', 'length', 'max'=>30),
             // The following rule is used by search().
             // @todo Please remove those attributes that should not be searched.
             array('setupPartId, description, positionR, positionZ, lens, filter', 'safe', 'on'=>'search'),

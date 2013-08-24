@@ -78,10 +78,9 @@ class PartsController extends Controller
                 $this->redirect(array('index'));
 		}
 
-        $pcat = new PartCategoriesController(0);
-        $tree = $pcat->buildCategoryTree();
+        $rootCategories = PartCategories::model()->findAll("parent is NULL");
 		$this->render('create',array(
-			'model'=>$model, 'tree'=>$tree
+			'model'=>$model, 'rootCategories'=>$rootCategories
 		));
 	}
 
@@ -104,10 +103,9 @@ class PartsController extends Controller
 				$this->redirect(array('view','id'=>$model->serialNum));
 		}
 
-        $pcat = new PartCategoriesController(0);
-        $tree = $pcat->buildCategoryTree();
+        $rootCategories = PartCategories::model()->findAll("parent is NULL");
 		$this->render('update',array(
-			'model'=>$model,'tree'=>$pcat->buildCategoryTree()
+			'model'=>$model, 'rootCategories'=>$rootCategories
 		));
 	}
 

@@ -5,4 +5,4 @@
 
 <h1>Create Parts</h1>
 
-<?php echo $this->renderPartial('_form', array('model'=>$model, 'tree'=>$tree)); ?>
+<?php echo $this->renderPartial('_form', array('model'=>$model, 'rootCategories'=>$rootCategories)); ?>

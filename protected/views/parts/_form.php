@@ -3,10 +3,30 @@
 /* @var $model Parts */
 /* @var $form CActiveForm */
 
-Yii::app()->getClientScript()->registerScriptFile(Yii::app()->baseUrl.'/js/dynatree-1.2.4/jquery/jquery-ui.custom.js');
-Yii::app()->getClientScript()->registerScriptFile(Yii::app()->baseUrl.'/js/dynatree-1.2.4/dist/jquery.dynatree-1.2.4.js');
+Yii::app()->getClientScript()->registerScriptFile(Yii::app()->baseUrl.'/js/treetable/javascripts/src/jquery.treetable.js');
+Yii::app()->getClientScript()->registerCssFile(Yii::app()->baseUrl.'/js/treetable/stylesheets/jquery.treetable.css');
+Yii::app()->getClientScript()->registerCssFile(Yii::app()->baseUrl.'/js/treetable/stylesheets/jquery.treetable.theme.default.css');
 
-Yii::app()->getClientScript()->registerCssFile(Yii::app()->baseUrl.'/js/dynatree-1.2.4/src/skin-vista/ui.dynatree.css');
+/**
+ * Render part categories as 'treetable' rows
+ */
+function renderNode($partCat)
+{
+    $icon = $partCat->isGroup? 'folder' : 'file';
+    //$parent = $partCat->parent == null ? '0', $partCat->parent;
+    $partCount = $partCat->isGroup ? '' : count($partCat->parts);
+    //Output <tr data-tt-id= ... >
+    echo "<tr data-tt-id=\"$partCat->partCatId\" data-tt-parent-id=\"$partCat->parent\">";
+    echo "<td><span class=\"$icon\">$partCat->name</span></td>";
+    echo "<td>$partCat->partCatId</td>";
+    //echo "<td>$partCat->description</td>";
+    echo "<td>$partCount</td>";
+    echo '</tr>';
+    
+    if(count($partCat->partCategories) > 0)
+        foreach($partCat->partCategories as $partCat0)
+            renderNode($partCat0);
+}
 ?>
 
 <div class="form">
@@ -58,49 +78,6 @@ Yii::app()->getClientScript()->registerCssFile(Yii::app()->baseUrl.'/js/dynatree
 
 </div><!-- form -->
 
-<?php
-function renderTree(array $tree)
-{
-    if(count($tree) > 0){
-        echo '<ul>';
-
-        foreach($tree as $node)
-        {
-            $id = $node['id'];
-            $name = $node['name'];
-            $isGroup = $node['isGroup'] == 1 ? 'true' : 'false';
-
-            //Render the open tag of current node.
-            if($node['isGroup'] == 1)
-                echo "<li class=\"folder\" data=\"key:$id,isFolder:true,expand:true\">$id: $name";
-            else
-                echo "<li class=\"part\" data=\"key:$id,isFolder:false\">$id: $name";
-            //Render children of current node.
-            if($node['isGroup'] == 1)
-                renderTree($node['children']);
-
-            //Render the close tag of current node.
-            echo "</li>";
-        }
-
-        echo '</ul>';
-    }
-}
-?>
-
-<!--
-<div id="tree" style="width:500px;height:300px;display:none">
-
-    <ul>
-        <li data="isFolder:true,expand:true">All Categories
-            <?php
-            renderTree($tree)
-            ?>
-        </li>
-    </ul>
-</div>
--->
-
 <!-- Modal -->
 <div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-header">
@@ -109,13 +86,24 @@ function renderTree(array $tree)
     </div>
     <div id="tree" class="modal-body">
 
-            <ul>
-                <li data="isFolder:true,expand:true">All Categories
-                    <?php
-                    renderTree($tree)
-                    ?>
-                </li>
-            </ul>
+    <table id="tree-table" class="treetable">
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Identifier</th>
+            <th>Part Count</th>
+        </tr>
+        </thead>
+        <tbody>
+        <?php
+        foreach ($rootCategories as $rootCategory)
+        {
+            renderNode($rootCategory);
+        }
+
+        ?>
+        </tbody>
+    </table>
 
     </div>
     <div class="modal-footer">
@@ -125,31 +113,37 @@ function renderTree(array $tree)
 
 <script type="text/javascript">
     $(function(){
-        // Attach the dynatree widget to an existing <div id="tree"> element
-        // and pass the tree options as an argument to the dynatree() function:
-        $("#tree").dynatree({
-            onActivate: function(node) {
-                // A DynaTreeNode object is passed to the activation handler
-                // Note: we also get this event, if persistence is on, and the page is reloaded.
-                //alert("You activated " + node.data.title);
-            },
-            persist: false,
-            onClick: function(node, event) {
-                if(!node.data.isFolder)
-                {
-                    $("#text_type").val(node.data.title);
-                    $("#Parts_type").val(node.data.key);
-                    $('#myModal').modal('toggle');
-                }
+        //     onClick: function(node, event) {
+        //         if(!node.data.isFolder)
+        //         {
+        //             $("#text_type").val(node.data.title);
+        //             $("#Parts_type").val(node.data.key);
+        //             $('#myModal').modal('toggle');
+        //         }
+        //     },
 
 
-            },
-            onCreate: function(node, span){
-                //bindContextMenu(span);
-            }
-        });
+        $('#tree-table').treetable({expandable:true});
+
         $('#text_type').click(function(){
             $('#myModal').modal('toggle');
+        });
+
+        $("#tree-table tbody tr").click(function(event){
+            //Make selection
+            $("#tree-table tr.selected").not(this).removeClass("selected");
+            $(this).addClass("selected");
+
+            //Set Part Category
+            var selRow = $(this);
+            var selSpan = selRow.find('span');
+
+            if(selSpan.is('.file'))
+            {
+                $("#text_type").val(selSpan.text());
+                $("#Parts_type").val(selRow.attr('data-tt-id'));
+                $('#myModal').modal('toggle');
+            }
         });
 
         $('#cancelBtn').click(function(){

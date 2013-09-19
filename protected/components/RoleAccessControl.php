@@ -13,6 +13,13 @@ if(!defined('INCONCLUSIVE')) define('INCONCLUSIVE', 'inconclusive');
 
 class RoleAccessControl extends CApplicationComponent {
 
+    /**
+     * @param $userId integer identifier of the user from the database
+     * @param $controllerId string controller to be checked
+     * @param $actionId string action to be checked
+     * @return bool true if user has permission to access the route constructed
+     * using ($controller, $action); false otherwise.
+     */
     public function hasAccess($userId, $controllerId, $actionId)
     {
         //Get user roles
@@ -97,7 +104,7 @@ class RoleAccessControl extends CApplicationComponent {
      * @var array a list of action groups.
      */
     public static $actionGroups = array(
-        'read'=>array('list','index','view','treeview')
+        'read'=>array('list','index','view','treeview','tree','partsList')
     );
 
     /**

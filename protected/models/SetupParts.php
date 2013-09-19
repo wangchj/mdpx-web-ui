@@ -15,6 +15,8 @@
  * @property SetupParts $parent0
  * @property SetupParts[] $setupParts
  * @property VesselSetups $vesselSetup
+ * @property SetupCameras $setupCameras
+ * @property SetupProbes $setupProbes
  */
 class SetupParts extends CActiveRecord
 {
@@ -34,7 +36,7 @@ class SetupParts extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('setupPartId, vesselSetupId, part', 'required'),
+			array('vesselSetupId, part', 'required'),
 			array('setupPartId, vesselSetupId, parent, port', 'numerical', 'integerOnly'=>true),
 			array('part', 'length', 'max'=>30),
 			// The following rule is used by search().
@@ -55,6 +57,8 @@ class SetupParts extends CActiveRecord
 			'parent0' => array(self::BELONGS_TO, 'SetupParts', 'parent'),
 			'setupParts' => array(self::HAS_MANY, 'SetupParts', 'parent'),
 			'vesselSetup' => array(self::BELONGS_TO, 'VesselSetups', 'vesselSetupId'),
+            'setupCameras' => array(self::HAS_ONE, 'SetupCameras', 'setupPartId'),
+            'setupProbes' => array(self::HAS_ONE, 'SetupProbes', 'setupPartId'),
 		);
 	}
 

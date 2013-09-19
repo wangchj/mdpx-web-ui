@@ -83,6 +83,7 @@ if(!isset($menu))
                     <a id="Setup-menu" class="dropdown-toggle" data-toggle="dropdown" href="" data_target="#">Setup <b class="caret"></b></a>
                     <ul class="dropdown-menu" role="menu" aria-labelledby="drop1">
                         <li role="presentation"><a role="menuitem" tabindex="-1" href="<?php putAppUrl()?>/index.php/VesselSetups">Vessel Setups</a></li>
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="<?php putAppUrl()?>/index.php/SetupParts">Setup Parts</a></li>
                         <?php /*
                         <li role="presentation"><a role="menuitem" tabindex="-1" href="<?php putAppUrl()?>/index.php/ExperimentSetups">Experiment Setups</a></li>
                         <li role="presentation"><a role="menuitem" tabindex="-1" href="<?php putAppUrl()?>/index.php/Experiments">Experiments</a></li>

@@ -22,8 +22,10 @@ switch($this->id)
         $menuCategory = 'PartCatalog';
         break;
     case 'vesselSetups':
+    case 'setupParts':
         $menuItems = array(
             array('Vessel Setups', 'vesselSetups'),
+            array('Setup Parts', 'setupParts')
             );
         $menuCategory = 'Setup';
         break;

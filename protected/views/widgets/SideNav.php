@@ -126,7 +126,7 @@ class SideNav extends CWidget
                 $this->menus = array(
                     array(
                         array('label'=>'Grid View', 'route'=>'index'),
-                        array('label'=>'List View', 'route'=>'list'),
+                        //array('label'=>'List View', 'route'=>'list'),
                         array('label'=>'Add New', 'route'=>'create')
                     )
                 );

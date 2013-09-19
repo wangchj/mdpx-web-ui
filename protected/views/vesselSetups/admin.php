@@ -45,13 +45,11 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 		array(
             //'header'=>'Actions',
 			'class'=>'CButtonColumn',
-            //'buttons'=>array(
-            //    'view'=>array(
-            //        'url'=>'Yii::app()->controller->createUrl("view", array("id"=>$data["vesselSetupId"]))',
-            //    ),
-                //'update'=>array('visible'=>'false'),
-            //    'delete'=>array('visible'=>'false'),
-            //),
+            'buttons'=>array(
+                'view'=>array('visible'=>'Yii::app()->controller->hasAccess("vesselSetups", "view")'),
+                'update'=>array('visible'=>'Yii::app()->controller->hasAccess("vesselSetups", "update")'),
+                'delete'=>array('visible'=>'Yii::app()->controller->hasAccess("vesselSetups", "delete")'),
+            ),
 		),
 	)
 )); ?>

@@ -1,10 +1,19 @@
 <?php
 /* @var $this VesselSetupsController */
-/* @var $model VesselSetups */
+/* @var $model VesselSetupsSum */
+
+$this->menu = array(
+    array(
+        array('label'=>'Setup Summary', 'route'=>'view', 'params'=>array('id'=>$model->vesselSetupId)),
+        array('label'=>'Parts List', 'route'=>'partsList', 'params'=>array('id'=>$model->vesselSetupId)),
+        array('label'=>'Parts Tree', 'route'=>'tree', 'params'=>array('id'=>$model->vesselSetupId)),
+    )
+);
 ?>
 
 <h1>View VesselSetup #<?php echo $model->vesselSetupId; ?></h1>
 
+<?php /*
 <p>
     <button id="addPlateBtn" class="btn" type="button"><i class="icon-plus"></i> Add a plate</button>
     <button id="addCameraBtn" class="btn" type="button"><i class="icon-plus"></i> Add a camera</button>
@@ -12,13 +21,20 @@
     &nbsp;
     <button id="addExperimentSetupBtn" class="btn" type="button"><i class="icon-plus"></i> Create Experiment Setup</button>
 </p>
+*/?>
 
 <?php $this->widget('zii.widgets.CDetailView', array(
 	'data'=>$model,
 	'attributes'=>array(
 		'vesselSetupId',
 		'name',
-        'dateTime'
+        'dateTime',
+        'chamber',
+        'topElectrode',
+        'botElectrode',
+        'pump',
+        'mfc',
+        'pGauge'
 	),
 )); ?>
 

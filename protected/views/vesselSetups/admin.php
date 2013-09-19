@@ -32,69 +32,26 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 
 <?php $this->widget('zii.widgets.grid.CGridView', array(
 	'id'=>'vessel-setups-grid',
-	'dataProvider'=>$dataProvider,
+	'dataProvider'=>$model->search(),
 	//'filter'=>$model,
 	'columns'=>array(
-	//	'vesselSetupId',
-	//	'name',
-    //    'dateTime',
-		//'description',
-        //'chamber',
-        array(
-            'name'=>'vesselSetupId',
-            'header'=>'ID'
-        ),
-        array(
-            'name'=>'dateTime',
-            'header'=>'Date Time'
-        ),
-        array(
-            'name'=>'name',
-            'header'=>'Name'
-        ),
-        array(
-            'name'=>'chamber',
-            'header'=>'Chamber'
-        ),
+        'vesselSetupId:number:ID',
+        'dateTime:datetime:Create Time',
+        'name:text:Setup Name',
+        'chamber::Chamber',
+		'topElectrode::Upper Electrode',
+		'botElectrode::Lower Electrode',
+        'pump::Pump',
 		array(
-            'name'=>'topElectrode',
-            'header'=>'Upper Electrode'
-        ),
-		array(
-            'name'=>'botElectrode',
-            'header'=>'Lower Electrode'
-        ),
-//		array(
-//            'name'=>'roughPump',
-//            'value'=>'$data->roughPump0->name . " (" . $data->roughPump . ")"'
-//        ),
-//		array(
-//            'name'=>'turboPump',
-//            'value'=>'$data->turboPump0->name . " (" . $data->turboPump . ")"'
-//        ),
-//		array(
-//            'name'=>'massFlowController',
-//            'value'=>'$data->massFlowController0->name . " (" . $data->massFlowController . ")"'
-//        ),
-//        array(
-//            'name'=>'pressureGauge',
-//            'value'=>'$data->pressureGauge0->name . " (" . $data->pressureGauge . ")"'
-//        ),
-//        array(
-//            'name'=>'dustShaker',
-//            'value'=>'$data->dustShaker0->name . " (" . $data->dustShaker . ")"'
-//        ),
-		array(
-            'header'=>'Actions',
+            //'header'=>'Actions',
 			'class'=>'CButtonColumn',
-            'buttons'=>array(
-                'view'=>array(
-                    'url'=>'Yii::app()->controller->createUrl("partslist", array("id"=>$data["vesselSetupId"]))',
-                ),
-                'update'=>array('visible'=>'false'),
-                'delete'=>array('visible'=>'false'),
-
-            ),
+            //'buttons'=>array(
+            //    'view'=>array(
+            //        'url'=>'Yii::app()->controller->createUrl("view", array("id"=>$data["vesselSetupId"]))',
+            //    ),
+                //'update'=>array('visible'=>'false'),
+            //    'delete'=>array('visible'=>'false'),
+            //),
 		),
 	)
 )); ?>

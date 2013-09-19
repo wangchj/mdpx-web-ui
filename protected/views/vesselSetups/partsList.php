@@ -16,6 +16,14 @@ $('.search-form form').submit(function(){
 });
 ");
 */
+
+$this->menu = array(
+    array(
+        array('label'=>'Setup Summary', 'route'=>'view', 'params'=>array('id'=>$model->vesselSetupId)),
+        array('label'=>'Parts List', 'route'=>'partsList', 'params'=>array('id'=>$model->vesselSetupId)),
+        array('label'=>'Parts Tree', 'route'=>'tree', 'params'=>array('id'=>$model->vesselSetupId)),
+    )
+);
 ?>
 
 <h1>Vessel Setup #<?php echo $model->vesselSetupId; ?></h1>
@@ -37,18 +45,13 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 <?php $this->widget('zii.widgets.grid.CGridView', array(
 	'id'=>'parts-list-grid',
 	'dataProvider'=>$model->search(),
-	'filter'=>$model,
+	//'filter'=>$model,
 	'columns'=>array(
-		'setupPartId',
-		array(
-            'name'=>'part',
-            'value'=>'$data->part0->type0->name . \'(\' . $data->part . \')\''
-        ),
-		array(
-            'name'=>'parent',
-            'value'=>($model->parent0 == null)? '' : '$data->parent0  . \' (\' . $data->parent . \')\''
-            ),
-		'port',
+		'setupPartId:raw:Setup Part ID',
+        'part0.type0.name:text:Part Name',
+        'part0.serialNum',
+        'parent0.part0.type0.name:text:Parent Part',
+		'port:number:Location',
 //		'addedOn',
 //        array(
 //            'name'=>'addedBy',

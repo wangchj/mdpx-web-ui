@@ -5,4 +5,4 @@
 
 <h1>Add Vessel Setup Part</h1>
 
-<?php $this->renderPartial('_form', array('model'=>$model)); ?>
+<?php $this->renderPartial('_form', array('model'=>$model,'setupCam'=>$setupCam, 'setupProbe'=>$setupProbe)); ?>

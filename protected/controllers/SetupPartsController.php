@@ -1,5 +1,7 @@
 <?php
 
+defined('TempIntId') or define('TempIntId', 1);
+
 class SetupPartsController extends Controller
 {
 	/**
@@ -54,34 +56,77 @@ class SetupPartsController extends Controller
 	 */
 	public function actionCreate($vesselSetupId, $parent)
 	{
-		$model=new SetupParts;
+		$setupPart=new SetupParts;
+        $setupCam = new SetupCameras;
+        $setupProbe = new SetupProbes;
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if(isset($_POST['SetupParts']))
+        $setupPart->vesselSetupId = $vesselSetupId;
+        $setupPart->parent = $parent;
+
+		if(isset($_POST['SetupParts']) && $this->actionCreatePostBack($vesselSetupId, $parent, $setupPart, $setupCam, $setupProbe))
 		{
-			$model->attributes=$_POST['SetupParts'];
-            $model->vesselSetupId = $vesselSetupId;
-            if($model->parent != '')
-                $model->parent = $parent;
-
-			if($model->save())
-            {
-                if(isset($_GET['retUrl']))
-                    $this->redirect($_GET['retUrl']);
-                else
-                    $this->redirect(array('view','id'=>$model->setupPartId));
-            }
-
+            if(isset($_GET['retUrl']))
+                $this->redirect($_GET['retUrl']);
+            else
+                $this->redirect(array('view','id'=>$setupPart->setupPartId));
 		}
 
-        $model->vesselSetupId = $vesselSetupId;
-        $model->parent = $parent;
-
 		$this->render('create',array(
-			'model'=>$model,
+			'model'=>$setupPart, 'setupCam'=>$setupCam, 'setupProbe'=>$setupProbe
 		));
+	}
+	
+	/**
+	 * Handles create action when the request is a post back.
+	 *
+	 * @param integer $vesselSetupId
+	 * @param integer $parent
+     * @param SetupParts $setupPart
+     * @param SetupCameras $setupCam
+     * @param SetupProbes $setupProbe
+     * @return true if new record created successfully; false otherwise.
+	 */
+	private function actionCreatePostBack($vesselSetupId, $parent, $setupPart, $setupCam, $setupProbe)
+	{
+        $setupPart->attributes=$_POST['SetupParts'];
+        $setupPart->vesselSetupId = $vesselSetupId;
+        if($setupPart->parent != '')
+            $setupPart->parent = $parent;
+        
+        //If the part is a camera (serial num starts with 35-01)
+        if($setupPart->isCamera())
+        {
+            $setupCam->setupPartId = TempIntId;
+            $setupCam->attributes = $_POST['SetupCameras'];
+            if($setupPart->validate() && $setupCam->validate() && $setupPart->save())
+            {
+                $setupCam->setupPartId = $setupPart->setupPartId;
+                if($setupCam->save())
+                    return true;
+            }
+        }
+        //If the part is a probe (serial num starts with 30)
+        else if($setupPart->isProbe())
+        {
+            $setupProbe->setupPartId = TempIntId;
+            $setupProbe->attributes = $_POST['SetupProbes'];
+            if($setupPart->validate() && $setupProbe->validate() && $setupPart->save())
+            {
+                $setupProbe->setupPartId = $setupPart->setupPartId;
+                if($setupProbe->save())
+                    return true;
+            }
+        }
+        else
+        {
+            if($setupPart->validate() && $setupPart->save())
+                return true;
+        }
+        
+        return false;
 	}
 
 	/**
@@ -91,29 +136,55 @@ class SetupPartsController extends Controller
 	 */
 	public function actionUpdate($id)
 	{
-		$model=$this->loadModel($id);
+		$setupPart=$this->loadModel($id);
+        $setupCam = SetupCameras::model()->find("setupPartId=$id");
+        $setupProbe = SetupProbes::model()->find("setupPartId=$id");
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if(isset($_POST['SetupParts']))
+		if(isset($_POST['SetupParts']) &&
+            $this->actionUpdatePostBack($setupPart, $setupPart->isCamera() ? $setupCam : $setupProbe))
 		{
-			$model->part = $_POST['SetupParts']['part'];
-            $model->port = $_POST['SetupParts']['port'];
-
-			if($model->save())
-            {
-                if(isset($_GET['retUrl']))
-                    $this->redirect($_GET['retUrl']);
-                else
-                    $this->redirect(array('view','id'=>$model->setupPartId));
-            }
+            if(isset($_GET['retUrl']))
+                $this->redirect($_GET['retUrl']);
+            else
+                $this->redirect(array('view','id'=>$setupPart->setupPartId));
 		}
 
 		$this->render('update',array(
-			'model'=>$model,
+			'model'=>$setupPart, 'setupCam'=>$setupCam, 'setupProbe'=>$setupProbe
 		));
 	}
+
+    /**
+     * Handles setup part update post back.
+     *
+     * @param SetupParts $setupPart The setup part.
+     * @param mixed $auxPart the auxiliary information of a part. For example, if the setup part is a
+     * camera, then an instance of SetupCameras class should be passed in as auxPart. Similarly, if
+     * the setup part is a probe, then an instance of SetupProbes should be passed in.
+     * @return true if model saved successfully; false otherwise.
+     */
+    private function actionUpdatePostBack($setupPart, $auxPart)
+    {
+        //Currently not allow updating part field
+        //$setupPart->part = $_POST['SetupParts']['part'];
+
+        $setupPart->port = $_POST['SetupParts']['port'];
+
+        if($setupPart->isCamera() || $setupPart->isProbe())
+        {
+            $auxPart->attributes = $setupPart->isCamera() ? $_POST['SetupCameras'] : $_POST['SetupProbes'];
+            if($setupPart->validate() && $auxPart->validate() && $setupPart->save() && $auxPart->save())
+                return true;
+        }
+        else if($setupPart->save())
+        {
+            return true;
+        }
+        return false;
+    }
 
 	/**
 	 * Deletes a particular model.
@@ -122,7 +193,13 @@ class SetupPartsController extends Controller
 	 */
 	public function actionDelete($id)
 	{
-		$this->loadModel($id)->delete();
+		$setupPart = $this->loadModel($id);
+        if($setupPart->isCamera())
+            $setupPart->setupCameras->delete();
+        if($setupPart->isProbe())
+            $setupPart->setupProbes->delete();
+
+        $setupPart->delete();
 
 		// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
 		if(!isset($_GET['ajax']))

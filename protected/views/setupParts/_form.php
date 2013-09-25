@@ -33,11 +33,53 @@ Yii::app()->getClientScript()->registerCssFile(Yii::app()->baseUrl.'/js/treetabl
 	<div>
 		<?php echo $form->labelEx($model,'part'); ?>
         <?php echo $form->hiddenField($model,'part'); ?>
-		<?php echo CHtml::textField('part_text',
+		<?php echo CHtml::textField('SetupParts_part_text',
             $model->part == null ? '' : $model->part0->type0->name . ' (' . $model->part . ')',
             array('class'=>'span4', 'size'=>30, 'maxlength'=>30, 'data-toggle'=>'modal', 'role'=>'button'));?>
 		<?php echo $form->error($model,'part'); ?>
 	</div>
+
+    <?if($model->isCamera()):?>
+    <!-- SetupCameras -->
+    <div id="setupCamerasGroup" class="auxField">
+        <?= $form->labelEx($setupCam, 'positionR'); ?>
+        <?= $form->textField($setupCam, 'positionR', array('class'=>'span4')); ?>
+        <?= $form->error($setupCam,'positionR'); ?>
+
+        <?= $form->labelEx($setupCam, 'positionZ'); ?>
+        <?= $form->textField($setupCam, 'positionZ', array('class'=>'span4')); ?>
+        <?= $form->error($setupCam,'positionZ'); ?>
+
+        <?= $form->labelEx($setupCam, 'lens'); ?>
+        <?= $form->hiddenField($setupCam,'lens'); ?>
+        <?= CHtml::textField('SetupCameras_lens_text',
+            $setupCam->lens == null ? '' : $setupCam->lens0->type0->name . ' (' . $setupCam->lens . ')',
+            array('class'=>'span4')); ?>
+        <?= $form->error($setupCam,'lens'); ?>
+
+        <?= $form->labelEx($setupCam, 'filter'); ?>
+        <?= $form->hiddenField($setupCam,'filter'); ?>
+        <?= CHtml::textField('SetupCameras_filter_text',
+            $setupCam->filter == null ? '' : $setupCam->filter0->type0->name . ' (' . $setupCam->filter . ')',
+            array('class'=>'span4')); ?>
+        <?= $form->error($setupCam,'filter'); ?>
+    </div>
+    <!-- End SetupCameras -->
+    <?endif;?>
+
+    <?if($model->isProbe()):?>
+    <!-- SetupProbes -->
+    <div id="setupProbesGroup" class="auxField">
+        <?= $form->labelEx($setupProbe, 'length'); ?>
+        <?= $form->textField($setupProbe, 'length', array('class'=>'span4')); ?>
+        <?= $form->error($setupProbe,'length'); ?>
+
+        <?= $form->labelEx($setupProbe, 'width'); ?>
+        <?= $form->textField($setupProbe, 'width', array('class'=>'span4')); ?>
+        <?= $form->error($setupProbe,'width'); ?>
+    </div>
+    <!-- End SetupProbes -->
+    <?endif;?>
 
 	<div>
 		<?php echo $form->labelEx($model,'parent'); ?>
@@ -162,6 +204,13 @@ function renderPart($partCat, $part)
 
     $(function()
     {
+        //Set Part field readonly if action is update
+        if(<?=($this->action->id == 'update' ? 'true' : 'false')?>)
+            $('#SetupParts_part_text').attr('readonly', true);
+
+        //Set visibility of relevant aux fields
+        toggleAuxFields();
+
         //Make treetable
         $("#tree-table").treetable({expandable:true});
 
@@ -174,16 +223,47 @@ function renderPart($partCat, $part)
                 $(this).addClass("selected");
 
                 //Select part and close modal
-                $('#part_text').val($(this).find('span').text() + ' (' + $(this).attr('data-tt-id') + ')');
-                $('#SetupParts_part').val($(this).attr('data-tt-id'));
+                var trigger = window.modalTrigger;
+                var fieldId = trigger.id.replace(/_text$/, ''); //Remove '_text' from end of trigger ID.
+                $(trigger).val($(this).find('span').text() + ' (' + $(this).attr('data-tt-id') + ')');
+                $('#' + fieldId).val($(this).attr('data-tt-id'));
                 $('#myModal').modal('toggle');
+
+                //If the modal trigger is part field, hide and show corresponding fields.
+                if(fieldId == 'SetupParts_part')
+                {
+                    toggleAuxFields();
+                }
             }
         });
 
         //Open part selection modal when clicked
-        $('#part_text').click(function(){
+        <?if($this->action->id != 'update'):?>
+        $('#SetupParts_part_text').click(function(){
+            window.modalTrigger = this;
+            $('#myModal').modal('toggle');
+        })
+        <?endif;?>
+        $('#SetupCameras_lens_text, #SetupCameras_filter_text').click(function(){
+            window.modalTrigger = this;
             $('#myModal').modal('toggle');
         });
     });
+
+    /**
+     * Hide and show aux fields based on the part type.
+     *
+     * For example, if the value of the part
+     * field indicates a camera, the fields for camera is shown, and aux field for other part
+     * type is hidden.
+     */
+    function toggleAuxFields()
+    {
+        $('.auxField').hide();
+        if($('#SetupParts_part').val().substr(0, 5) == '35-01')
+            $('#setupCamerasGroup').show();
+        else if($('#SetupParts_part').val().substr(0, 2) == '30')
+            $('#setupProbesGroup').show();
+    }
 </script>
 

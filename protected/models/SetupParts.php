@@ -105,6 +105,22 @@ class SetupParts extends CActiveRecord
 		));
 	}
 
+    /**
+     * @return bool true if this part is a camera.
+     */
+    public function isCamera()
+    {
+        return substr($this->part, 0, 5) == '35-01';
+    }
+
+    /**
+     * @return bool true if this part is a probe.
+     */
+    public function isProbe()
+    {
+        return substr($this->part, 0, 2) == '30';
+    }
+
 	/**
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!

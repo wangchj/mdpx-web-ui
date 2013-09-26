@@ -83,16 +83,27 @@ function renderNode($setupPart)
 }
 ?>
 
-<?if($this->hasAnyAccess(array('setupParts/create','setupParts/update', 'setupParts/delete'))):?>
+<?if($this->hasAnyAccess(array('setupParts/view','setupParts/create','setupParts/update', 'setupParts/delete'))):?>
 <ul id="menu-part" class="dropdown-menu context-menu" role="menu" aria-labelledby="dropdownMenu">
-<?if($this->hasAccess('setupParts', 'create')):?><li><a href="javascript:createClicked()">Add New Setup Part</a></li><?endif?>
-<?if($this->hasAccess('setupParts', 'update')):?><li><a href="javascript:editClicked()">Edit Setup Part</a></li><?endif?>
-<?if($this->hasAccess('setupParts', 'delete')):?><li><a href="javascript:deleteClicked()">Delete Setup Part</a></li><?endif?>
+<?if($this->hasAccess('setupParts', 'view')):?><li><a href="javascript:viewClicked()">View Details</a></li><?endif;?>
+<?if($this->hasAccess('setupParts', 'create')):?><li><a href="javascript:createClicked()">Add New Setup Part</a></li><?endif;?>
+<?if($this->hasAccess('setupParts', 'update')):?><li><a href="javascript:editClicked()">Edit Setup Part</a></li><?endif;?>
+<?if($this->hasAccess('setupParts', 'delete')):?><li><a href="javascript:deleteClicked()">Delete Setup Part</a></li><?endif;?>
 </ul>
-<?endif?>
+<?endif;?>
 
 
 <script type="text/javascript">
+
+    <?if($this->hasAccess('setupParts', 'view')):?>
+    function viewClicked()
+    {
+        var selNode = $('#tree-table tr.selected');
+        var nodeId = selNode.attr('data-tt-id');
+        var url = '<?php echo $this->createUrl('setupParts/view', array('id'=>'_spid'))?>'.replace('_spid', nodeId);
+        window.location = url;
+    }
+    <?endif;?>
 
     <?if($this->hasAccess('setupParts', 'create')):?>
     function createClicked()

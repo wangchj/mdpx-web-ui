@@ -131,6 +131,8 @@ function renderNode($setupPart)
     <?if($this->hasAccess('setupParts', 'delete')):?>
     function deleteClicked()
     {
+        if(!confirm('Are you sure you want to delete this item?')) return false;
+        
         //Selected node
         var selNode = $('#tree-table tr.selected');
         var nodeId = selNode.attr('data-tt-id');

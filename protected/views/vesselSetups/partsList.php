@@ -43,7 +43,7 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 */?>
 
 <?php $this->widget('zii.widgets.grid.CGridView', array(
-	'id'=>'parts-list-grid',
+    'id'=>'parts-list-grid',
 	'dataProvider'=>$model->search(),
 	//'filter'=>$model,
 	'columns'=>array(
@@ -58,8 +58,19 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 //            'value'=>'$data->addedBy0->firstName . \' \' . $data->addedBy0->lastName . \' (\' . $data->addedBy . \')\''
 //        ),
 //		//'addedBy',
-//		array(
-//			'class'=>'CButtonColumn',
-//		),
+		array(
+			'class'=>'CButtonColumn',
+			 'buttons'=>array(
+                'view'=>array(
+                    'url'=>'Yii::app()->controller->createUrl("setupParts/view",array("id"=>$data->setupPartId))',
+                    'visible'=>'Yii::app()->controller->hasAccess("setupParts", "view")'),
+                'update'=>array(
+                    'url'=>'Yii::app()->controller->createUrl("setupParts/update",array("id"=>$data->setupPartId,"retUrl"=>Yii::app()->controller->createUrl("vesselSetups/partsList",array("id"=>$data->vesselSetupId))))',
+                     'visible'=>'Yii::app()->controller->hasAccess("setupParts", "update")'),
+                'delete'=>array(
+                    'url'=>'Yii::app()->controller->createUrl("setupParts/delete",array("id"=>$data->setupPartId))',
+                    'visible'=>'Yii::app()->controller->hasAccess("setupParts", "delete")'),
+            ),
+		),
 	),
 )); ?>

@@ -4,10 +4,6 @@
 
 $this->menu = array(
     array(
-        array('label'=>'Grid View', 'route'=>'experimentSetups/index'),
-        array('label'=>'Add New', 'route'=>'experimentSetupss/create')
-    ),
-    array(
         array('label'=>'Detail View', 'route'=>'experimentSetups/view', 'params'=>array('id'=>$this->actionParams['id'])),
         array('label'=>'Measurements', 'route'=>'measurements/index', 'params'=>array('experimentSetupId'=>$this->actionParams['id']))
     ),

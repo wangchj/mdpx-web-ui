@@ -24,7 +24,7 @@ $this->menu = array(
 		'description',
 		'dateTime',
         'isProgrammed:boolean',
-		'researcherId',
-		'operatorId',
+		array('label'=>'Researcher', 'value'=>"{$model->researcher->firstName} {$model->researcher->lastName}"),
+        array('label'=>'Operator', 'value'=>"{$model->operator->firstName} {$model->operator->lastName}"),
 	),
 )); ?>

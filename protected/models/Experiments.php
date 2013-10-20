@@ -107,4 +107,16 @@ class Experiments extends CActiveRecord
 			'criteria'=>$criteria,
 		));
 	}
+
+    public static function getDropdownList()
+    {
+        $models = self::model()->findAll();
+        $result = array();
+        foreach($models as $model)
+        {
+            $result[$model->experimentId] = "$model->name";
+        }
+
+        return $result;
+    }
 }

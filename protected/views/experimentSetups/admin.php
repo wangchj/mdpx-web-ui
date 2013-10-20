@@ -1,6 +1,6 @@
 <?php
-/* @var $this ExperimentSetupController */
-/* @var $model ExperimentSetup */
+/* @var $this ExperimentSetupsController */
+/* @var $model ExperimentSetups */
 
 Yii::app()->clientScript->registerScript('search', "
 $('.search-button').click(function(){
@@ -42,12 +42,12 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 	'dataProvider'=>$model->search(),
 	'filter'=>$model,
 	'columns'=>array(
-        'experimentSetupId',
-        'experimentId',
-        'dateTime',
+        'experimentSetupId::ID',
+        'experimentId::Group',
+        'dateTime:datetime:Time',
 		'name',
 		'description',
-		'vesselSetupId',
+		'vesselSetup.name',
 		array(
             'name'=>'dcVoltageSetpoint',
             'value'=>'round($data->dcVoltageSetpoint,2)'
@@ -64,7 +64,7 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
             'name'=>'pressureSetpoint',
             'value'=>'round($data->pressureSetpoint,2)'
         ),
-        array(
+        /*array(
             'name'=>'magnet1Setpoint',
             'value'=>'round($data->magnet1Setpoint,2)'
         ),
@@ -79,7 +79,7 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
         array(
             'name'=>'magnet4Setpoint',
             'value'=>'round($data->magnet4Setpoint,2)'
-        ),
+        ),*/
 		//'magneticFieldSetpoint',
 		//'magneticFieldGradientSetpoint',
 		//'gasType1',

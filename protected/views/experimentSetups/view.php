@@ -12,23 +12,23 @@ $this->menu = array(
 ?>
 
 <h1>View Experiment Setup #<?php echo $model->experimentSetupId; ?></h1>
-
+<!--
 <p>
 <button id="addExperimentBtn" class="btn" type="button"><i class="icon-plus"></i> Create Experiment Setup</button>
 </p>
-
+-->
 <?php $this->widget('zii.widgets.CDetailView', array(
 	'data'=>$model,
 	'attributes'=>array(
-        'experimentSetupId',
-        'experimentId',
-        'dateTime',
+        array('label'=>'Experiment Setup ID', 'name'=>'experimentSetupId'),
+        array('label'=>'Experiment Group', 'value'=>"{$model->experiment->name} (Group ID = $model->experimentId)"),
+        'dateTime:datetime',
 		'name',
 		'description',
-		'vesselSetupId',
-		'dcVoltageSetpoint',
-		'dcCurrentSetpoint',
-		'rfPowerSetpoint',
+		array('label'=>'Vessel Setup', 'value'=>"{$model->vesselSetup->name} (Setup ID = $model->vesselSetupId)"),
+		array('label'=>'DC Voltage Setpoint (V)', 'name'=>'dcVoltageSetpoint'),
+        array('label'=>'DC Current Setpoint (A)', 'name'=>'dcCurrentSetpoint'),
+        array('label'=>'RF Power Setuppoint (??)', 'name'=>'rfPowerSetpoint'),
 		'pressureSetpoint',
 		'magnet1Setpoint',
 		'magnet2Setpoint',
@@ -36,10 +36,10 @@ $this->menu = array(
 		'magnet4Setpoint',
 		'magneticFieldSetpoint',
 		'magneticFieldGradientSetpoint',
-		'gasType1',
-		'gasType2',
-		'dustType1',
-		'dustType2',
+		array('label'=>'Gas Type 1', 'value'=>"{$model->gasType10->name}"),
+        array('label'=>'Gas Type 2', 'value'=>"{$model->gasType20->name}"),
+        array('label'=>'Dust Type 2', 'value'=>"{$model->dustType10->name}"),
+        array('label'=>'Dust Type 2', 'value'=>"{$model->dustType20->name}"),
 	),
 )); ?>
 

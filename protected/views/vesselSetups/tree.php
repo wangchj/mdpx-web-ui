@@ -12,6 +12,9 @@ $this->menu = array(
         array('label'=>'Setup Summary', 'route'=>'view', 'params'=>array('id'=>$model->vesselSetupId)),
         array('label'=>'Parts List', 'route'=>'partsList', 'params'=>array('id'=>$model->vesselSetupId)),
         array('label'=>'Parts Tree', 'route'=>'tree', 'params'=>array('id'=>$model->vesselSetupId)),
+    ),
+    array(
+        array('label'=>'Create Param Setup', 'route'=>'experimentSetups/create', 'params'=>array('vesselSetupId'=>$model->vesselSetupId))
     )
 );
 ?>

@@ -42,19 +42,22 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 	'dataProvider'=>$model->search(),
 	'filter'=>$model,
 	'columns'=>array(
-		'measurementId',
-		'experimentSetupId',
+		//'measurementId::ID',
+		'experimentSetupId::Param Set',
 		'dateTime',
         array(
             'name'=>'dcVoltage',
+            'header'=>'DC Voltage',
             'value'=>'round($data->dcVoltage,2)'
         ),
         array(
             'name'=>'dcCurrent',
+            'header'=>'DC Current',
             'value'=>'round($data->dcCurrent,2)'
         ),
         array(
             'name'=>'rfPower',
+            'header'=>'RF Power',
             'value'=>'round($data->rfPower,2)'
         ),
         array(
@@ -65,7 +68,7 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
             'name'=>'pressure',
             'value'=>'round($data->pressure,2)'
         ),
-        array(
+        /*array(
             'name'=>'magnet1',
             'value'=>'round($data->magnet1,2)'
         ),
@@ -80,7 +83,7 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
         array(
             'name'=>'magnet4',
             'value'=>'round($data->magnet4,2)'
-        ),
+        ),*/
         array(
             'name'=>'magneticField',
             'value'=>'round($data->magneticField,2)'
@@ -89,7 +92,7 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
             'name'=>'magneticFieldGradient',
             'value'=>'round($data->magneticFieldGradient,2)'
         ),
-		'dataPath',
+		/*'dataPath',*/
 		array(
 			'class'=>'CButtonColumn',
 		),

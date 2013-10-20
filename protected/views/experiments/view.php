@@ -3,10 +3,13 @@
 /* @var $model Experiments */
 
 $this->menu = array(
-  array(
-      array('label'=>'Detail View', 'route'=>'experiments/view', 'params'=>array('id'=>$this->actionParams['id'])),
-      array('label'=>'Parameter Sets', 'route'=>'experimentSetups/index', 'params'=>array('experimentId'=>$this->actionParams['id']))
-  ),
+    array(
+        array('label'=>'Detail View', 'route'=>'experiments/view', 'params'=>array('id'=>$this->actionParams['id'])),
+        array('label'=>'Parameter Sets', 'route'=>'experimentSetups/index', 'params'=>array('experimentId'=>$this->actionParams['id']))
+    ),
+    array(
+        array('label'=>'Create Param Setup', 'route'=>'experimentSetups/create', 'params'=>array('experimentId'=>$model->experimentId)),
+    )
 );
 ?>
 

@@ -26,6 +26,7 @@
  * @property integer $dustType2
  *
  * The followings are the available model relations:
+ * @property VesselSetups $vesselSetup
  * @property Experiments $experiment
  * @property DustTypes $dustType10
  * @property DustTypes $dustType20
@@ -79,6 +80,7 @@ class ExperimentSetups extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
+            'vesselSetup' => array(self::BELONGS_TO, 'VesselSetups', 'vesselSetupId'),
             'experiment' => array(self::BELONGS_TO, 'Experiments', 'experimentId'),
             'dustType10' => array(self::BELONGS_TO, 'DustTypes', 'dustType1'),
             'dustType20' => array(self::BELONGS_TO, 'DustTypes', 'dustType2'),

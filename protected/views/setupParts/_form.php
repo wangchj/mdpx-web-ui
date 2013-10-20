@@ -39,7 +39,7 @@ Yii::app()->getClientScript()->registerCssFile(Yii::app()->baseUrl.'/js/treetabl
 		<?php echo $form->error($model,'part'); ?>
 	</div>
 
-    <?if($model->isCamera()):?>
+    <?if($model->isCamera() || $model->isNewRecord):?>
     <!-- SetupCameras -->
     <div id="setupCamerasGroup" class="auxField">
         <?= $form->labelEx($setupCam, 'positionR'); ?>
@@ -67,7 +67,7 @@ Yii::app()->getClientScript()->registerCssFile(Yii::app()->baseUrl.'/js/treetabl
     <!-- End SetupCameras -->
     <?endif;?>
 
-    <?if($model->isProbe()):?>
+    <?if($model->isProbe() || $model->isNewRecord):?>
     <!-- SetupProbes -->
     <div id="setupProbesGroup" class="auxField">
         <?= $form->labelEx($setupProbe, 'length'); ?>

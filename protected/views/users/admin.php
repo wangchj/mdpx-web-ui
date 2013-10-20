@@ -14,6 +14,8 @@ $('.search-form form').submit(function(){
 	return false;
 });
 ");
+
+$this->menu = array(array(array('label'=>'Grid View', 'route'=>'users/index')));
 ?>
 
 <h1>Manage Users</h1>
@@ -35,7 +37,7 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 	'dataProvider'=>$model->search(),
 	'filter'=>$model,
 	'columns'=>array(
-		'userId',
+		'userId::User ID',
 		'firstName',
 		'lastName',
 		'phone',

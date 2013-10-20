@@ -49,6 +49,7 @@ Yii::app()->getClientScript()->registerScriptFile(Yii::app()->baseUrl.'/js/maske
 		<?php echo $form->error($model,'affiliation'); ?>
 	</div>
 
+    <?if($this->id == 'site' && $this->action->id == 'register'):?>
 	<div>
 		<?php echo $form->labelEx($model,'password'); ?>
 		<?php echo $form->passwordField($model,'password',array('size'=>32,'maxlength'=>32)); ?>
@@ -60,9 +61,11 @@ Yii::app()->getClientScript()->registerScriptFile(Yii::app()->baseUrl.'/js/maske
         <?php echo $form->passwordField($model,'password_repeat',array('size'=>32,'maxlength'=>32)); ?>
         <?php echo $form->error($model,'password_repeat'); ?>
     </div>
+    <?endif;?>
 
 	<div class="buttons">
 		<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); ?>
+        <?= CHtml::button('Cancel', array('onClick'=>'javascript:window.location=\''.(isset($_GET['retUrl']) ? $_GET['retUrl'] : $this->createUrl('index')) . '\''))?>
 	</div>
 
 <?php $this->endWidget(); ?>

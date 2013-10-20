@@ -62,6 +62,8 @@ class ExperimentSetupsController extends Controller
 
         if(isset($_GET['vesselSetupId']))
             $model->vesselSetupId = $_GET['vesselSetupId'];
+        if(isset($_GET['experimentId']))
+            $model->experimentId = $_GET['experimentId'];
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);

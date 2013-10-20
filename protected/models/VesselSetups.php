@@ -91,4 +91,16 @@ class VesselSetups extends CActiveRecord
 			'criteria'=>$criteria,
 		));
 	}
+
+    public static function getDropdownList()
+    {
+        $models = self::model()->findAll();
+        $result = array();
+        foreach($models as $model)
+        {
+            $result[$model->vesselSetupId] = "$model->name";
+        }
+
+        return $result;
+    }
 }

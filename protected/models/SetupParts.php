@@ -131,4 +131,17 @@ class SetupParts extends CActiveRecord
 	{
 		return parent::model($className);
 	}
+
+    /**
+     * @returns integer the depth, or level, of this node. 0 means root node.
+     */
+    public function getNodeLevel()
+    {
+        $level = 0;
+
+        for($node = $this; $node->parent0 != null; $node = $node->parent0)
+            $level++;
+
+        return $level;
+    }
 }

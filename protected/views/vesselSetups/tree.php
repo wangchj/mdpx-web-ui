@@ -72,11 +72,13 @@ function renderNode($setupPart)
     //$parent = $partCat->parent == null ? '0', $partCat->parent;
     //$partCount = $partCat->isGroup ? '' : count($partCat->parts);
 
+    $padding = ($setupPart->getNodeLevel() - 1) * 25;
+
     //Output <tr data-tt-id= ... >
     echo "<tr data-tt-id=\"$setupPart->setupPartId\" data-tt-parent-id=\"$setupPart->parent\">";
     echo "<td><span>" . $setupPart->part0->type0->name . "</span></td>";
     echo "<td>$setupPart->part</td>";
-    echo "<td>$setupPart->port</td>";
+    echo "<td><span style=\"padding-left:{$padding}px\">$setupPart->port</span></td>";
     echo "<td>$setupPart->setupPartId</td>";
     echo '</tr>';
 

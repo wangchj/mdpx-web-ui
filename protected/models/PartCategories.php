@@ -4,10 +4,10 @@
  * This is the model class for table "PartCategories".
  *
  * The followings are the available columns in table 'PartCategories':
- * @property integer $partCatId
+ * @property string $partCatId
  * @property string $name
- * @property string description
- * @property integer $parent
+ * @property string $description
+ * @property string $parent
  * @property boolean $isGroup
  *
  * The followings are the available model relations:
@@ -45,9 +45,9 @@ class PartCategories extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('partCatId,name,', 'required'),
-			array('parent,partCatId', 'numerical', 'integerOnly'=>true),
 			array('isGroup', 'boolean'),
-			array('name', 'length', 'max'=>40),
+            array('partCatId, parent', 'length', 'max'=>30),
+			array('name', 'length', 'max'=>20),
             array('description', 'length', 'max'=>200),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
@@ -95,10 +95,10 @@ class PartCategories extends CActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('partCatId',$this->partCatId);
+		$criteria->compare('partCatId',$this->partCatId,true);
 		$criteria->compare('name',$this->name,true);
         $criteria->compare('description',$this->description,true);
-		$criteria->compare('parent',$this->parent);
+		$criteria->compare('parent',$this->parent,true);
 		$criteria->compare('isGroup',$this->isGroup);
 
 		return new CActiveDataProvider($this, array(

@@ -2,10 +2,17 @@
 /* @var $this VesselSetupsController */
 /* @var $model VesselSetups */
 
+Yii::import('application.components.Mobile_Detect');
+
+$mobileDetect = new Mobile_Detect;
+
 Yii::app()->clientScript->registerCoreScript('jquery');
 Yii::app()->getClientScript()->registerScriptFile(Yii::app()->baseUrl.'/js/treetable/javascripts/src/jquery.treetable.js');
 Yii::app()->getClientScript()->registerCssFile(Yii::app()->baseUrl.'/js/treetable/stylesheets/jquery.treetable.css');
 Yii::app()->getClientScript()->registerCssFile(Yii::app()->baseUrl.'/js/treetable/stylesheets/jquery.treetable.theme.default.css');
+
+if($mobileDetect->isMobile())
+    Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.'/js/jquery.hammer.min.js');
 
 $this->menu = array(
     array(
@@ -44,7 +51,7 @@ $this->menu = array(
 
 <?else:?>
 
-<table id="tree-table" class="treetable">
+<table id="tree-table" class="treetable" style="-webkit-user-select:none">
     <thead>
     <tr>
         <th>Part Name</th>
@@ -89,7 +96,7 @@ function renderNode($setupPart)
 ?>
 
 <?if($this->hasAnyAccess(array('setupParts/view','setupParts/create','setupParts/update', 'setupParts/delete'))):?>
-<ul id="menu-part" class="dropdown-menu context-menu" role="menu" aria-labelledby="dropdownMenu">
+<ul id="menu-part" class="dropdown-menu context-menu" role="menu" aria-labelledby="dropdownMenu" style="-webkit-user-select:none">
 <?if($this->hasAccess('setupParts', 'view')):?><li><a href="javascript:viewClicked()">View Details</a></li><?endif;?>
 <?if($this->hasAccess('setupParts', 'create')):?><li><a href="javascript:createClicked()">Add New Setup Part</a></li><?endif;?>
 <?if($this->hasAccess('setupParts', 'update')):?><li><a href="javascript:editClicked()">Edit Setup Part</a></li><?endif;?>
@@ -175,6 +182,7 @@ function renderNode($setupPart)
         });
 
         <?if($this->hasAnyAccess(array('setupParts/create','setupParts/update', 'setupParts/delete'))):?>
+        <?if(!$mobileDetect->isMobile()): //Client is mobile?>
         $("#tree-table tbody tr").bind('contextmenu',
             function(event){
                 var node = $(this);
@@ -190,7 +198,23 @@ function renderNode($setupPart)
                 return false;
             }
         );
-        <?endif?>
+        <?else: //else, client is mobile?>
+        //Touch hold
+        $("#tree-table tbody tr").hammer().on('hold', function(event)
+        {
+            $(".selected").not(this).removeClass("selected");
+            $(this).addClass("selected");
+
+            //Hide any menu current on the page
+            $('.context-menu').hide();
+            //Show menu
+            $('#menu-part').css({left: event.gesture.center.pageX + 2 , top: event.gesture.center.pageY + 2}).show();
+
+            //Return false to not show browser context menu
+            return false;
+        });
+        <?endif;?>
+        <?endif;?>
 
         $(document).bind('click', function(event){
             if(event.which == 1) $('.context-menu').hide();

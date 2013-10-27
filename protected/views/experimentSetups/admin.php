@@ -88,6 +88,11 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 		//'dustType2',
 		array(
 			'class'=>'CButtonColumn',
+            'buttons'=>array(
+                'view'=>array('visible'=>'Yii::app()->controller->hasAccess("view")'),
+                'update'=>array('visible'=>'Yii::app()->controller->hasAccess("update")'),
+                'delete'=>array('visible'=>'Yii::app()->controller->hasAccess("delete")'),
+            ),
 		),
 	),
 )); ?>

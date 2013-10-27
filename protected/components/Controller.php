@@ -23,38 +23,40 @@ class Controller extends CController
 
     /**
      * Checks if the current user has access to the operation defined by controller and action.
-     * @param $controllerId
-     * @param $actionId
+     * @param $route
      * @return boolean true if the current user has access to the operation;
      * false otherwise
      */
-    public function hasAccess($controllerId, $actionId)
+    public function hasAccess($route)
     {
-        $user = Yii::app()->user;
+        $userId = Yii::app()->user->id;
         $am = Yii::app()->accessManager;
 
-        return $am->hasAccess($user->id, $controllerId, $actionId);
+        //No controller ID specified. Use current controller ID.
+        if(!strpos($route, '/'))
+        {
+            return $am->hasAccess($userId, $this->id, $route);
+        }
+        else
+        {
+            $r = explode('/', $route);
+            return $am->hasAccess($userId, $r[0], $r[1]);
+        }
     }
 
+    /**
+     * Check if the current user has access to any of the operations specified.
+     * @param array $routes a list of operations
+     * @return bool true if user is allowed to access ANY of the operations; false
+     * if none of the operations is allowed or $routes is empty.
+     */
     public function hasAnyAccess($routes=array())
     {
         if(count($routes) == 0) return false;
 
         foreach($routes as $route)
-        {
-            //No controller ID specified. Use current controller ID.
-            if(!strpos($route, '/'))
-            {
-                if($this->hasAccess($this->id, $route))
-                    return true;
-            }
-            else
-            {
-                $r = explode('/', $route);
-                if($this->hasAccess($r[0], $r[1]))
-                    return true;
-            }
-        }
+            if($this->hasAccess($route))
+                return true;
 
         return false;
     }

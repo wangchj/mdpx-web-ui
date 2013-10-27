@@ -58,12 +58,9 @@ $('.search-form form').submit(function(){
         array(
             'class'=>'CButtonColumn',
             'buttons'=>array(
-                'update'=>array(
-                    'visible'=>'Yii::app()->accessManager->hasAccess(Yii::app()->user->id,$this->id, "update")',
-                ),
-                'delete'=>array(
-                    'visible'=>'Yii::app()->accessManager->hasAccess(Yii::app()->user->id, $this->id, "delete")',
-                ),
+                'view'=>array('visible'=>'Yii::app()->controller->hasAccess("view")'),
+                'update'=>array('visible'=>'Yii::app()->controller->hasAccess("update")'),
+                'delete'=>array('visible'=>'Yii::app()->controller->hasAccess("delete")'),
             ),
         ),
     ),

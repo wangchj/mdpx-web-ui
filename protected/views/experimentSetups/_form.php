@@ -21,11 +21,11 @@
         <?php echo $form->error($model,'experimentId'); ?>
     </div>
 
-    <div>
+    <? /*<div>
         <?php echo $form->labelEx($model,'dateTime'); ?>
         <?php echo $form->textField($model,'dateTime'); ?>
         <?php echo $form->error($model,'dateTime'); ?>
-    </div>
+    </div>*/?>
 
 	<div>
 		<?php echo $form->labelEx($model,'name'); ?>

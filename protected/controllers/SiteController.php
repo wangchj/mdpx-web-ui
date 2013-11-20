@@ -107,11 +107,12 @@ class SiteController extends Controller
 
     public function actionRegister()
     {
-        $model = new Users;
-
-        if(isset($_POST['Users']))
+        $model = new NewUsers;
+        $modelName = $model->tableName();
+        
+        if(isset($_POST[$modelName]))
         {
-            $model->attributes=$_POST['Users'];
+            $model->attributes=$_POST[$modelName];
 
             //Clean phone number
             $model->phone = str_replace(' ', '', str_replace('-', '', str_replace(')', '', str_replace('(', '', $model->phone))));
@@ -122,7 +123,7 @@ class SiteController extends Controller
                 //$model->signupTime = date('Y-m-d H:i:s');
 
                 //Hash password
-                $model->password = $model->encryptPassword($model->password);
+                $model->password = Users::encryptPassword($model->password);
 
                 //Insert new registration to database.
                 if($model->save(false))

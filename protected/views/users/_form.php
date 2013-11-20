@@ -75,6 +75,6 @@ Yii::app()->getClientScript()->registerScriptFile(Yii::app()->baseUrl.'/js/maske
 <script type="text/javascript">
     $(function(){
         //Format phone number field
-        $('#Users_phone').mask("(999) 999-9999");
+        $('#<?=$model->tableName()?>_phone').mask("(999) 999-9999");
     });
 </script>

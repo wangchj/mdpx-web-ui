@@ -15,7 +15,12 @@ $('.search-form form').submit(function(){
 });
 ");
 
-$this->menu = array(array(array('label'=>'Grid View', 'route'=>'users/index')));
+$this->menu = array(
+    array(
+        array('label'=>'All Users', 'route'=>'users/index'),
+        array('label'=>'New Users', 'route'=>'users/new')
+    )
+);
 ?>
 
 <h1>Manage Users</h1>
@@ -43,9 +48,6 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 		'phone',
 		'email',
 		'affiliation',
-		/*
-		'password',
-		*/
 		array(
 			'class'=>'CButtonColumn',
             'buttons'=>array(

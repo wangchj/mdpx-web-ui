@@ -27,17 +27,13 @@ class UsersController extends Controller
 	public function accessRules()
 	{
 		return array(
-			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view'),
-				'users'=>array('@'),
-			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update'),
+				'actions'=>array('index','view',
+				    //New user operations
+				    'new', 'approve', 'decline',
+				    //User crud operations
+				    'create','update','delete','admin'),
 				'users'=>array('@'),
-			),
-			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('admin','delete'),
-				'users'=>array('admin'),
 			),
 			array('deny',  // deny all users
 				'users'=>array('*'),
@@ -131,6 +127,54 @@ class UsersController extends Controller
             'model'=>$model,
         ));
 	}
+    
+    public function actionNew()
+    {
+        $model=new NewUsers('search');
+        $model->unsetAttributes();  // clear any default values
+        if(isset($_GET['Users']))
+            $model->attributes=$_GET['Users'];
+
+        $this->render('new',array(
+            'model'=>$model,
+        ));
+    }
+    
+    public function actionApprove($id)
+    {
+        $newUser = NewUsers::model()->findByPk($id);
+        $user = new Users();
+        
+        $user->email = $newUser->email;
+        $user->password = $newUser->password;
+        $user->firstName = $newUser->firstName;
+        $user->lastName = $newUser->lastName;
+        $user->phone = $newUser->phone;
+        $user->affiliation = $newUser->affiliation;
+        
+        if($user->save(false))
+        {
+            $newUser->delete();
+
+            if(isset($_GET['ajax']))
+                return;
+
+            if(isset($_POST['retUrl']))
+                $this->redirect(array('users/view', 'id'=>$user->userId,'retUrl'=>$_POST['retUrl']));
+            else
+                $this->redirect(array('users/view', 'id'=>$user->userId));
+        }
+    }
+    
+    /**
+     * Decline and delete a new user from the table NewUsers.
+     * @param intger $id database identifier of the new user.
+     */
+    public function actionDecline($id)
+    {
+        $newUser = NewUsers::model()->findByPk($id);
+        $newUser->delete();
+    }
 
 	/**
 	 * Manages all models.

@@ -10,15 +10,28 @@ Yii::app()->getClientScript()->registerCssFile(Yii::app()->baseUrl.'/js/treetabl
 ?>
 
 <?
-$this->menu = array(
-    array(
-        array('label'=>'Details', 'route'=>'users/view'),
-        array('label'=>'Update', 'route'=>'users/update', 'params'=>array('id'=>$model->userId))
-    ),
-);
+if($this->id == 'users')
+{
+    $this->menu = array(
+        array(
+            array('label'=>'Details', 'route'=>'users/view'),
+            array('label'=>'Update', 'route'=>'users/update', 'params'=>array('id'=>$model->userId))
+        ),
+    );
+}
+if($this->id == 'account')
+{
+    $this->menu = array(
+        array(
+            array('label'=>'Account Info', 'route'=>'account/info'),
+            array('label'=>'Update Info', 'route'=>'account/update'),
+            array('label'=>'Change Password', 'route'=>'account/changePassword'),
+        ),
+    );
+}
 ?>
 
-<h1>User Details<?php //echo $model->userId; ?></h1>
+<h1><?if($this->id == 'users'):?>User Details<?else:?>Account Info<?endif;?></h1>
 
 <?php $this->widget('zii.widgets.CDetailView', array(
 	'data'=>$model,
@@ -26,7 +39,7 @@ $this->menu = array(
 		array('label'=>'User ID', 'name'=>'userId'),
 		'firstName',
 		'lastName',
-		'phone',
+		array('name'=>'phone','value'=>Users::formatPhone($model->phone)),
 		'email',
 		'affiliation',
 	),
@@ -39,12 +52,11 @@ foreach($model->roles as $role)
 {
     $remove = $this->createUrl('userRoles/delete',array('userId'=>$model->userId, 'roleId'=>$role->roleId));
 
-    echo "<tr>
-            <td colspan='3'>
-                <strong>{$role->roleName}</strong>
-                <div style=\"display:inline-block;float:right\"><a class=\"removeRole\" href='{$remove}'><i class=\"icon-trash\"></i></a></div>
-            </td>
-        </tr>";
+    echo "<tr><td colspan='3'><strong>{$role->roleName}</strong>";
+    if($this->id=='users')
+        echo "<div style=\"display:inline-block;float:right\"><a class=\"removeRole\" href='{$remove}'><i class=\"icon-trash\"></i></a></div>";
+    echo "</td></tr>";
+
     foreach($role->rolePermissions as $p)
         echo "<tr><td>{$p->controllerId}</td><td>{$p->actionId}</td><td>$p->access</td></tr>";
 
@@ -53,7 +65,9 @@ foreach($model->roles as $role)
 ?>
 </table>
 
+<?if($this->id == 'users'):?>
 <a hef="#" onclick="addRole()" data-toggle"modal">Add Role</a>
+<?endif;?>
 
 <?
 function outputRolePermissions($role)

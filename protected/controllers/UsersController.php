@@ -90,6 +90,7 @@ class UsersController extends Controller
 		if(isset($_POST['Users']))
 		{
 			$model->attributes=$_POST['Users'];
+            $model->phone = Users::unformatPhone($model->phone);
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->userId));
 		}

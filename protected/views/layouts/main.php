@@ -116,8 +116,8 @@ if(!isset($menu))
                     <li class="dropdown">
                         <a id="Setups-menu" class="dropdown-toggle" data-toggle="dropdown" href="" data_target="#"><?=Yii::app()->user->name?> <b class="caret"></b></a>
                         <ul class="dropdown-menu" role="menu" aria-labelledby="drop1">
-                            <li role="presentation"><a role="menuitem" tabindex="-1" href="">Account Info</a></li>
-                            <li role="presentation"><a role="menuitem" tabindex="-1" href="<?=$this->createUrl('site/changePassword')?>">Change Password</a></li>
+                            <li role="presentation"><a role="menuitem" tabindex="-1" href="<?=$this->createUrl('account/info')?>">Account Info</a></li>
+                            <li role="presentation"><a role="menuitem" tabindex="-1" href="<?=$this->createUrl('account/changePassword')?>">Change Password</a></li>
                             <li role="presentation"><a role="menuitem" tabindex="-1" href="<?=$this->createUrl('site/logout')?>">Logout</a></li>
                         </ul>
                     </li>

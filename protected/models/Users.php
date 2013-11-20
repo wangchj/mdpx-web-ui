@@ -51,10 +51,11 @@ class Users extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('firstName, lastName, email, affiliation, password, password_repeat', 'required'),
+			array('firstName, lastName, email, affiliation', 'required'),
 			array('userId', 'numerical', 'integerOnly'=>true),
 			array('firstName, lastName, email, affiliation', 'length', 'max'=>45),
 			array('phone', 'length', 'max'=>10),
+            array('password,password_repeat', 'required', 'on'=>'insert'),
 			array('password,password_repeat', 'length', 'max'=>32),
             array('password', 'compare', 'on'=>'insert'),
             array('password_repeat', 'safe', 'on'=>'insert'),
@@ -129,6 +130,29 @@ class Users extends CActiveRecord
 	{
 		return md5($password);
 	}
+
+    /**
+     * Insert special characters to make phone number more readable.
+     * @param $unformattedPoneStr unformatted phone string.
+     * @return formmated phone number string.
+     */
+    public static function formatPhone($unformattedPoneStr)
+    {
+        $result = "($unformattedPoneStr";
+        $result = substr_replace($result, ')', 4, 0);
+        $result = substr_replace($result, '-', 8, 0);
+        return $result;
+    }
+
+    /**
+     * Strip phone number formats by taking out special characters such as (, ), and -
+     * @param string $formattedPhoneStr phone string that are formatted by formatPhone()
+     * @return string integer string
+     */
+    public static function unformatPhone($formattedPhoneStr)
+    {
+        return str_replace(' ', '', str_replace('-', '', str_replace(')', '', str_replace('(', '', $formattedPhoneStr))));
+    }
 
     public static function getDropdownList()
     {

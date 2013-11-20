@@ -52,19 +52,21 @@ switch($this->id)
 }
 ?>
 
-<?php $this->beginContent('//layouts/main', array('menu'=>$menuCategory)); ?>
+<?php $this->beginContent('//layouts/main', array('menu'=>isset($menuCategory)?$menuCategory:null)); ?>
 
 <?php
-    //Render the 2nd level menu
-    echo '<ul class="nav nav-pills">';
-    foreach($menuItems as $menuItem)
-    {
-        //Output <li> open tag
-        echo '<li'; if($this->id == $menuItem[1]) echo ' class="active"'; echo '>';
-        //Output <a href></a></li>
-        echo '<a href="' . $this->createUrl($menuItem[1] . '/') . '">' . $menuItem[0] . '</a></li>';
+    if(isset($menuItems))
+    {//Render the 2nd level menu
+        echo '<ul class="nav nav-pills">';
+        foreach($menuItems as $menuItem)
+        {
+            //Output <li> open tag
+            echo '<li'; if($this->id == $menuItem[1]) echo ' class="active"'; echo '>';
+            //Output <a href></a></li>
+            echo '<a href="' . $this->createUrl($menuItem[1] . '/') . '">' . $menuItem[0] . '</a></li>';
+        }
+        echo '</ul>';
     }
-    echo '</ul>';
 ?>
 
 <?php /*

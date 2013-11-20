@@ -4,6 +4,16 @@
 /* @var $form CActiveForm */
 ?>
 
+<?
+$this->menu = array(
+    array(
+        array('label'=>'Account Info', 'route'=>'account/info'),
+        array('label'=>'Update Info', 'route'=>'account/update'),
+        array('label'=>'Change Password', 'route'=>'account/changePassword'),
+    ),
+);
+?>
+
 <h1>Change Password</h1>
 
 <div class="form">

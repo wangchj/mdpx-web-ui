@@ -45,7 +45,6 @@ switch($this->id)
         $menuItems = array(
             array('Users', 'users'),
             array('Roles', 'roles'),
-            array('Role Permissions', 'rolePermissions')
         );
         $menuCategory = 'Admin';
         break;

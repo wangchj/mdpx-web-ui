@@ -70,6 +70,7 @@ class PartsController extends Controller
 		if(isset($_POST['Parts']))
 		{
 			$model->attributes=$_POST['Parts'];
+            $model->serialNum = PartCategories::getNextSerialNum($model->type);
             $model->addedBy = Yii::app()->user->id;
             $model->addedOn = date('Y-m-d H:i:s');
 			if($model->save())

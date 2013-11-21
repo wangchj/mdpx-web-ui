@@ -105,4 +105,19 @@ class PartCategories extends CActiveRecord
 			'criteria'=>$criteria,
 		));
 	}
+
+    /**
+     * Gets the next part serial number for a part category.
+     * @param integer $catId part category id
+     * @return string the next serial number.
+     * @throws Exception if part category cannot be found.
+     */
+    public static function getNextSerialNum($catId)
+    {
+        $cat = PartCategories::model()->findByPk($catId);
+        if($cat == null)
+            throw new Exception('Cannot find part cateogry for next serial number.');
+        $partCount = count($cat->parts);
+        return $catId . '-' . sprintf('%04d', $partCount+1);
+    }
 }

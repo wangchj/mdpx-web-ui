@@ -40,20 +40,20 @@ function renderNode($partCat)
 
 	<?php echo $form->errorSummary($model); ?>
 
-	<div>
+	<?/*<div>
 		<?php echo $form->labelEx($model,'serialNum'); ?>
 		<?php echo $form->textField($model,'serialNum',array('size'=>30,'maxlength'=>30)); ?>
 		<?php echo $form->error($model,'serialNum'); ?>
-	</div>
+	</div>*/?>
 
 	<div>
 		<?php echo $form->labelEx($model,'type'); ?>
         <?php echo $form->hiddenField($model,'type'); ?>
-		<input type="text" id="text_type" readonly="readonly" data-toggle="modal" role="button"
-               <?php if($model->type0 != null){ ?>
-               value="<?php echo $model->type . ' ' . $model->type0->name ?>"
-                       <?php } ?>
-                style="background-color:#ffffff"/>
+		<input type="text" id="text_type" data-toggle="modal" role="button"
+            <? if($model->type0 != null): ?>
+                value="<?= $model->type . ' ' . $model->type0->name ?>"
+            <? endif; ?>
+            style="background-color:#ffffff"/>
 		<?php echo $form->error($model,'type'); ?>
 	</div>
 

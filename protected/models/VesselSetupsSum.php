@@ -72,7 +72,7 @@ class VesselSetupsSum extends CActiveRecord
 			'botElectrode' => 'Bot Electrode',
 			'pump' => 'Pump',
 			'mfc' => 'Mfc',
-			'pGauge' => 'P Gauge',
+			'pGauge' => 'Pressure Gauge',
 		);
 	}
 

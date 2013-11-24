@@ -16,9 +16,16 @@
  * @property ExperimentSetups[] $experimentSetups
  * @property Users $researcher
  * @property Users $operator
+ *
+ * The following are used for searching:
+ * @property string $researcherSearch
+ * @property string $operatorSearch
  */
 class Experiments extends CActiveRecord
 {
+    public $researcherSearch;
+    public $operatorSearch;
+
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @param string $className active record class name.
@@ -50,7 +57,7 @@ class Experiments extends CActiveRecord
 			array('name, description', 'length', 'max'=>45),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('experimentId, name, description, dateTime, isProgrammed, researcherId, operatorId', 'safe', 'on'=>'search'),
+			array('experimentId, name, description, dateTime, isProgrammed, researcherId, operatorId, researcherSearch, operatorSearch', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -94,7 +101,7 @@ class Experiments extends CActiveRecord
 		// should not be searched.
 
 		$criteria=new CDbCriteria;
-
+        $criteria->with = array('researcher', 'operator');
 		$criteria->compare('experimentId',$this->experimentId);
 		$criteria->compare('name',$this->name,true);
 		$criteria->compare('description',$this->description,true);
@@ -102,7 +109,10 @@ class Experiments extends CActiveRecord
         $criteria->compare('isProgrammed',$this->isProgrammed);
 		$criteria->compare('researcherId',$this->researcherId);
 		$criteria->compare('operatorId',$this->operatorId);
-
+        if($this->researcherSearch != '')
+            $criteria->addCondition("researcher.firstName LIKE '%{$this->researcherSearch}%' OR researcher.lastName LIKE '%{$this->researcherSearch}%'");
+        if($this->operatorSearch != '')
+            $criteria->addCondition("operator.firstName LIKE '%{$this->operatorSearch}%' OR operator.lastName LIKE '%{$this->operatorSearch}%'");
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
 		));

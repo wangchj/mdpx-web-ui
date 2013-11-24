@@ -41,10 +41,12 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 		'dateTime',
         'isProgrammed:boolean',
         array(
-            'name'=>'researcherId',
+            'name'=>'researcherSearch',
+            'header'=>'Researcher',
             'value'=>'$data->researcher->firstName . \' \' . $data->researcher->lastName . \' (\' . $data->researcherId . \')\''),
         array(
-            'name'=>'operatorId',
+            'name'=>'operatorSearch',
+            'header'=>'Operator',
             'value'=>'$data->operator->firstName . \' \' . $data->operator->lastName . \' (\' . $data->operatorId . \')\''),
 		array(
 			'class'=>'CButtonColumn',

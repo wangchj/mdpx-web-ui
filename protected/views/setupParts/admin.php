@@ -37,12 +37,12 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 <?php $this->widget('zii.widgets.grid.CGridView', array(
 	'id'=>'setup-parts-grid',
 	'dataProvider'=>$model->search(),
-	//'filter'=>$model,
+	'filter'=>$model,
 	'columns'=>array(
 		'setupPartId',
 		'vesselSetupId',
-		'part0.type0.name',
-        'part0.serialNum',
+		array('name'=>'partNameSearch', 'value'=>'$data->part0->type0->name'),
+        array('name'=>'serialNumSearch', 'value'=>'$data->part0->serialNum'),
         'port',
         'parent',
 		array(

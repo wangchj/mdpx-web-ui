@@ -17,9 +17,16 @@
  * @property VesselSetups $vesselSetup
  * @property SetupCameras $setupCameras
  * @property SetupProbes $setupProbes
+ *
+ * The following are used for searching:
+ * @property string $partNameSearch
+ * @property string $serialNumSearch
  */
 class SetupParts extends CActiveRecord
 {
+    public $partNameSearch;
+    public $serialNumSearch;
+
 	/**
 	 * @return string the associated database table name
 	 */
@@ -41,7 +48,7 @@ class SetupParts extends CActiveRecord
 			array('part', 'length', 'max'=>30),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('setupPartId, vesselSetupId, part, parent, port', 'safe', 'on'=>'search'),
+			array('setupPartId, vesselSetupId, part, parent, port, partNameSearch, serialNumSearch', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -73,6 +80,8 @@ class SetupParts extends CActiveRecord
 			'part' => 'Part',
 			'parent' => 'Parent',
 			'port' => 'Port',
+            'partNameSearch' => 'Part Name',
+            'serialNumSearch' => 'Serial Number'
 		);
 	}
 
@@ -93,13 +102,15 @@ class SetupParts extends CActiveRecord
 		// @todo Please modify the following code to remove attributes that should not be searched.
 
 		$criteria=new CDbCriteria;
-
+        $criteria->with = array('part0', 'part0.type0');
 		$criteria->compare('setupPartId',$this->setupPartId);
 		$criteria->compare('vesselSetupId',$this->vesselSetupId);
 		$criteria->compare('part',$this->part,true);
 		$criteria->compare('parent',$this->parent);
 		$criteria->compare('port',$this->port);
-
+        $criteria->compare('type0.name', $this->partNameSearch, true);
+        $criteria->compare('part0.serialNum', $this->serialNumSearch, true);
+        //$criteria->addCondition('hello');
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
 		));

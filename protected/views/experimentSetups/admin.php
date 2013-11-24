@@ -42,12 +42,12 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 	'dataProvider'=>$model->search(),
 	'filter'=>$model,
 	'columns'=>array(
-        'experimentSetupId::ID',
+    //    'experimentSetupId::ID',
         'experimentId::Group',
-        'dateTime:datetime:Time',
+        'dateTime:datetime',
 		'name',
 		'description',
-		'vesselSetup.name',
+		'vesselSetup.name::Vessel Setup',
 		array(
             'name'=>'dcVoltageSetpoint',
             'value'=>'round($data->dcVoltageSetpoint,2)'

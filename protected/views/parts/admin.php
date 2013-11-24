@@ -36,18 +36,16 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 	'filter'=>$model,
 	'columns'=>array(
 		'serialNum',
-		//'name',
 		array(
-            'name'=>'type',
+            'name'=>'typeSearch',
             'value'=>'$data->type0->name  . \' (\' . $data->type . \')\''
-            ),
+        ),
 		//'description',
 		'addedOn',
         array(
-            'name'=>'addedBy',
+            'name'=>'addedBySearch',
             'value'=>'$data->addedBy0->firstName . \' \' . $data->addedBy0->lastName . \' (\' . $data->addedBy . \')\''
         ),
-		//'addedBy',
 		array(
 			'class'=>'CButtonColumn',
             'buttons'=>array(

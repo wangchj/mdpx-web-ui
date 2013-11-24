@@ -15,9 +15,16 @@
  * @property SetupCameras[] $setupCamerases
  * @property SetupCameras[] $setupCamerases1
  * @property SetupParts[] $setupParts
+ *
+ * The following are used for searching:
+ * @property string $typeSearch
+ * @property string $addedBySearch
  */
 class Parts extends CActiveRecord
 {
+    public $typeSearch;
+    public $addedBySearch;
+
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @param string $className active record class name.
@@ -49,7 +56,7 @@ class Parts extends CActiveRecord
 			array('serialNum, type', 'length', 'max'=>30),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('serialNum, type, addedOn, addedBy', 'safe', 'on'=>'search'),
+			array('serialNum, type, addedOn, addedBy, typeSearch, addedBySearch', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -93,10 +100,16 @@ class Parts extends CActiveRecord
 
 		$criteria=new CDbCriteria;
 
+        $criteria->with = array('type0', 'addedBy0');
+
 		$criteria->compare('serialNum',$this->serialNum,true);
 		$criteria->compare('type',$this->type,true);
 		$criteria->compare('addedOn',$this->addedOn,true);
 		$criteria->compare('addedBy',$this->addedBy);
+        $criteria->compare('type0.name', $this->typeSearch, true);
+        //$criteria->compare('addedBy0.firstName', $this->addedBySearch, true);
+        if($this->addedBySearch != '')
+            $criteria->addCondition("addedBy0.firstName LIKE '%{$this->addedBySearch}%' OR addedBy0.lastName LIKE '%{$this->addedBySearch}%'");
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

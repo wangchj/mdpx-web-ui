@@ -33,9 +33,14 @@
  * @property GasTypes $gasType10
  * @property GasTypes $gasType20
  * @property Measurements[] $measurements
+ *
+ * The following are used for searching:
+ * @property string $typeSearch
  */
 class ExperimentSetups extends CActiveRecord
 {
+    public $vesselSetupNameSearch;
+
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @param string $className active record class name.
@@ -68,7 +73,7 @@ class ExperimentSetups extends CActiveRecord
             array('dcVoltageSetpoint, dcCurrentSetpoint, rfPowerSetpoint, pressureSetpoint, magnet1Setpoint, magnet2Setpoint, magnet3Setpoint, magnet4Setpoint, magneticFieldSetpoint, magneticFieldGradientSetpoint', 'length', 'max'=>18),
             // The following rule is used by search().
             // @todo Please remove those attributes that should not be searched.
-            array('experimentSetupId, experimentId, dateTime, name, description, vesselSetupId, dcVoltageSetpoint, dcCurrentSetpoint, rfPowerSetpoint, pressureSetpoint, magnet1Setpoint, magnet2Setpoint, magnet3Setpoint, magnet4Setpoint, magneticFieldSetpoint, magneticFieldGradientSetpoint, gasType1, gasType2, dustType1, dustType2', 'safe', 'on'=>'search'),
+            array('experimentSetupId, experimentId, dateTime, name, description, vesselSetupId, dcVoltageSetpoint, dcCurrentSetpoint, rfPowerSetpoint, pressureSetpoint, magnet1Setpoint, magnet2Setpoint, magnet3Setpoint, magnet4Setpoint, magneticFieldSetpoint, magneticFieldGradientSetpoint, gasType1, gasType2, dustType1, dustType2, vesselSetupNameSearch', 'safe', 'on'=>'search'),
         );
 	}
 
@@ -129,7 +134,7 @@ class ExperimentSetups extends CActiveRecord
 		// should not be searched.
 
 		$criteria=new CDbCriteria;
-
+        $criteria->with = array('vesselSetup');
         $criteria->compare('experimentSetupId',$this->experimentSetupId);
         $criteria->compare('experimentId',$this->experimentId);
         $criteria->compare('dateTime',$this->dateTime,true);
@@ -150,6 +155,7 @@ class ExperimentSetups extends CActiveRecord
         $criteria->compare('gasType2',$this->gasType2);
         $criteria->compare('dustType1',$this->dustType1);
         $criteria->compare('dustType2',$this->dustType2);
+        $criteria->compare('vesselSetup.name',$this->vesselSetupNameSearch,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

@@ -47,7 +47,7 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
         'dateTime:datetime',
 		'name',
 		'description',
-		'vesselSetup.name::Vessel Setup',
+		array('name'=>'vesselSetupNameSearch', 'header'=>'Vessel Setup', 'value'=>'$data->vesselSetup->name'),
 		array(
             'name'=>'dcVoltageSetpoint',
             'value'=>'round($data->dcVoltageSetpoint,2)'

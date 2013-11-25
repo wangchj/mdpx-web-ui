@@ -104,7 +104,6 @@ if(!isset($menu))
                     <ul class="dropdown-menu" role="menu" aria-labelledby="drop1">
                         <li role="presentation"><a role="menuitem" tabindex="-1" href="<?php putAppUrl()?>/index.php/Users">Users</a></li>
                         <li role="presentation"><a role="menuitem" tabindex="-1" href="<?php putAppUrl()?>/index.php/Roles">Roles</a></li>
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="<?php putAppUrl()?>/index.php/RolePermissions">Role Permissions</a></li>
                     </ul>
                 </li>
                 <?php }?>

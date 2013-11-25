@@ -106,7 +106,13 @@ class Experiments extends CActiveRecord
 		$criteria->compare('name',$this->name,true);
 		$criteria->compare('description',$this->description,true);
 		$criteria->compare('dateTime',$this->dateTime,true);
-        $criteria->compare('isProgrammed',$this->isProgrammed);
+        if($this->isProgrammed != '')
+        {
+            if(strtoupper($this->isProgrammed) == 'YES' || $this->isProgrammed == 1)
+                $criteria->compare('isProgrammed',1);
+            else if(strtoupper($this->isProgrammed) == 'NO' || $this->isProgrammed == 0)
+                $criteria->compare('isProgrammed',0);
+        }
 		$criteria->compare('researcherId',$this->researcherId);
 		$criteria->compare('operatorId',$this->operatorId);
         if($this->researcherSearch != '')

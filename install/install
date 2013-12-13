@@ -1,0 +1,14 @@
+#!/bin/bash
+
+# This script is written so that it is run in the application root directory.
+
+# Create assets directory
+mkdir assets
+chmod 777 assets
+
+# Create protected/runtime directory
+mkdir protected/runtime
+chmod 777 protected/runtime
+
+# Apply CSS patch
+patch ../yii/framework/zii/widgets/assets/gridview/styles.css < install/yii-gridview-style.css-for-bootstrap1.patch

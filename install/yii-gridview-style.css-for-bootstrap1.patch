@@ -1,18 +1,12 @@
---- yii/framework/zii/widgets/assets/gridview/styles.css
-+++ yii/framework/zii/widgets/assets/gridview/styles.css
-@@ -117,9 +117,15 @@
- 	font-style: italic;
- }
- 
-+.grid-view table.items thead tr.filters td
-+{
-+    padding-right: 16px;
-+}
-+
- .grid-view .filters input,
- .grid-view .filters select
- {
- 	width: 100%;
- 	border: 1px solid #ccc;
--}+	margin-bottom: 0px;
-+}
+119a120,124
+> .grid-view table.items thead tr.filters td
+> {
+> 	padding-right: 16px;
+> }
+> 
+125c130,131
+< }
+\ No newline at end of file
+---
+> 	margin-bottom: 0px;
+> }
